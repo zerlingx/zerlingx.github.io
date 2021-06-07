@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Arch中安装Tensorflow及一些小问题 | zerlingx&#39;s blog | Stay hungry, stay foolish.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#39C5BB">
+    
+    
+    <meta name="keywords" content="ai,tensorflow">
+    <meta name="description" content="记录一下在Arch Linux中安装Tensorflow遇到的一些问题及解决方法。  使用pip安装 1pip install tensorflow  关于如何修改下载源加快速度，看这里。 使用anaconda安装  推荐用arch自己的软件库和包管理器，手动下载安装好像更新比较麻烦。 1sudo pacman -S anaconda  可以使用图形化客户端： 1anacond">
+<meta name="keywords" content="ai,tensorflow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arch中安装Tensorflow及一些小问题">
+<meta property="og:url" content="http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/index.html">
+<meta property="og:site_name" content="zerlingx&#39;s blog">
+<meta property="og:description" content="记录一下在Arch Linux中安装Tensorflow遇到的一些问题及解决方法。  使用pip安装 1pip install tensorflow  关于如何修改下载源加快速度，看这里。 使用anaconda安装  推荐用arch自己的软件库和包管理器，手动下载安装好像更新比较麻烦。 1sudo pacman -S anaconda  可以使用图形化客户端： 1anacond">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2021-05-14T01:40:46.146Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Arch中安装Tensorflow及一些小问题">
+<meta name="twitter:description" content="记录一下在Arch Linux中安装Tensorflow遇到的一些问题及解决方法。  使用pip安装 1pip install tensorflow  关于如何修改下载源加快速度，看这里。 使用anaconda安装  推荐用arch自己的软件库和包管理器，手动下载安装好像更新比较麻烦。 1sudo pacman -S anaconda  可以使用图形化客户端： 1anacond">
+    
+        <link rel="alternate" type="application/atom+xml" title="zerlingx&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zerlingx</h5>
+          <a href="mailto:centralnode@zerlingx.com" title="centralnode@zerlingx.com" class="mail">centralnode@zerlingx.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zerlingx" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://wiki.archlinux.org/" target="_blank">
+                <i class="icon icon-lg icon-wikipedia-w"></i>
+                ArchWiki
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Arch中安装Tensorflow及一些小问题</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Arch中安装Tensorflow及一些小问题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-06-19T00:34:12.000Z" itemprop="datePublished" class="page-time">
+  2019-06-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AI/">AI</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用pip安装"><span class="post-toc-number">1.</span> <span class="post-toc-text">使用pip安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用anaconda安装"><span class="post-toc-number">2.</span> <span class="post-toc-text">使用anaconda安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用conda安装"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用conda安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注"><span class="post-toc-number">4.</span> <span class="post-toc-text">注</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-things-in-installing-tensorflow" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Arch中安装Tensorflow及一些小问题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-06-19 08:34:12" datetime="2019-06-19T00:34:12.000Z" itemprop="datePublished">2019-06-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AI/">AI</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>记录一下在Arch Linux中安装Tensorflow遇到的一些问题及解决方法。</p>
+</blockquote>
+<h2 id="使用pip安装">使用pip安装</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow</span><br></pre></td></tr></table></figure>
+<p> 关于如何修改下载源加快速度，看<a href="https://zerlingx.com/2019/06/14/pip-speed-up/">这里</a>。</p>
+<h2 id="使用anaconda安装">使用anaconda安装</h2>
+<p> 推荐用arch自己的软件库和包管理器，手动下载安装好像更新比较麻烦。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S anaconda</span><br></pre></td></tr></table></figure>
+<p> 可以使用图形化客户端： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">anaconda-navigator</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用conda安装">使用conda安装</h2>
+<p> 首先使用上面的方法安装anaconda。<br>
+ 之后可能会发现仍然无法使用conda命令，需要把anaconda的路径加入shell的环境变量。<br>
+ 修改<code>.bashrc</code>，如果使用其他shell则修改相应的配置文件，比如<code>.zshrc</code>。<br>
+ 在最后加入以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/opt/anaconda/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<p> 重新打开一下shell，应该可以使用conda了。</p>
+<p> 要修改conda的下载源，执行以下命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line"></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line"></span><br><span class="line">conda config --<span class="built_in">set</span> show_channel_urls yes</span><br></pre></td></tr></table></figure>
+<p> 安装tensorflow,使用命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install tensorflow</span><br></pre></td></tr></table></figure>
+<h2 id="注">注</h2>
+<ul>
+<li>要安装gpu版只需要安装显卡驱动，并把上面提到的命令改为使用tensorflow-gpu。<br>
+</li>
+<li>arch上的tensorflow好像看起来版本号和别的不太一样，都只有1.14左右（2019-06-19），要不就直接使用tensorflow 2.0。<br>
+</li>
+<li>如果有红色提示缺少依赖直接装就行了。权限不足就sudo一下。</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2021-05-14T01:40:46.146Z" itemprop="dateUpdated">2021-05-14 09:40:46</time>
+</span><br>
+
+
+        
+        文章转载请标明出处，仅供学习使用。
+        
+    </div>
+    
+    <footer>
+        <a href="http://zerlingx.com">
+            <img src="/img/avatar.jpg" alt="zerlingx">
+            zerlingx
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ai/">ai</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/&title=《Arch中安装Tensorflow及一些小问题》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/&title=《Arch中安装Tensorflow及一些小问题》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Arch中安装Tensorflow及一些小问题》 — zerlingx's blog&url=http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/06/22/acm-io-tricks/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">ACM、C++关于输入输出的小技巧</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "vonyPRJwedvkCu0ksIMQYbmO-gzGzoHsz",
+            appKey: "O5p62bw33LShlsMSGD0y51wr",
+            avatar: "mm",
+            placeholder: "Your comment...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zerlingx &copy; 2019 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/&title=《Arch中安装Tensorflow及一些小问题》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/&title=《Arch中安装Tensorflow及一些小问题》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Arch中安装Tensorflow及一些小问题》 — zerlingx's blog&url=http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrklEQVR42u3aQXLCMAwFUO5/6XZLhyF8SRbN4mXF0MTxMzO2KunxiK+fp+v5m/xz787re45deHh4eIOpv17XL3v9/t34ydTfjZO8/e0IeHh4eGu862klW/w1I1+CfLmTpcTDw8O7Jy8/DK4BvYAeDw8P7/68aqhdmModDgY8PDy8mHdsuMtgOk92/EOuBQ8PDy/m5VWk+3xeqe/h4eHhjavq1Q03T+bOi23RaHh4eHgLvHzDTULtpEXg1IFUWGI8PDy8BV61cNUD5OmJU3fi4eHhbfB6zQHXoXY1UVtNEOfNCnh4eHh7vGqBPzkeqq0GyV/zPC0eHh7eHq833b1i/8qxgYeHh/d13iSwnjcrJMmRD8uEh4eHt8DLE7LVjX6Sxp2w65UxPDw8vOle3Xt9dYGq231yf+GXxMPDwxvzJqnYyQLNU8mFngg8PDy8Q7wDazNIB1fTxPkPgIeHh7fBy4tPk3A5D4KrI3x4Fg8PD2+Bl08rb5bqhcv5yOVyHR4eHt5RXq+labJ9X09r3mL1Zxw8PDy8BV4vVM0bCPINPT8wRrkWPDw8vDFvklRNNuvmercOhsL/Cnh4eHiHeNUS1LzVoDdOIWmCh4eHt8Cr3tRrNm1u68U3RgcJHh4e3lHeNw+AasKimp7Aw8PD2+b1DoBq8iIPkfOnooAbDw8Pb43XK1MlYXS1RaCK+ZBixsPDw1vmJVv2hJGMkC9rlNrAw8PDO8qbpAnyhEW1FaBaMHv7LB4eHt4Cr7rVVsta1Unnha7egYGHh4d3ipccBnmw22vkyknVtgY8PDy8Pd7kNb2Sf14qGx0/eHh4eLfh9TbrXvNBtQUBDw8P72683j29BeqV30YhNR4eHl7Mq7YF9DKovVTv6C14eHh4C7x8iOrkqind+YKO6nt4eHh4n69f7rXY7qcHouoAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'stand by (~_~)';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'welcome back (^-^)/';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

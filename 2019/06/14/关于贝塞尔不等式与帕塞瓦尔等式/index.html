@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式 | zerlingx&#39;s blog | Stay hungry, stay foolish.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#39C5BB">
+    
+    
+    <meta name="keywords" content="study,math,notes">
+    <meta name="description" content="在书上讲关于傅里叶级数的均方逼近和误差的相关部分中，对于贝塞尔不等式和帕塞瓦尔等式的描述非常少，而且完全一样，自己直接就看懵了。网上找到的相关资料过于高级，超出大一的范围。还是问老师靠谱。  贝塞尔不等式的条件  设\(f(x)\)在\([-\pi,\pi]\)上黎曼可积，则其傅里叶系数满足下列不等式： \[ \frac{a_0^2}{2}+\sum_{n=1}^{\infty}(a_">
+<meta name="keywords" content="study,math,notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式">
+<meta property="og:url" content="http://zerlingx.com/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/index.html">
+<meta property="og:site_name" content="zerlingx&#39;s blog">
+<meta property="og:description" content="在书上讲关于傅里叶级数的均方逼近和误差的相关部分中，对于贝塞尔不等式和帕塞瓦尔等式的描述非常少，而且完全一样，自己直接就看懵了。网上找到的相关资料过于高级，超出大一的范围。还是问老师靠谱。  贝塞尔不等式的条件  设\(f(x)\)在\([-\pi,\pi]\)上黎曼可积，则其傅里叶系数满足下列不等式： \[ \frac{a_0^2}{2}+\sum_{n=1}^{\infty}(a_">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2021-05-14T01:40:46.149Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式">
+<meta name="twitter:description" content="在书上讲关于傅里叶级数的均方逼近和误差的相关部分中，对于贝塞尔不等式和帕塞瓦尔等式的描述非常少，而且完全一样，自己直接就看懵了。网上找到的相关资料过于高级，超出大一的范围。还是问老师靠谱。  贝塞尔不等式的条件  设\(f(x)\)在\([-\pi,\pi]\)上黎曼可积，则其傅里叶系数满足下列不等式： \[ \frac{a_0^2}{2}+\sum_{n=1}^{\infty}(a_">
+    
+        <link rel="alternate" type="application/atom+xml" title="zerlingx&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zerlingx</h5>
+          <a href="mailto:centralnode@zerlingx.com" title="centralnode@zerlingx.com" class="mail">centralnode@zerlingx.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zerlingx" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://wiki.archlinux.org/" target="_blank">
+                <i class="icon icon-lg icon-wikipedia-w"></i>
+                ArchWiki
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-06-14T15:49:03.000Z" itemprop="datePublished" class="page-time">
+  2019-06-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Notes/">Notes</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#贝塞尔不等式的条件"><span class="post-toc-number">1.</span> <span class="post-toc-text">贝塞尔不等式的条件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#帕塞瓦尔等式"><span class="post-toc-number">2.</span> <span class="post-toc-text">帕塞瓦尔等式</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-关于贝塞尔不等式与帕塞瓦尔等式" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-06-14 23:49:03" datetime="2019-06-14T15:49:03.000Z" itemprop="datePublished">2019-06-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Notes/">Notes</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>在书上讲关于傅里叶级数的均方逼近和误差的相关部分中，对于贝塞尔不等式和帕塞瓦尔等式的描述非常少，而且完全一样，自己直接就看懵了。网上找到的相关资料过于高级，超出大一的范围。还是问老师靠谱。</p>
+</blockquote>
+<h2 id="贝塞尔不等式的条件">贝塞尔不等式的条件</h2>
+<p> 设<span class="math inline">\(f(x)\)</span>在<span class="math inline">\([-\pi,\pi]\)</span>上黎曼可积，则其傅里叶系数满足下列不等式： <span class="math display">\[
+\frac{a_0^2}{2}+\sum_{n=1}^{\infty}(a_n^2+b_n^2)\le \frac{1}{\pi}\int_{-\pi}^{\pi}f^2(x)dx
+\]</span></p>
+<h2 id="帕塞瓦尔等式">帕塞瓦尔等式</h2>
+<p> 帕塞瓦尔等式即上面的式子将不等号改为等号。（条件都一样）<br>
+ 其意义为对于黎曼可积的函数，当<span class="math inline">\(n\to\infty\)</span>，级数收敛到<span class="math inline">\(f(x)\)</span>,误差趋于零。<br>
+ 看到这里恐怕要问了，为什么和上面的贝塞尔等式条件一样，突然就取到等号了？<br>
+ 我的老师对此的解释是……历史上先提出了贝塞尔不等式，一开始只证明了小于等于，后来才证明了相等，才有了贝塞尔不等式。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2021-05-14T01:40:46.149Z" itemprop="dateUpdated">2021-05-14 09:40:46</time>
+</span><br>
+
+
+        
+        文章转载请标明出处，仅供学习使用。
+        
+    </div>
+    
+    <footer>
+        <a href="http://zerlingx.com">
+            <img src="/img/avatar.jpg" alt="zerlingx">
+            zerlingx
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/math/">math</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/">notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/">study</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/&title=《关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/&title=《关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式》 — zerlingx's blog&url=http://zerlingx.com/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/06/19/things-in-installing-tensorflow/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Arch中安装Tensorflow及一些小问题</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/06/14/pip-speed-up/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">pip修改下载源以提升下载速度</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "vonyPRJwedvkCu0ksIMQYbmO-gzGzoHsz",
+            appKey: "O5p62bw33LShlsMSGD0y51wr",
+            avatar: "mm",
+            placeholder: "Your comment...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zerlingx &copy; 2019 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/&title=《关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/&title=《关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式》 — zerlingx's blog&url=http://zerlingx.com/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuUlEQVR42u3aQW4bMRAEQP3/0w4Q5OZI6Z4hJQeoPRkLesVaAeSoh49HfH39vr7//WzkszHPnvP17Xp9//CFh4eHN5r6s+v1mITUjkn+N5kzHh4e3m3ebBG/sSa/fkI+Zzw8PLyfwMs3hrz8TYpmPDw8vP+dly/cybQ24QUeHh7eZ3nJ0j8LEdpoeBbvHsha8PDw8GLepgH2qb/f1N/Dw8PDK2PWWdPr9Z08btjM8M9z8PDw8C7w8hJ2Nokbm00dH+Ph4eFd4OV1adska4OD2f8eiCHw8PDwjvKScDa/k5TUm2DiABIPDw/v5dxmy3pSfCcbzOZOdMQBDw8P7428ZF1tA99kcS/C2QSPh4eHd42XN6Xa7SEBtK2yYjweHh7eG3l5ITuLbtukZBhJ4OHh4V3g5cV0+/GbYweb41l4eHh4t3mvy9YiMI3Hz7pz7fYTNfvw8PDwRrzZb/bZh7WNrlmJ/2h3Ejw8PLySl0cDs6J5FlLkscU/kHh4eHgXeLMDprOWWL4ZtEcNor0ADw8P7wJvM7m25X/qYEEbduDh4eHtebPmVsvbhB3t63iaUuPh4eFd4M2W7FOBxb799pf7eHh4eG/k7Y9D5UV2EtoOC3E8PDy8C7x9PLo5VpUs7vn2UHyHeHh4eAte/vO+bdVvwtz2CU9fFh4eHt4F3qy9lDx6dtBq86Kjzh4eHh7empe0oNoyOo8q2m+gbYzh4eHh3eBtGk6zpX9/EGH44vDw8PAO8WbTykvqzcGC/EhWtO/h4eHhHeK1IelmC8mbavkLymeIh4eHd5aXl795iNBi9ofA8PDw8N7PO9sSa5fy/BXUrwYPDw/vx/Daie5D3mHMgYeHh/dRXttVy5f+GTXaBfDw8PCu8c42nzYtsXxDKjYGPDw8vKO8WQOsLaOTOPjUBtMGGXh4eHjxyF8WUvk+h1cmyAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'stand by (~_~)';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'welcome back (^-^)/';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

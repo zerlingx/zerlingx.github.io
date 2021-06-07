@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>机器学习纲要_03_逻辑回归 | zerlingx&#39;s blog | Stay hungry, stay foolish.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#39C5BB">
+    
+    
+    <meta name="keywords" content="notes,ai">
+    <meta name="description" content="分类问题  分类问题需要的输出即离散的函数值。 比如对于“是或否”的分类，可看作函数输出\(y=0,1\)。 对于\(h_\theta(x)\)，要限制其值域范围到0~1。  假设陈述 sigmoid函数（logistic函数） \[ g(z)=\frac{1}{1+e^{-z}} \]">
+<meta name="keywords" content="notes,ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习纲要_03_逻辑回归">
+<meta property="og:url" content="http://zerlingx.com/2021/04/05/机器学习纲要_03_逻辑回归/index.html">
+<meta property="og:site_name" content="zerlingx&#39;s blog">
+<meta property="og:description" content="分类问题  分类问题需要的输出即离散的函数值。 比如对于“是或否”的分类，可看作函数输出\(y=0,1\)。 对于\(h_\theta(x)\)，要限制其值域范围到0~1。  假设陈述 sigmoid函数（logistic函数） \[ g(z)=\frac{1}{1+e^{-z}} \]">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/03_p1.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/03_p2.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/03_p3.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/03_p4.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/03_p5.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/03_p6.png">
+<meta property="og:updated_time" content="2021-06-07T10:37:13.647Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习纲要_03_逻辑回归">
+<meta name="twitter:description" content="分类问题  分类问题需要的输出即离散的函数值。 比如对于“是或否”的分类，可看作函数输出\(y=0,1\)。 对于\(h_\theta(x)\)，要限制其值域范围到0~1。  假设陈述 sigmoid函数（logistic函数） \[ g(z)=\frac{1}{1+e^{-z}} \]">
+<meta name="twitter:image" content="http://zerlingx.com/images/machine_learning_2021/03_p1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="zerlingx&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zerlingx</h5>
+          <a href="mailto:centralnode@zerlingx.com" title="centralnode@zerlingx.com" class="mail">centralnode@zerlingx.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zerlingx" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://wiki.archlinux.org/" target="_blank">
+                <i class="icon icon-lg icon-wikipedia-w"></i>
+                ArchWiki
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">机器学习纲要_03_逻辑回归</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">机器学习纲要_03_逻辑回归</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-04-04T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2021-04-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AI/">AI</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分类问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">分类问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#假设陈述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">假设陈述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#决策界限判定边界"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">决策界限（判定边界）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线性边界"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">线性边界</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非线性边界"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">非线性边界</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代价函数"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">代价函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代价函数-1"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">代价函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#梯度下降法"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">梯度下降法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高级优化方法"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">高级优化方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多元分类一对多"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">多元分类：一对多</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#过拟合问题"><span class="post-toc-number">2.</span> <span class="post-toc-text">过拟合问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代价函数-2"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">代价函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线性回归正则化"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">线性回归正则化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#梯度下降法-1"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">梯度下降法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#正规方程法"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">正规方程法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#逻辑回归正则化"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">逻辑回归正则化</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-机器学习纲要_03_逻辑回归" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">机器学习纲要_03_逻辑回归</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-04-05 00:00:00" datetime="2021-04-04T16:00:00.000Z" itemprop="datePublished">2021-04-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AI/">AI</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="分类问题">分类问题</h1>
+<blockquote>
+<p>分类问题需要的输出即离散的函数值。<br>
+比如对于“是或否”的分类，可看作函数输出<span class="math inline">\(y=0,1\)</span>。<br>
+对于<span class="math inline">\(h_\theta(x)\)</span>，要限制其值域范围到0~1。</p>
+</blockquote>
+<h2 id="假设陈述">假设陈述</h2>
+<p><strong>sigmoid函数（logistic函数）</strong></p>
+<p><span class="math display">\[
+g(z)=\frac{1}{1+e^{-z}}
+\]</span></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\03_p1.png" alt="03_p1" title>
+                </div>
+                <div class="image-caption">03_p1</div>
+            </figure>
+<p>值域<span class="math inline">\(g(z)\in(0,1)\)</span>。</p>
+<p>取假设函数为</p>
+<p><span class="math display">\[
+h_\theta(x)=g(\theta^Tx)=\frac{1}{1+e^{-\theta^Tx}}
+\]</span></p>
+<p>其意义可看作输入<span class="math inline">\(x\)</span>时<span class="math inline">\(y=1\)</span>的概率</p>
+<p><span class="math display">\[
+h_\theta(x)=P(y=1|x;\theta)
+\]</span></p>
+<h2 id="决策界限判定边界">决策界限（判定边界）</h2>
+<p>我们想要的是判断<span class="math inline">\(y\)</span>属于正类（大于零）还是负类，<br>
+那么显然，<span class="math inline">\(h_\theta(x)\ge0.5\)</span>的为正类，反之亦然。<br>
+即取<span class="math inline">\(h_\theta(x)=g(z)=0.5\)</span>时为边界。</p>
+<p>根据不同的情况，建立不同的模型，<br>
+设置不同的假设函数，有不同的边界。</p>
+<h3 id="线性边界">线性边界</h3>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\03_p2.png" alt="03_p2" title>
+                </div>
+                <div class="image-caption">03_p2</div>
+            </figure>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;h_\theta(x)=g(\theta_0+\theta_1x_1+\theta_2x_2) \\
+&amp;\theta=\left[\begin{matrix}-3 \\ 1 \\ 1 \\\end{matrix}\right] \\
+&amp;y=1\quad if\quad\theta^Tx&gt;0 \\
+\end{aligned}
+\]</span></p>
+<h3 id="非线性边界">非线性边界</h3>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\03_p3.png" alt="03_p3" title>
+                </div>
+                <div class="image-caption">03_p3</div>
+            </figure>
+<p>逻辑回归是非线性回归。</p>
+<h2 id="代价函数">代价函数</h2>
+<p>注意，现在的<span class="math inline">\(h\)</span>为<br>
+<span class="math inline">\(h_\theta(x)=\frac{1}{1+e^{-\theta^Tx}}\)</span><br>
+之前那样的<span class="math inline">\(J\)</span>不能用了。</p>
+<h3 id="代价函数-1">代价函数</h3>
+<p><span class="math display">\[
+Cost\left(h_\theta(x),y\right)=
+\left\{
+\begin{array}
+    -\ln\left(h_\theta(x)\right), &amp; if\ y=1 \\
+    -\ln\left(1-h_\theta(x)\right), &amp; if\ y=0 \\
+\end{array}
+\right.
+\]</span></p>
+<p>由于<span class="math inline">\(y\)</span>只能为1或0</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\Rightarrow \\
+&amp;Cost\left(h_\theta(x),y\right)=-y\ln\left(h_\theta(x)\right)-(1-y)\ln\left(1-h_\theta(x)\right) \\
+&amp;J(\theta)=\frac{1}{m}\sum_{i=1}^{m}{Cost\left(h_\theta\left(x^{(i)}\right),y^{(i)}\right)}
+\end{aligned}
+\]</span></p>
+<h3 id="梯度下降法">梯度下降法</h3>
+<p>老样子</p>
+<p>repeat{<br>
+  <span class="math inline">\(\theta_j=\theta_j-\alpha\frac{\partial}{\partial\theta_j}J(\theta)\)</span><br>
+}</p>
+<p>主要是求导<br>
+（发现求了之后形式和原来的基本一样，<br>
+cost应该是故意构造成这样的）</p>
+<p><span class="math inline">\(\Rightarrow\)</span> repeat{   <span class="math inline">\(\theta_j=\theta_j-\alpha\frac{1}{m}\sum_{i=1}^{m}{\left(h_\theta\left(x^{(i)}\right)-y^{(i)}\right)x_j^{(i)}}\)</span><br>
+}</p>
+<h2 id="高级优化方法">高级优化方法</h2>
+<p>共轭梯度法、BFGS、L-BFGS……<br>
+略。</p>
+<h2 id="多元分类一对多">多元分类：一对多</h2>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\03_p4.png" alt="03_p4" title>
+                </div>
+                <div class="image-caption">03_p4</div>
+            </figure>
+<p>要分成大于两个的类型。<br>
+多次二分类就行。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\03_p5.png" alt="03_p5" title>
+                </div>
+                <div class="image-caption">03_p5</div>
+            </figure>
+<h1 id="过拟合问题">过拟合问题</h1>
+<p>不是模型越复杂越好，<br>
+可能代价函数很小，但没法应用到新的值。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\03_p6.png" alt="03_p6" title>
+                </div>
+                <div class="image-caption">03_p6</div>
+            </figure>
+<p>如何解决过拟合问题。方法：<br>
+1、减少特征数量<br>
+手动/自动选择</p>
+<p>2、正则化<br>
+保留所有特征，但减少参数<span class="math inline">\(\theta_j\)</span>的幅度</p>
+<h2 id="代价函数-2">代价函数</h2>
+<p>设置惩罚因子（正则化项）</p>
+<p><span class="math display">\[
+J\left(\theta\right)=\frac{1}{2m}\left[\sum_{i=1}^{m}\left(h_\theta\left(x^{\left(i\right)}\right)-y^{\left(i\right)}\right)^2+\lambda\sum_{j=1}^{n}\theta_j^2\right]
+\]</span></p>
+<p>注意正则化项里<span class="math inline">\(\theta_0\)</span>不要放进去</p>
+<p><strong>正则化项：</strong> 不是特定的<span class="math inline">\(\theta_j\)</span>最小，而是整体<span class="math inline">\(\theta_j\)</span>的平方和最小。</p>
+<p>超参数的问题<br>
+如果<span class="math inline">\(\lambda\)</span>太大，可能会使得除了<span class="math inline">\(\theta_0\)</span>的<span class="math inline">\(\theta_j\)</span>全被消掉。</p>
+<h2 id="线性回归正则化">线性回归正则化</h2>
+<h3 id="梯度下降法-1">梯度下降法</h3>
+<p><span class="math inline">\(J\left(\theta\right)\Rightarrow\)</span><br>
+repeat {<br>
+  <span class="math inline">\(\theta_j=\theta_j−\left[\alpha\frac{1}{m}\sum_{i=1}^{m}\left(h_\theta\left(x^{\left(i\right)}\right)x_j^{\left(i\right)}\right)+\frac{\lambda}{m}\theta_j\right]\)</span><br>
+  即<br>
+  <span class="math inline">\(\theta_j=\theta_j\left(1-\alpha\frac{\lambda}{m}\right)−α\frac{1}{m}\sum_{i=1}^{m}{\left(h_\theta\left(x^{\left(i\right)}\right)-y^{\left(i\right)}\right)x_j^{\left(i\right)}}\)</span><br>
+  （<span class="math inline">\(j\neq0\)</span>，对于<span class="math inline">\(j=0\)</span>，不用<span class="math inline">\(\lambda\)</span>那一项） }</p>
+<h3 id="正规方程法">正规方程法</h3>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;X\theta=y \\
+&amp;\Rightarrow \\
+&amp;\theta=\left(X^TX+\lambda\left[\begin{matrix}0&amp;&amp;&amp;\\&amp;1&amp;&amp;\\&amp;&amp;\ddots&amp;\\&amp;&amp;&amp;1\\&amp;&amp;&amp;\\\end{matrix}\right]\right)^{-1}X^Ty \\
+\end{aligned}
+\]</span></p>
+<p>（可能要学一下矩阵导数来证明）<br>
+对于上式中括号里的项，<br>
+只要<span class="math inline">\(\lambda&gt;0\)</span>，一定为非奇异矩阵（逆矩阵存在）。</p>
+<h2 id="逻辑回归正则化">逻辑回归正则化</h2>
+<p>同上，略。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2021-06-07T10:37:13.647Z" itemprop="dateUpdated">2021-06-07 18:37:13</time>
+</span><br>
+
+
+        
+        文章转载请标明出处，仅供学习使用。
+        
+    </div>
+    
+    <footer>
+        <a href="http://zerlingx.com">
+            <img src="/img/avatar.jpg" alt="zerlingx">
+            zerlingx
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ai/">ai</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/">notes</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2021/04/05/机器学习纲要_03_逻辑回归/&title=《机器学习纲要_03_逻辑回归》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2021/04/05/机器学习纲要_03_逻辑回归/&title=《机器学习纲要_03_逻辑回归》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2021/04/05/机器学习纲要_03_逻辑回归/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《机器学习纲要_03_逻辑回归》 — zerlingx's blog&url=http://zerlingx.com/2021/04/05/机器学习纲要_03_逻辑回归/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2021/04/05/机器学习纲要_03_逻辑回归/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/04/08/机器学习纲要_04_神经网络/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">机器学习纲要_04_神经网络</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/03/28/FFT快速傅里叶变换原理概要/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">FFT快速傅里叶变换原理概要</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "vonyPRJwedvkCu0ksIMQYbmO-gzGzoHsz",
+            appKey: "O5p62bw33LShlsMSGD0y51wr",
+            avatar: "mm",
+            placeholder: "Your comment...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zerlingx &copy; 2019 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2021/04/05/机器学习纲要_03_逻辑回归/&title=《机器学习纲要_03_逻辑回归》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2021/04/05/机器学习纲要_03_逻辑回归/&title=《机器学习纲要_03_逻辑回归》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2021/04/05/机器学习纲要_03_逻辑回归/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《机器学习纲要_03_逻辑回归》 — zerlingx's blog&url=http://zerlingx.com/2021/04/05/机器学习纲要_03_逻辑回归/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2021/04/05/机器学习纲要_03_逻辑回归/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqUlEQVR42u3aQW4bMRAEQP//0wqQUw7RpnuGtIyg9mRI8pLFA0n0zNdX/Lx+P8/f/vmb15vn+Z3t7489eHh4eKOpP0/o+fNkOd5NOgHky/eXN+Dh4eFd4z0P9u7Vsy2+PQw2y4qHh4f3Wd6N4fP/wsPDw/ufePk1ur1qPx9OeHh4eJ/lJWHEfvgk5J2FIweyFjw8PLyY1xbAfsLfF+t7eHh4eIuqentU5Fv5Juwo5omHh4d3gfc8zCZcyAGz/byId/Hw8PCO8toDYNMQ0L75QGsCHh4e3gXeptGqnVa7KJtoGA8PD+8e77msNTsANphkUYpLNh4eHt41XnJpzqebfNK2AsyOJTw8PLx7vJaak9plaiOGYT6Nh4eHt+DlW3z+eb4c7S/388TDw8M7xUu26XYTb+PXdnNPru94eHh493jDWll72hwl5YEFHh4e3lleW+xvg9fkOGmpxYh4eHh4F3hFMakMbTfX6Lb0FR1meHh4eId4m4Nh9hQtU6MrftR0hYeHh3eBN2sXeF6m9j376z4eHh7ebV7bQjrbsjeLsurGxcPDwzvE25Tn94FvW0ibhRR4eHh4Z3mzOHVWvsoj4GMBBx4eHt4FXj78rDGrBbRLXCwNHh4e3iFeG9omF9nZGs++/cfhhIeHh3eBtwkCkgVqm7SSgKMtzuHh4eGd5c0KYPnweUGrjYCjUfDw8PAu8GZhxKzk3xbJZmHugawFDw8P73G2r/LZLESyfc+u1PW5h4eHh7fgbbbdfKPP2RvGComHh4dX8try1axpYBNJ5FEyHh4e3nfy9k0Dm2asfSSBh4eH95N5eYFq1i6QL0F0TcfDw8P7KK8NFDZva4Pat8cJHh4e3jVe22I1y4b3B0l99cfDw8O7wNsXwGatBpvP8wMJDw8P7yjvFyZq2k+U1kH0AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'stand by (~_~)';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'welcome back (^-^)/';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

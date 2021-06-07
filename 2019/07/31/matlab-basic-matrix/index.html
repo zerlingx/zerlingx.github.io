@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Matlab基础——矩阵 | zerlingx&#39;s blog | Stay hungry, stay foolish.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#39C5BB">
+    
+    
+    <meta name="keywords" content="matlab">
+    <meta name="description" content="矩阵创建 手动完整输入 每一行的元素用逗号或者空格隔开，不同行用分号隔开，整个矩阵用中括号括起来。如： 12A = [1 2 3; 4 5 6; 7 8 9]A = [1,2,3; 4,5,6; 7,8,9] 使用函数创建 ones 全为1的矩阵 ones(n, m)将创建n×m的元素全为1的矩阵。 ones(n)将创建n×n的元素全为1的方阵。 zeros 全为0的矩阵 用法同">
+<meta name="keywords" content="matlab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Matlab基础——矩阵">
+<meta property="og:url" content="http://zerlingx.com/2019/07/31/matlab-basic-matrix/index.html">
+<meta property="og:site_name" content="zerlingx&#39;s blog">
+<meta property="og:description" content="矩阵创建 手动完整输入 每一行的元素用逗号或者空格隔开，不同行用分号隔开，整个矩阵用中括号括起来。如： 12A = [1 2 3; 4 5 6; 7 8 9]A = [1,2,3; 4,5,6; 7,8,9] 使用函数创建 ones 全为1的矩阵 ones(n, m)将创建n×m的元素全为1的矩阵。 ones(n)将创建n×n的元素全为1的方阵。 zeros 全为0的矩阵 用法同">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2021-05-14T01:40:46.148Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Matlab基础——矩阵">
+<meta name="twitter:description" content="矩阵创建 手动完整输入 每一行的元素用逗号或者空格隔开，不同行用分号隔开，整个矩阵用中括号括起来。如： 12A = [1 2 3; 4 5 6; 7 8 9]A = [1,2,3; 4,5,6; 7,8,9] 使用函数创建 ones 全为1的矩阵 ones(n, m)将创建n×m的元素全为1的矩阵。 ones(n)将创建n×n的元素全为1的方阵。 zeros 全为0的矩阵 用法同">
+    
+        <link rel="alternate" type="application/atom+xml" title="zerlingx&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zerlingx</h5>
+          <a href="mailto:centralnode@zerlingx.com" title="centralnode@zerlingx.com" class="mail">centralnode@zerlingx.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zerlingx" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://wiki.archlinux.org/" target="_blank">
+                <i class="icon icon-lg icon-wikipedia-w"></i>
+                ArchWiki
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Matlab基础——矩阵</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Matlab基础——矩阵</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-07-31T04:16:49.000Z" itemprop="datePublished" class="page-time">
+  2019-07-31
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Matlab/">Matlab</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#矩阵创建"><span class="post-toc-number">1.</span> <span class="post-toc-text">矩阵创建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#手动完整输入"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">手动完整输入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用函数创建"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">使用函数创建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ones-全为1的矩阵"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">ones 全为1的矩阵</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#zeros-全为0的矩阵"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">zeros 全为0的矩阵</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#eye-单位矩阵"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">eye 单位矩阵</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rand-均匀分布随机矩阵"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">rand 均匀分布随机矩阵</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#randn-正态分布随机矩阵"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">randn 正态分布随机矩阵</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#magic-魔方矩阵"><span class="post-toc-number">1.2.6.</span> <span class="post-toc-text">magic 魔方矩阵</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#diag-对角矩阵"><span class="post-toc-number">1.2.7.</span> <span class="post-toc-text">diag 对角矩阵</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#矩阵运算"><span class="post-toc-number">2.</span> <span class="post-toc-text">矩阵运算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一般运算"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">一般运算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#特定函数"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">特定函数</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-matlab-basic-matrix" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Matlab基础——矩阵</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-07-31 12:16:49" datetime="2019-07-31T04:16:49.000Z" itemprop="datePublished">2019-07-31</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Matlab/">Matlab</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="矩阵创建">矩阵创建</h2>
+<h3 id="手动完整输入">手动完整输入</h3>
+<p>每一行的元素用逗号或者空格隔开，不同行用分号隔开，整个矩阵用中括号括起来。如：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A = [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>; <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>; <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br><span class="line">A = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>; <span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>; <span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="使用函数创建">使用函数创建</h3>
+<h4 id="ones-全为1的矩阵">ones 全为1的矩阵</h4>
+<p><code>ones(n, m)</code>将创建n×m的元素全为1的矩阵。</p>
+<p><code>ones(n)</code>将创建n×n的元素全为1的方阵。</p>
+<h4 id="zeros-全为0的矩阵">zeros 全为0的矩阵</h4>
+<p>用法同ones。</p>
+<h4 id="eye-单位矩阵">eye 单位矩阵</h4>
+<p><code>eye(n)</code>生成n阶单位矩阵（对角元素为1，其他为0的方阵）。</p>
+<h4 id="rand-均匀分布随机矩阵">rand 均匀分布随机矩阵</h4>
+<p>用法同ones。</p>
+<h4 id="randn-正态分布随机矩阵">randn 正态分布随机矩阵</h4>
+<p>用法同ones。</p>
+<h4 id="magic-魔方矩阵">magic 魔方矩阵</h4>
+<p>magic(n)生成n阶魔方矩阵。</p>
+<p>生成的矩阵各行、列的和相等，元素为1～n^2。（这样的矩阵不唯一）</p>
+<h4 id="diag-对角矩阵">diag 对角矩阵</h4>
+<p>diag(A, k)，A为一组数字（1×n矩阵），k为数字。</p>
+<p>生成的矩阵对角元素为A中的数字，在对角线上方k个元素远处（若k等于0则在对角线上，k小于0则在对角线下方）。例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="built_in">diag</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"></span><br><span class="line">     <span class="number">1</span>     <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span></span><br><span class="line">     <span class="number">0</span>     <span class="number">2</span>     <span class="number">0</span>     <span class="number">0</span></span><br><span class="line">     <span class="number">0</span>     <span class="number">0</span>     <span class="number">3</span>     <span class="number">0</span></span><br><span class="line">     <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span>     <span class="number">4</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="built_in">diag</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"></span><br><span class="line">     <span class="number">0</span>     <span class="number">1</span>     <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span></span><br><span class="line">     <span class="number">0</span>     <span class="number">0</span>     <span class="number">2</span>     <span class="number">0</span>     <span class="number">0</span></span><br><span class="line">     <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span>     <span class="number">3</span>     <span class="number">0</span></span><br><span class="line">     <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span>     <span class="number">4</span></span><br><span class="line">     <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h2 id="矩阵运算">矩阵运算</h2>
+<h3 id="一般运算">一般运算</h3>
+<p>Matlab中矩阵的运算符号由一般的运算符号表示，数字（数组）运算有时要在运算符号前面加个点表示。</p>
+<table>
+<thead>
+<tr class="header">
+<th>符号</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>+</td>
+<td>加法</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>减法</td>
+</tr>
+<tr class="odd">
+<td>*</td>
+<td>乘法</td>
+</tr>
+<tr class="even">
+<td>/</td>
+<td>右除</td>
+</tr>
+<tr class="odd">
+<td>\</td>
+<td>左除</td>
+</tr>
+<tr class="even">
+<td>^</td>
+<td>乘方</td>
+</tr>
+<tr class="odd">
+<td>'</td>
+<td>共轭转置</td>
+</tr>
+<tr class="even">
+<td>.'</td>
+<td>非共轭转置</td>
+</tr>
+</tbody>
+</table>
+<p>注：<br>
+A/B == A右除B == A*B的逆<br>
+B\A == B左除A == B的逆*A<br>
+A*B即矩阵乘法<br>
+A.*B为A与B对应位置的元素分别相乘</p>
+<h3 id="特定函数">特定函数</h3>
+<table>
+<thead>
+<tr class="header">
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>det()</td>
+<td>行列式</td>
+</tr>
+<tr class="even">
+<td>inv()</td>
+<td>逆矩阵</td>
+</tr>
+<tr class="odd">
+<td>rank()</td>
+<td>求秩</td>
+</tr>
+</tbody>
+</table>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2021-05-14T01:40:46.148Z" itemprop="dateUpdated">2021-05-14 09:40:46</time>
+</span><br>
+
+
+        
+        文章转载请标明出处，仅供学习使用。
+        
+    </div>
+    
+    <footer>
+        <a href="http://zerlingx.com">
+            <img src="/img/avatar.jpg" alt="zerlingx">
+            zerlingx
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matlab/">matlab</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2019/07/31/matlab-basic-matrix/&title=《Matlab基础——矩阵》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2019/07/31/matlab-basic-matrix/&title=《Matlab基础——矩阵》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2019/07/31/matlab-basic-matrix/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Matlab基础——矩阵》 — zerlingx's blog&url=http://zerlingx.com/2019/07/31/matlab-basic-matrix/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2019/07/31/matlab-basic-matrix/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/04/bag-dp-nine-lesson/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">《背包九讲》笔记</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/07/29/ACM-big-num/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">ACM大正整数运算模板</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "vonyPRJwedvkCu0ksIMQYbmO-gzGzoHsz",
+            appKey: "O5p62bw33LShlsMSGD0y51wr",
+            avatar: "mm",
+            placeholder: "Your comment...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zerlingx &copy; 2019 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2019/07/31/matlab-basic-matrix/&title=《Matlab基础——矩阵》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2019/07/31/matlab-basic-matrix/&title=《Matlab基础——矩阵》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2019/07/31/matlab-basic-matrix/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Matlab基础——矩阵》 — zerlingx's blog&url=http://zerlingx.com/2019/07/31/matlab-basic-matrix/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2019/07/31/matlab-basic-matrix/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLUlEQVR42u3a204DMQwFwP7/Ty8Sb6g0HNsLosnkqaJ7yaSSie08HvG4Pserz+u/rK98/vb53tsGBgbG2zKu5Xh+5Rq5ZudLk88NAwPjHMYkyCb3JguULx8GBgZGNfAlk0tCcy9YY2BgYPS2bkmOWQ3HGBgYGMnjktCZFMt6xbvbcnEMDIw3ZMwbA7/3+U/7GxgYGP+ScbVGnoLmrcprMDAwMPZmVLd0yXRzdp70RoEYAwNjU0aelFaL+1V2b4P45f8GBgbGAYx1EJy3JO89bFFeIQwMjLdl5PWrqIk43vxNFhcDA+MERvV41vrReRO02hyNfgEMDIyNGL2p9A5J3NU0/eaNGBgYWzPmD8qzyN6V+cJhYGCcw7h3M5c8p9e8LOxzMTAwtmAkh64mBzKq5bZmtR8DA2NTRtIszI+Qric0D+Uv34WBgXEYo5pMVreM+fIVmpcYGBgHMHrbwfz6JLxWGwkYGBjnMJrnMop3JYC83Ba1BDAwMLZj9Er8yWsm28TqQRAMDIwTGHm3MwnKk2T40RsYGBjHMKoFuGqRLt+AVhsPGBgYezMmxfoqL1+mcqENAwNjU8ZVHNUlyJG9NPjLsTAMDIxNGdUMsVcgq05i/i4MDIz9GHkQ7LGrBbtmwMXAwDiAMUlrqwG3F/V/gGFgYGAMjkH0NovlYhwGBgbGOERW091ycQ0DA+MARrVYn3zbO4rRLP1jYGBszeiVzyZHVHNevtAYGBibMj4AwpHk8ws+8MkAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'stand by (~_~)';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'welcome back (^-^)/';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

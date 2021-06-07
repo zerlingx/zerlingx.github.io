@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>《背包九讲》笔记 | zerlingx&#39;s blog | Stay hungry, stay foolish.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#39C5BB">
+    
+    
+    <meta name="keywords" content="C/C++,acm">
+    <meta name="description" content="作为经典的动态规划问题，背包问题有许多变形。掌握基本模型对理解、解决动态规划问题有很大帮助。其中有一篇广为流传的教程——《背包九讲》。后面一部分我还没有完全看懂，不过先把看懂的部分简要概括一下。  01背包 条件 有N件物品和一个容量为V的背包。第i件物品的费用是c[i],价值是w[i]。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量,且价值总和最大。（后面命名方式基本相同">
+<meta name="keywords" content="C&#x2F;C++,acm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《背包九讲》笔记">
+<meta property="og:url" content="http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/index.html">
+<meta property="og:site_name" content="zerlingx&#39;s blog">
+<meta property="og:description" content="作为经典的动态规划问题，背包问题有许多变形。掌握基本模型对理解、解决动态规划问题有很大帮助。其中有一篇广为流传的教程——《背包九讲》。后面一部分我还没有完全看懂，不过先把看懂的部分简要概括一下。  01背包 条件 有N件物品和一个容量为V的背包。第i件物品的费用是c[i],价值是w[i]。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量,且价值总和最大。（后面命名方式基本相同">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2021-05-14T01:40:46.146Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《背包九讲》笔记">
+<meta name="twitter:description" content="作为经典的动态规划问题，背包问题有许多变形。掌握基本模型对理解、解决动态规划问题有很大帮助。其中有一篇广为流传的教程——《背包九讲》。后面一部分我还没有完全看懂，不过先把看懂的部分简要概括一下。  01背包 条件 有N件物品和一个容量为V的背包。第i件物品的费用是c[i],价值是w[i]。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量,且价值总和最大。（后面命名方式基本相同">
+    
+        <link rel="alternate" type="application/atom+xml" title="zerlingx&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zerlingx</h5>
+          <a href="mailto:centralnode@zerlingx.com" title="centralnode@zerlingx.com" class="mail">centralnode@zerlingx.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zerlingx" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://wiki.archlinux.org/" target="_blank">
+                <i class="icon icon-lg icon-wikipedia-w"></i>
+                ArchWiki
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">《背包九讲》笔记</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">《背包九讲》笔记</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-04T10:27:58.000Z" itemprop="datePublished" class="page-time">
+  2019-08-04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ACM/">ACM</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#背包"><span class="post-toc-number">1.</span> <span class="post-toc-text">01背包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#条件"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">条件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#状态转移方程"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">状态转移方程</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#完全背包"><span class="post-toc-number">2.</span> <span class="post-toc-text">完全背包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#条件-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">条件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#状态转移方程-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">状态转移方程</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多重背包"><span class="post-toc-number">3.</span> <span class="post-toc-text">多重背包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#条件-2"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">条件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-1"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#状态转移方程-2"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">状态转移方程</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#混合背包"><span class="post-toc-number">4.</span> <span class="post-toc-text">混合背包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#条件-3"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">条件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-2"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">思路</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多维背包"><span class="post-toc-number">5.</span> <span class="post-toc-text">多维背包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#条件-4"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">条件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-3"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#状态转移方程-3"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">状态转移方程</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分组背包"><span class="post-toc-number">6.</span> <span class="post-toc-text">分组背包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#条件-5"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">条件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-4"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#状态转移方程-4"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">状态转移方程</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#依赖背包"><span class="post-toc-number">7.</span> <span class="post-toc-text">依赖背包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#条件-6"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">条件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-5"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">思路</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#泛化物品"><span class="post-toc-number">8.</span> <span class="post-toc-text">泛化物品</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#条件-7"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">条件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路-6"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">思路</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#背包问题的变化"><span class="post-toc-number">9.</span> <span class="post-toc-text">背包问题的变化</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-bag-dp-nine-lesson" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">《背包九讲》笔记</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-04 18:27:58" datetime="2019-08-04T10:27:58.000Z" itemprop="datePublished">2019-08-04</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ACM/">ACM</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>作为经典的动态规划问题，背包问题有许多变形。掌握基本模型对理解、解决动态规划问题有很大帮助。其中有一篇广为流传的教程——《背包九讲》。后面一部分我还没有完全看懂，不过先把看懂的部分简要概括一下。</p>
+</blockquote>
+<h2 id="背包">01背包</h2>
+<h3 id="条件">条件</h3>
+<p>有<code>N</code>件物品和一个容量为<code>V</code>的背包。第i件物品的费用是<code>c[i]</code>,价值是<code>w[i]</code>。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量,且价值总和最大。（后面命名方式基本相同）</p>
+<p>每一种物品只有一件,物品相互独立，只有放或不放两种情况。</p>
+<h3 id="思路">思路</h3>
+<p>对于任何一件物品i，只能有两种情况——放或不放。定义<code>f[i][v]</code>表示前i件物品放入容量v的背包能获得的最大价值。那么如果物品i放入背包，<code>f[i][v]=f[i-1][v-c[i]]+w[i]</code>，否则<code>f[i][v]=f[i-1][v]</code>。</p>
+<h3 id="状态转移方程">状态转移方程</h3>
+<p><code>f[i][v]=max{f[i-1][v],f[i-1][v-c[i]]+w[i]}</code></p>
+<p>即</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i = <span class="number">1</span> ; i &lt;= N ; i++)</span><br><span class="line">    <span class="keyword">for</span>(v = V ; v &gt; <span class="number">0</span> ; v--)</span><br><span class="line">        f[v] = max(f[v], f[v-c[i]]+w[i]);</span><br></pre></td></tr></table></figure>
+<h2 id="完全背包">完全背包</h2>
+<h3 id="条件-1">条件</h3>
+<p>每种物品都有无限件可以使用。</p>
+<h3 id="状态转移方程-1">状态转移方程</h3>
+<p><code>f[i][v]=max{f[i-1][v],f[i][v-c[i]]+w[i]}</code></p>
+<p>即</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i = <span class="number">1</span> ; i &lt;= N ; i++)</span><br><span class="line">    <span class="keyword">for</span>(v = <span class="number">0</span> ; v &lt;= V ; v++)</span><br><span class="line">        f[v] = max(f[v], f[v-c[i]]+w[i]);</span><br></pre></td></tr></table></figure>
+<p>（只需改变一下v的方向）</p>
+<h2 id="多重背包">多重背包</h2>
+<h3 id="条件-2">条件</h3>
+<p>物品i最多有<code>n[i]</code>件可用。</p>
+<h3 id="思路-1">思路</h3>
+<p>数组多一维记录物品数量，用类似完全背包的方法求解。也可以把物品平摊开来，当做01背包求解。</p>
+<h3 id="状态转移方程-2">状态转移方程</h3>
+<p><code>f[i][v]=max{f[i-1][v-k*c[i]]+k*w[i]|0&lt;=k&lt;=n[i]}</code></p>
+<p>即</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i = <span class="number">1</span> ; i &lt;= N ; i++)</span><br><span class="line">    <span class="keyword">for</span>(v = <span class="number">0</span> ; v &lt;= V ; v++)</span><br><span class="line">        <span class="keyword">for</span>(k = <span class="number">1</span> ; k &lt;= n[i] ; k++)</span><br><span class="line">            <span class="keyword">if</span>(v-k*c[i] &gt;= <span class="number">0</span>)        </span><br><span class="line">                f[v] = max(f[v], f[v-k*c[i]]+k*w[i]);</span><br></pre></td></tr></table></figure>
+<p>这只是最直观的大概样式，可以用二进制拆分或单调队列进行优化。</p>
+<h2 id="混合背包">混合背包</h2>
+<h3 id="条件-3">条件</h3>
+<p>即将上面三种问题混合起来，有的物品只有一个，有的有多个，有的有无限个。</p>
+<h3 id="思路-2">思路</h3>
+<p>判断一下就完了，略。</p>
+<h2 id="多维背包">多维背包</h2>
+<h3 id="条件-4">条件</h3>
+<p>拿二维01背包做例子，其他同理。</p>
+<p>对于每个物体，有两种不同的费用。对于物品i，设两种费用为<code>a[i]</code>和<code>b[i]</code>，背包的两种容量为分别为V、U。</p>
+<h3 id="思路-3">思路</h3>
+<p>将状态也增加一维即可。</p>
+<h3 id="状态转移方程-3">状态转移方程</h3>
+<p><code>f[i][v][u]=max{f[i-1][v][u],f[i-1][v-a[i]][u-b[i]]+w[i]}</code></p>
+<p>即</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i = <span class="number">1</span> ; i &lt;= N ; i++)</span><br><span class="line">    <span class="keyword">for</span>(v = V ; v &gt; <span class="number">0</span> ; v--)</span><br><span class="line">        <span class="keyword">for</span>(u = U ; u &gt; <span class="number">0</span> ; u--)</span><br><span class="line">            f[v][u] = max(f[v][u], f[v-a[i]][u-b[i]+w[i]);</span><br></pre></td></tr></table></figure>
+<h2 id="分组背包">分组背包</h2>
+<h3 id="条件-5">条件</h3>
+<p>物品被分为了几个组，每一组中的物品互相冲突最多只能选其中之一。</p>
+<h3 id="思路-4">思路</h3>
+<p>显然，将物品分好组遍历就行。</p>
+<h3 id="状态转移方程-4">状态转移方程</h3>
+<p><code>f[k][v]=max{f[k-1][v],f[k-1][v-c[i]]+w[i]|物品i属于第k组}</code></p>
+<p>即</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p, group[maxk][maxi];</span><br><span class="line">...</span><br><span class="line"><span class="keyword">for</span>(k = <span class="number">1</span> ; k &lt;= K ; k++)</span><br><span class="line">    <span class="keyword">for</span>(v = V ; v &gt; <span class="number">0</span> ; v--)&#123;</span><br><span class="line">        p = group[k];</span><br><span class="line">        <span class="keyword">while</span>(*p)&#123;</span><br><span class="line">            f[k][v] = max(f[k<span class="number">-1</span>][v], f[k<span class="number">-1</span>][v-c[*p]]+w[*p]);</span><br><span class="line">            p++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>（假设为01背包） （注意这里将f数组加一维储存k以前的状态只是为了直观一点，其实只需要多一层用来储存k-1时的状态就行了）</p>
+<h2 id="依赖背包">依赖背包</h2>
+<h3 id="条件-6">条件</h3>
+<p>物品之间有依赖关系。即，要选i则必须选j。</p>
+<h3 id="思路-5">思路</h3>
+<p>首选考虑简化的问题。我们假设没有物品既依赖于别的物品又被其他物品依赖，也没有某件物品同时依赖于多个物品。并且假设为01背包。</p>
+<p>对于不依赖于其他物品的物品，我们称之为“主件”，其他则称之为“附件”。那么所有物品就分为了几个含有一个主件和若干个附件的集合。对于每个集合，可以都不取、只取主件或取主件和若干个附件。显然，每一个集合中，只可能有一种策略。那么这个问题就可以转化为上面所说的类似于物品组的问题。为了降低复杂度，可以在集合内部先进行一次01背包，去掉很多没用的策略，之后再用分组背包的思路求解。</p>
+<p>那么对于更一般的问题呢？如果依赖以森林的方式出现，即附件也可以有附件，那么这就成了一种树型dp。可能要把dfs也结合进去，父节点对字节点的属性都要进行dp。对一层dp，“物品”的值并不确定，那么可以把这种情况称为“泛化物品”，下面进行介绍。</p>
+<h2 id="泛化物品">泛化物品</h2>
+<h3 id="条件-7">条件</h3>
+<p>物品没有固定的价值，而是随着分配给它的费用二变化，即价值为费用的函数。</p>
+<h3 id="思路-6">思路</h3>
+<p>其实上面的物品组也可以说是一种泛化物品，对于一个组，可以用某种费用换取其价值。</p>
+<p>那么对于泛化物品，也可以用相似的方法求解，只不过要考虑费用变化的定义域。每一个物品都成了函数，灵活性大大提升。</p>
+<h2 id="背包问题的变化">背包问题的变化</h2>
+<p>背包问题能有的变化太多了，比如max变min，考虑取物品的顺序、字典序，求方案数量，还可以与其他类型的问题结合，或是用隐秘的问法。这个……我等菜鸡怎敢妄言呢……</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2021-05-14T01:40:46.146Z" itemprop="dateUpdated">2021-05-14 09:40:46</time>
+</span><br>
+
+
+        
+        文章转载请标明出处，仅供学习使用。
+        
+    </div>
+    
+    <footer>
+        <a href="http://zerlingx.com">
+            <img src="/img/avatar.jpg" alt="zerlingx">
+            zerlingx
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/acm/">acm</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/&title=《《背包九讲》笔记》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/&title=《《背包九讲》笔记》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《《背包九讲》笔记》 — zerlingx's blog&url=http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/12/software-project-note/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">软件工程笔记</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/07/31/matlab-basic-matrix/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Matlab基础——矩阵</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "vonyPRJwedvkCu0ksIMQYbmO-gzGzoHsz",
+            appKey: "O5p62bw33LShlsMSGD0y51wr",
+            avatar: "mm",
+            placeholder: "Your comment...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zerlingx &copy; 2019 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/&title=《《背包九讲》笔记》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/&title=《《背包九讲》笔记》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《《背包九讲》笔记》 — zerlingx's blog&url=http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3aO47DMAxF0ex/0542jeT7SGcAU1dVEDiKjwqCH30+eF2LRZ7//oZ83u/cWjJkyHgt49ouwlj98X6H/ZP83WTIkHEOg7zE6nn+JPm+uIMMGTJkhIngPqD3/1eGDBky0lKTJJQpWIYMGTJqReyzATRtwD1Wi8uQIeOFDN51///PP5lvyJAh41WMK1z8V2lqeDWWDBkyZjN4gOPpIGnM1cYGNw0+GTJkDGXwwFdrunXKXRKg0c9kyJDxckbtGgSH1VppPEAvMTJkyBjH6G9d43UulsmQIeMcBg9nPBDzgwhOeh/6ZciQMZrBC8hOmyxt1aXBWoYMGScwapeu0tYbTy7JzssMV4YMGeMYzwZB/iqdUcRyhClDhowjGf2hY7EQTXeWIUPGaEbtKlhauPID4lcrZMiQcRqjNgDgaV9a6PKgfzOJlSFDxjgGH0CmL9oJ0EGglyFDxlBG57pDLbD+/M6IDBkyxjHSMNqP7vzSGD8mGTJknMDoX61If5umlQ8kiDJkyBjH6FyAeGqcGRfDMmTIOICRTjvToSYfcPKR6s3NERkyZIxgXOHi48x+qA1CsAwZMkYz+CJBmY8EeMiuDURlyJAxj8GDbDoMCMaNYVkbZI4yZMgYxOg39Pfttn4Re/OkDBkyZLTvcaQHUcxeZciQISMMsrwZR47g5uBkyJBxAIMPAwisFo5rha4MGTJOYKR5F0njOi9dSzFlyJAxlPEHxzDbGYsx36cAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'stand by (~_~)';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'welcome back (^-^)/';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

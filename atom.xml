@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>zerlingx&#39;s blog</title>
+  
+  <subtitle>Stay hungry, stay foolish.</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://zerlingx.com/"/>
+  <updated>2021-05-14T06:01:05.781Z</updated>
+  <id>http://zerlingx.com/</id>
+  
+  <author>
+    <name>zerlingx</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>固体火箭发动机燃烧产物热力计算</title>
+    <link href="http://zerlingx.com/2021/05/14/%E7%83%AD%E5%8A%9B%E8%AE%A1%E7%AE%97%E4%BD%9C%E4%B8%9A_%E6%9D%A8%E9%80%B8%E9%9F%AC/"/>
+    <id>http://zerlingx.com/2021/05/14/热力计算作业_杨逸韬/</id>
+    <published>2021-05-14T01:22:00.000Z</published>
+    <updated>2021-05-14T06:01:05.781Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;推进理论课的一次热力计算作业，还是挺有趣的，可以作为简单的案例参考。主要难点在于利用平衡常数法计算平衡组分，使用的方程、设计的计算链顺序对结果有重要的影响。物性参数主要参考北航的教材《固体火箭发动机原理》，如果需要找其他组分的参数也可以上NASA
+        
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="http://zerlingx.com/categories/Notes/"/>
+    
+    
+      <category term="study" scheme="http://zerlingx.com/tags/study/"/>
+    
+      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+    
+      <category term="physics" scheme="http://zerlingx.com/tags/physics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习纲要_05_卷积神经网络</title>
+    <link href="http://zerlingx.com/2021/04/27/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_05_%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    <id>http://zerlingx.com/2021/04/27/机器学习纲要_05_卷积神经网络/</id>
+    <published>2021-04-26T16:00:00.000Z</published>
+    <updated>2021-06-07T10:37:19.397Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;概述&quot;&gt;概述&lt;/h1&gt;
+&lt;h2 id=&quot;深层神经网络问题导入&quot;&gt;深层神经网络问题导入&lt;/h2&gt;
+&lt;h3 id=&quot;常见的神经网络&quot;&gt;常见的神经网络&lt;/h3&gt;
+&lt;figure class=&quot;image-bubble&quot;&gt;
+                &lt;div
+        
+      
+    
+    </summary>
+    
+      <category term="AI" scheme="http://zerlingx.com/categories/AI/"/>
+    
+    
+      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+    
+      <category term="ai" scheme="http://zerlingx.com/tags/ai/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习纲要_04_神经网络</title>
+    <link href="http://zerlingx.com/2021/04/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_04_%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    <id>http://zerlingx.com/2021/04/08/机器学习纲要_04_神经网络/</id>
+    <published>2021-04-07T16:00:00.000Z</published>
+    <updated>2021-06-07T10:37:16.734Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;问题的提出&quot;&gt;问题的提出&lt;/h1&gt;
+&lt;p&gt;从图像识别问题入手。&lt;br&gt;
+比如，对于识别是不是汽车的问题，图像上的每个像素点就是一个特征，&lt;br&gt;
+（假设是灰度图像，即像素只需要考虑强度大小，对于RGB彩色图其实同理）&lt;/p&gt;
+&lt;figure
+        
+      
+    
+    </summary>
+    
+      <category term="AI" scheme="http://zerlingx.com/categories/AI/"/>
+    
+    
+      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+    
+      <category term="ai" scheme="http://zerlingx.com/tags/ai/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习纲要_03_逻辑回归</title>
+    <link href="http://zerlingx.com/2021/04/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_03_%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/"/>
+    <id>http://zerlingx.com/2021/04/05/机器学习纲要_03_逻辑回归/</id>
+    <published>2021-04-04T16:00:00.000Z</published>
+    <updated>2021-06-07T10:37:13.647Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;分类问题&quot;&gt;分类问题&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;分类问题需要的输出即离散的函数值。&lt;br&gt;
+比如对于“是或否”的分类，可看作函数输出&lt;span class=&quot;math
+        
+      
+    
+    </summary>
+    
+      <category term="AI" scheme="http://zerlingx.com/categories/AI/"/>
+    
+    
+      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+    
+      <category term="ai" scheme="http://zerlingx.com/tags/ai/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FFT快速傅里叶变换原理概要</title>
+    <link href="http://zerlingx.com/2021/03/28/FFT%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E5%8E%9F%E7%90%86%E6%A6%82%E8%A6%81/"/>
+    <id>http://zerlingx.com/2021/03/28/FFT快速傅里叶变换原理概要/</id>
+    <published>2021-03-28T13:30:00.000Z</published>
+    <updated>2021-05-14T02:05:32.052Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;复变、控制论、ACM，学了三次忘了三次……&lt;/p&gt;
+&lt;p&gt;在这里只是整理一下提纲，详细推导与代码推荐参考&lt;a href=&quot;https://zhuanlan.zhihu.com/p/31584464&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="http://zerlingx.com/categories/Notes/"/>
+    
+    
+      <category term="acm" scheme="http://zerlingx.com/tags/acm/"/>
+    
+      <category term="study" scheme="http://zerlingx.com/tags/study/"/>
+    
+      <category term="math" scheme="http://zerlingx.com/tags/math/"/>
+    
+      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习纲要_02_线性代数复习与应用</title>
+    <link href="http://zerlingx.com/2021/03/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_02_%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%A4%8D%E4%B9%A0%E4%B8%8E%E5%BA%94%E7%94%A8/"/>
+    <id>http://zerlingx.com/2021/03/24/机器学习纲要_02_线性代数复习与应用/</id>
+    <published>2021-03-23T16:00:00.000Z</published>
+    <updated>2021-06-07T10:37:08.230Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;线性代数基础矩阵&quot;&gt;线性代数基础——矩阵&lt;/h1&gt;
+&lt;h2 id=&quot;矩阵&quot;&gt;矩阵&lt;/h2&gt;
+&lt;p&gt;&lt;span class=&quot;math display&quot;&gt;\[
+A=
+\left[\begin{matrix}
+1402 &amp;amp; 191 \\
+1371
+        
+      
+    
+    </summary>
+    
+      <category term="AI" scheme="http://zerlingx.com/categories/AI/"/>
+    
+    
+      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+    
+      <category term="ai" scheme="http://zerlingx.com/tags/ai/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习纲要_01_机器学习的基本模型和数学描述</title>
+    <link href="http://zerlingx.com/2021/03/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_01_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/"/>
+    <id>http://zerlingx.com/2021/03/22/机器学习纲要_01_机器学习的基本模型和数学描述/</id>
+    <published>2021-03-21T16:00:00.000Z</published>
+    <updated>2021-06-07T10:37:05.692Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;个人的机器学习课程学习笔记，没有经过太多的处理，只是简要地说明原理和关键公式，详细讲解建议参考&lt;a href=&quot;https://www.coursera.org/learn/machine-learning/home/welcome&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="AI" scheme="http://zerlingx.com/categories/AI/"/>
+    
+    
+      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+    
+      <category term="ai" scheme="http://zerlingx.com/tags/ai/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>压高公式——临近空间气压和密度与高度的关系</title>
+    <link href="http://zerlingx.com/2021/03/12/%E5%8E%8B%E9%AB%98%E5%85%AC%E5%BC%8F/"/>
+    <id>http://zerlingx.com/2021/03/12/压高公式/</id>
+    <published>2021-03-12T06:42:00.000Z</published>
+    <updated>2021-05-14T01:40:46.146Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;基本按照&lt;a href=&quot;https://en.wikipedia.org/wiki/Barometric_formula&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;wiki_Barometric
+        
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="http://zerlingx.com/categories/Notes/"/>
+    
+    
+      <category term="study" scheme="http://zerlingx.com/tags/study/"/>
+    
+      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+    
+      <category term="physics" scheme="http://zerlingx.com/tags/physics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于win10的触摸板延迟设置问题</title>
+    <link href="http://zerlingx.com/2020/11/03/win10_touchpad_delay/"/>
+    <id>http://zerlingx.com/2020/11/03/win10_touchpad_delay/</id>
+    <published>2020-11-03T09:26:12.000Z</published>
+    <updated>2021-05-14T01:40:46.144Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;关于win10的触摸板延迟设置问题&quot;&gt;关于win10的触摸板延迟设置问题&lt;/h1&gt;
+&lt;h2 id=&quot;win10触摸板延迟问题&quot;&gt;win10触摸板延迟问题&lt;/h2&gt;
+&lt;p&gt;​
+        
+      
+    
+    </summary>
+    
+      <category term="WIN" scheme="http://zerlingx.com/categories/WIN/"/>
+    
+    
+      <category term="win" scheme="http://zerlingx.com/tags/win/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>onenote使用latex或unicomath格式输入数学公式的设置</title>
+    <link href="http://zerlingx.com/2019/11/06/onenote-math-input/"/>
+    <id>http://zerlingx.com/2019/11/06/onenote-math-input/</id>
+    <published>2019-11-06T11:09:31.000Z</published>
+    <updated>2021-05-14T01:40:46.145Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;这里写的适用于onenote2016，应用商店版的功能较少，好像不能进行相关设置。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+&lt;p&gt;在&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="Text" scheme="http://zerlingx.com/categories/Text/"/>
+    
+    
+      <category term="latex" scheme="http://zerlingx.com/tags/latex/"/>
+    
+      <category term="win" scheme="http://zerlingx.com/tags/win/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vscode的网易云音乐插件问题处理</title>
+    <link href="http://zerlingx.com/2019/09/23/netease-ext-in-vscode/"/>
+    <id>http://zerlingx.com/2019/09/23/netease-ext-in-vscode/</id>
+    <published>2019-09-23T05:38:30.000Z</published>
+    <updated>2021-05-14T01:40:46.148Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;vsocde上的netease-cloud-music做的相当好，但因为ffmpeg动态链接库的问题经常无法使用。这里给出在archlinux上的一种快捷解决方法。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;插件的页面上说要替换ffmpeg
+        
+      
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://zerlingx.com/categories/Linux/"/>
+    
+    
+      <category term="music" scheme="http://zerlingx.com/tags/music/"/>
+    
+      <category term="linux" scheme="http://zerlingx.com/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>软件工程笔记</title>
+    <link href="http://zerlingx.com/2019/08/12/software-project-note/"/>
+    <id>http://zerlingx.com/2019/08/12/software-project-note/</id>
+    <published>2019-08-12T13:18:03.000Z</published>
+    <updated>2021-05-14T01:40:46.147Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;这门纯理论的课是真的无聊，居然还要闭卷考……记个笔记方便背……&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;一软件工程与软件过程&quot;&gt;一、软件工程与软件过程&lt;/h2&gt;
+&lt;h3 id=&quot;计算机软件&quot;&gt;1.1
+        
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="http://zerlingx.com/categories/Notes/"/>
+    
+    
+      <category term="study" scheme="http://zerlingx.com/tags/study/"/>
+    
+      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《背包九讲》笔记</title>
+    <link href="http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/"/>
+    <id>http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/</id>
+    <published>2019-08-04T10:27:58.000Z</published>
+    <updated>2021-05-14T01:40:46.146Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;作为经典的动态规划问题，背包问题有许多变形。掌握基本模型对理解、解决动态规划问题有很大帮助。其中有一篇广为流传的教程——《背包九讲》。后面一部分我还没有完全看懂，不过先把看懂的部分简要概括一下。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+      <category term="ACM" scheme="http://zerlingx.com/categories/ACM/"/>
+    
+    
+      <category term="C/C++" scheme="http://zerlingx.com/tags/C-C/"/>
+    
+      <category term="acm" scheme="http://zerlingx.com/tags/acm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Matlab基础——矩阵</title>
+    <link href="http://zerlingx.com/2019/07/31/matlab-basic-matrix/"/>
+    <id>http://zerlingx.com/2019/07/31/matlab-basic-matrix/</id>
+    <published>2019-07-31T04:16:49.000Z</published>
+    <updated>2021-05-14T01:40:46.148Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;矩阵创建&quot;&gt;矩阵创建&lt;/h2&gt;
+&lt;h3 id=&quot;手动完整输入&quot;&gt;手动完整输入&lt;/h3&gt;
+&lt;p&gt;每一行的元素用逗号或者空格隔开，不同行用分号隔开，整个矩阵用中括号括起来。如：&lt;/p&gt;
+&lt;figure class=&quot;highlight
+        
+      
+    
+    </summary>
+    
+      <category term="Matlab" scheme="http://zerlingx.com/categories/Matlab/"/>
+    
+    
+      <category term="matlab" scheme="http://zerlingx.com/tags/matlab/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ACM大正整数运算模板</title>
+    <link href="http://zerlingx.com/2019/07/29/ACM-big-num/"/>
+    <id>http://zerlingx.com/2019/07/29/ACM-big-num/</id>
+    <published>2019-07-29T15:30:21.000Z</published>
+    <updated>2021-05-14T01:40:46.145Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;主要参考《算法竞赛入门经典》第五章。另外还参考了很多别人的博客，魔改的乱七八糟，因此对于除加法以外的四则运算的可靠性都不能保证。还有，用这个会很费时间，最好一般还是不要用，正常的题目应该都会有用long
+        
+      
+    
+    </summary>
+    
+      <category term="ACM" scheme="http://zerlingx.com/categories/ACM/"/>
+    
+    
+      <category term="C/C++" scheme="http://zerlingx.com/tags/C-C/"/>
+    
+      <category term="acm" scheme="http://zerlingx.com/tags/acm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在linux上播放midi音乐</title>
+    <link href="http://zerlingx.com/2019/07/07/midi-on-linux/"/>
+    <id>http://zerlingx.com/2019/07/07/midi-on-linux/</id>
+    <published>2019-07-07T04:45:37.000Z</published>
+    <updated>2021-05-14T01:40:46.146Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;linux上的播放器好像都不能直接播放midi格式的音乐，需要一些简单的配置。 这里使用的是archlinux系统，别的应该差不多。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;参考&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="Music" scheme="http://zerlingx.com/categories/Music/"/>
+    
+    
+      <category term="midi" scheme="http://zerlingx.com/tags/midi/"/>
+    
+      <category term="music" scheme="http://zerlingx.com/tags/music/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++ STL 优先队列priority_queue</title>
+    <link href="http://zerlingx.com/2019/07/03/priority-queue/"/>
+    <id>http://zerlingx.com/2019/07/03/priority-queue/</id>
+    <published>2019-07-03T04:28:54.000Z</published>
+    <updated>2021-05-14T01:40:46.146Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;优先队列与队列一样只能队尾进、队首出。但是其排列顺序并不是按入队先后，而是可以自己定义优先级，相当于自动排好序的队列。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+      <category term="ACM" scheme="http://zerlingx.com/categories/ACM/"/>
+    
+    
+      <category term="C/C++" scheme="http://zerlingx.com/tags/C-C/"/>
+    
+      <category term="acm" scheme="http://zerlingx.com/tags/acm/"/>
+    
+      <category term="STL" scheme="http://zerlingx.com/tags/STL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ACM、C++关于输入输出的小技巧</title>
+    <link href="http://zerlingx.com/2019/06/22/acm-io-tricks/"/>
+    <id>http://zerlingx.com/2019/06/22/acm-io-tricks/</id>
+    <published>2019-06-22T01:01:06.000Z</published>
+    <updated>2021-05-14T01:40:46.147Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;输入输出的问题说大不大说小不小，关键时候知道一点小技巧能帮上大忙。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;##　cin、cout加速&lt;/p&gt;
+&lt;p&gt; 在main函数的第一行加入:&lt;/p&gt;
+&lt;figure
+        
+      
+    
+    </summary>
+    
+      <category term="ACM" scheme="http://zerlingx.com/categories/ACM/"/>
+    
+    
+      <category term="C/C++" scheme="http://zerlingx.com/tags/C-C/"/>
+    
+      <category term="acm" scheme="http://zerlingx.com/tags/acm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Arch中安装Tensorflow及一些小问题</title>
+    <link href="http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/"/>
+    <id>http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/</id>
+    <published>2019-06-19T00:34:12.000Z</published>
+    <updated>2021-05-14T01:40:46.146Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;记录一下在Arch Linux中安装Tensorflow遇到的一些问题及解决方法。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;使用pip安装&quot;&gt;使用pip安装&lt;/h2&gt;
+&lt;figure class=&quot;highlight
+        
+      
+    
+    </summary>
+    
+      <category term="AI" scheme="http://zerlingx.com/categories/AI/"/>
+    
+    
+      <category term="ai" scheme="http://zerlingx.com/tags/ai/"/>
+    
+      <category term="tensorflow" scheme="http://zerlingx.com/tags/tensorflow/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式</title>
+    <link href="http://zerlingx.com/2019/06/14/%E5%85%B3%E4%BA%8E%E8%B4%9D%E5%A1%9E%E5%B0%94%E4%B8%8D%E7%AD%89%E5%BC%8F%E4%B8%8E%E5%B8%95%E5%A1%9E%E7%93%A6%E5%B0%94%E7%AD%89%E5%BC%8F/"/>
+    <id>http://zerlingx.com/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/</id>
+    <published>2019-06-14T15:49:03.000Z</published>
+    <updated>2021-05-14T01:40:46.149Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;在书上讲关于傅里叶级数的均方逼近和误差的相关部分中，对于贝塞尔不等式和帕塞瓦尔等式的描述非常少，而且完全一样，自己直接就看懵了。网上找到的相关资料过于高级，超出大一的范围。还是问老师靠谱。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+      <category term="Notes" scheme="http://zerlingx.com/categories/Notes/"/>
+    
+    
+      <category term="study" scheme="http://zerlingx.com/tags/study/"/>
+    
+      <category term="math" scheme="http://zerlingx.com/tags/math/"/>
+    
+      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+    
+  </entry>
+  
+</feed>

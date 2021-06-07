@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>机器学习纲要_04_神经网络 | zerlingx&#39;s blog | Stay hungry, stay foolish.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#39C5BB">
+    
+    
+    <meta name="keywords" content="notes,ai">
+    <meta name="description" content="问题的提出 从图像识别问题入手。 比如，对于识别是不是汽车的问题，图像上的每个像素点就是一个特征， （假设是灰度图像，即像素只需要考虑强度大小，对于RGB彩色图其实同理）                                                                                              04_p1">
+<meta name="keywords" content="notes,ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习纲要_04_神经网络">
+<meta property="og:url" content="http://zerlingx.com/2021/04/08/机器学习纲要_04_神经网络/index.html">
+<meta property="og:site_name" content="zerlingx&#39;s blog">
+<meta property="og:description" content="问题的提出 从图像识别问题入手。 比如，对于识别是不是汽车的问题，图像上的每个像素点就是一个特征， （假设是灰度图像，即像素只需要考虑强度大小，对于RGB彩色图其实同理）                                                                                              04_p1">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/04_p1.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/04_p2.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/04_p3.png">
+<meta property="og:updated_time" content="2021-06-07T10:37:16.734Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习纲要_04_神经网络">
+<meta name="twitter:description" content="问题的提出 从图像识别问题入手。 比如，对于识别是不是汽车的问题，图像上的每个像素点就是一个特征， （假设是灰度图像，即像素只需要考虑强度大小，对于RGB彩色图其实同理）                                                                                              04_p1">
+<meta name="twitter:image" content="http://zerlingx.com/images/machine_learning_2021/04_p1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="zerlingx&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zerlingx</h5>
+          <a href="mailto:centralnode@zerlingx.com" title="centralnode@zerlingx.com" class="mail">centralnode@zerlingx.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zerlingx" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://wiki.archlinux.org/" target="_blank">
+                <i class="icon icon-lg icon-wikipedia-w"></i>
+                ArchWiki
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">机器学习纲要_04_神经网络</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">机器学习纲要_04_神经网络</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-04-07T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2021-04-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AI/">AI</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#问题的提出"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题的提出</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#神经网络模型"><span class="post-toc-number">2.</span> <span class="post-toc-text">神经网络模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#神经元-neuron"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">神经元 neuron</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#偏置单元"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">偏置单元</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#激活函数"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">激活函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#权重"><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text">权重</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#神经网络-neural-network"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">神经网络 neural network</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#输入层"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">输入层</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#输出层"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">输出层</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#隐藏层"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">隐藏层</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前向传播"><span class="post-toc-number">2.2.4.</span> <span class="post-toc-text">前向传播</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#架构"><span class="post-toc-number">2.2.5.</span> <span class="post-toc-text">架构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单案例用神经网络构造逻辑函数"><span class="post-toc-number">2.2.6.</span> <span class="post-toc-text">简单案例：用神经网络构造逻辑函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多元分类"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">多元分类</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#反向传播算法"><span class="post-toc-number">3.</span> <span class="post-toc-text">反向传播算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#神经网路的代价函数"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">神经网路的代价函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#反向传播算法-1"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">反向传播算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#误差delta"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">误差\(\delta\)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#对于每个参数theta_ijl的梯度求解方法"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">对于每个参数\(\Theta_{ij}^(l)\)的梯度求解方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#随机初始化"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">随机初始化</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-机器学习纲要_04_神经网络" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">机器学习纲要_04_神经网络</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-04-08 00:00:00" datetime="2021-04-07T16:00:00.000Z" itemprop="datePublished">2021-04-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AI/">AI</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="问题的提出">问题的提出</h1>
+<p>从图像识别问题入手。<br>
+比如，对于识别是不是汽车的问题，图像上的每个像素点就是一个特征，<br>
+（假设是灰度图像，即像素只需要考虑强度大小，对于RGB彩色图其实同理）</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\04_p1.png" alt="04_p1" title>
+                </div>
+                <div class="image-caption">04_p1</div>
+            </figure>
+<p>（上图只是用两个像素点举个简单的例子）<br>
+显然，这是非线性的分类问题。</p>
+<p>考虑一般的图片，有上百万、千万的像素，显然特征太多了，用前面的方法无法解决。<br>
+因此，用神经来学习复杂的非线性假设。</p>
+<h1 id="神经网络模型">神经网络模型</h1>
+<h2 id="神经元-neuron">神经元 neuron</h2>
+<p>本来是生物学概念。信息从树突输入，通过轴突输出。<br>
+如下图，不妨用一个黄圈表示一个神经元。<br>
+那么就可以用下图表示之前的逻辑回归模型。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\04_p2.png" alt="04_p2" title>
+                </div>
+                <div class="image-caption">04_p2</div>
+            </figure>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;（x_0=1） \\
+&amp;x=\left[\begin{matrix}x_0\\x_1\\x_2\\x_3\\\end{matrix}\right] \\
+&amp;\theta=\left[\begin{matrix}\theta_0\\\theta_1\\\theta_2\\\theta_3\\\end{matrix}\right] \\
+&amp;h_\theta\left(x\right)=\frac{1}{1+e^{-\theta^Tx}} \\
+\end{aligned}
+\]</span></p>
+<h3 id="偏置单元">偏置单元</h3>
+<p>上面的<span class="math inline">\(x_0\)</span>项，怎么加视情况而定。<br>
+为常数，所以一般不画出来。计算时别忘了。</p>
+<h3 id="激活函数">激活函数</h3>
+<p>神经元上运行的函数。</p>
+<p>上图可称为带有sigmoid（或logistic）激活函数的人工神经元。<br>
+注意激活函数不是只有最后一步输出前才用，而是每一步都用。<br>
+每一步都用<span class="math inline">\(g(z)\)</span>，相当于全部归一化。</p>
+<h3 id="权重">权重</h3>
+<p>即参数<span class="math inline">\(\theta\)</span>。神经网络文献里一般称为权重<span class="math inline">\(w\)</span>。</p>
+<h2 id="神经网络-neural-network">神经网络 neural network</h2>
+<p>上面的模型里只有一个神经元，<br>
+神经网络即若干神经元的组合。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\04_p3.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>如上图所示，（偏置单元<span class="math inline">\(x_0\)</span>、<span class="math inline">\(a_0^{\left(2\right)}\)</span>可以不画出来）<br>
+有三个输入单元<span class="math inline">\(x_1,x_2,x_3\)</span><br>
+接下来一层有三个神经元<span class="math inline">\(a_1^{\left(2\right)},a_2^{\left(2\right)},a_3^{\left(2\right)}\)</span>，<br>
+最后一层有一个神经元，计算并输出到假设函数<span class="math inline">\(h\)</span>。</p>
+<h3 id="输入层">输入层</h3>
+<p>第一层，输入特征。</p>
+<h3 id="输出层">输出层</h3>
+<p>最后一层，这层的神经元输出神经网络的最后结果。<br>
+（可能之后还要经过假设函数计算）</p>
+<h3 id="隐藏层">隐藏层</h3>
+<p>中间的层。（显然可能不止一层）</p>
+<p>标记方法解释：<br>
+<span class="math inline">\(a_j^{\left(l\right)}\)</span>——第<span class="math inline">\(l\)</span>层的第<span class="math inline">\(j\)</span>个神经元。<br>
+<span class="math inline">\(\Theta_{ji}^{\left(l\right)}\)</span>——权重矩阵（从<span class="math inline">\(l\)</span>层的第<span class="math inline">\(i\)</span>项，映射到<span class="math inline">\(l+1\)</span>层的第<span class="math inline">\(j\)</span>项）<br>
+<span class="math inline">\(z_j^{\left(l\right)}\)</span>——应用归一化函数后的方便表示，即<span class="math inline">\(a_j^{\left(l\right)}=g\left(z_j^{\left(l\right)}\right)\)</span>，<span class="math inline">\(z^{\left(l\right)}=\Theta^{\left(l-1\right)}a^{\left(l-1\right)}\)</span>。</p>
+<h3 id="前向传播">前向传播</h3>
+<p>根据<span class="math inline">\(x\)</span>和<span class="math inline">\(\Theta\)</span>，向前计算<span class="math inline">\(a\)</span>和<span class="math inline">\(h\)</span>的过程。<br>
+（下面的过程里每一层都用<span class="math inline">\(g(z)\)</span>归一化）<br>
+（其实<span class="math inline">\(x\)</span>就可以看作<span class="math inline">\(a^{\left(1\right)}\)</span>，不同资料上表示方法可能略有出入）</p>
+<p>插入<span class="math inline">\(x_0=1\)</span><br>
+<span class="math inline">\(a^{\left(2\right)}=g\left(\Theta^{\left(1\right)}x\right)\)</span><br>
+插入<span class="math inline">\(a_0^{\left(2\right)}=1\)</span><br>
+<span class="math inline">\(a^{\left(3\right)}=g\left(\Theta^{\left(2\right)}a^{\left(2\right)}\right)\)</span><br>
+<span class="math inline">\(h_\Theta\left(x\right)=a^{\left(3\right)}\)</span></p>
+<p>计算的时候别忘了偏置项。（只是由于都是1，平时不画出来）<br>
+注意各个量的维度，理清楚矩阵运算的过程<br>
+<span class="math inline">\(x,a^{\left(j\right)}\)</span>为向量，一维</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;x=\left[\begin{matrix}x_0\\x_1\\x_2\\x_3\\\end{matrix}\right] \\
+&amp;a^{\left(j\right)}=\left[\begin{matrix}a_0^{\left(l\right)}\\a_1^{\left(l\right)}\\a_2^{\left(l\right)}\\a_3^{\left(l\right)}\\\end{matrix}\right] \\
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(\Theta^{\left(l\right)}\)</span>为变换矩阵，二维，即一个<span class="math inline">\(3\times4\)</span>矩阵（在这层）</p>
+<p><span class="math display">\[
+\left[\begin{matrix}a_1^{\left(l+1\right)}\\a_2^{\left(l+1\right)}\\a_3^{\left(l+1\right)}\\\end{matrix}\right]=g\left(\left[\begin{matrix}\Theta_{10}^{\left(l\right)}&amp;\cdots&amp;\cdots&amp;\Theta_{13}^{\left(l\right)}\\\vdots&amp;&amp;&amp;\vdots\\\Theta_{30}^{\left(l\right)}&amp;\cdots&amp;\cdots&amp;\Theta_{33}^{\left(l\right)}\\\end{matrix}\right]\times\left[\begin{matrix}x_0\\x_1\\x_2\\x_3\\\end{matrix}\right]\right)
+\]</span></p>
+<p>具体来说，<span class="math inline">\(\Theta^{\left(l\right)}\)</span>这个矩阵的行列视输入输出层特征数而定，<br>
+即输出特征数个行、输入特征数个列。<br>
+设<span class="math inline">\(k\)</span>等于隐层数加一，<span class="math inline">\(l\in\left[1,k\right]\)</span>。<br>
+整个<span class="math inline">\(\Theta\)</span>实际上是个<span class="math inline">\(i\times j\times L\)</span>的三维张量。</p>
+<h3 id="架构">架构</h3>
+<p>字面意思，神经网络中神经元的连接方式。</p>
+<h3 id="简单案例用神经网络构造逻辑函数">简单案例：用神经网络构造逻辑函数</h3>
+<p>比如</p>
+<p><span class="math display">\[
+g\left(\left[\begin{matrix}-30&amp;20&amp;20\\\end{matrix}\right]\times\left[\begin{matrix}1\\x_1\\x_2\\\end{matrix}\right]\right)=a
+\]</span></p>
+<p>（假设<span class="math inline">\(x_i\)</span>为二进制输入，即只有0或1）<br>
+那么显然我们得到了逻辑与。<br>
+同理可以构造其他逻辑函数。</p>
+<p>那么，如果有很多层数，就可以实现复杂的功能。</p>
+<h2 id="多元分类">多元分类</h2>
+<p>假设一个问题的答案有且只有四类，<br>
+（而且互斥，比如把图片分为“人、车、狗、猫”四类）<br>
+那么我们就需要一个有四个输出的神经网络，<br>
+对应的四种答案为不同的<span class="math inline">\(y^{\left(i\right)}\)</span></p>
+<p><span class="math display">\[
+y=\left[\begin{matrix}1\\0\\0\\0\\\end{matrix}\right], y=\left[\begin{matrix}0\\1\\0\\0\\\end{matrix}\right], y=\left[\begin{matrix}0\\0\\1\\0\\\end{matrix}\right], y=\left[\begin{matrix}0\\0\\0\\1\\\end{matrix}\right]
+\]</span></p>
+<p>那么就容易表述了，可以表示为成对的输入输出<span class="math inline">\(\left(x^{\left(i\right)},y^{\left(i\right)}\right)\)</span>。</p>
+<h1 id="反向传播算法">反向传播算法</h1>
+<h2 id="神经网路的代价函数">神经网路的代价函数</h2>
+<p>从上面的讨论可见，神经网络类似于多层多元复合的逻辑回归，<br>
+那么其代价函数也类似，或者说由逻辑回归推导而来。</p>
+<p><span class="math display">\[
+J\left(\Theta\right)=−\frac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^{K}\left[y_k^{\left(i\right)}ln\left(h_\Theta\left(x^{\left(i\right)}\right)\right)_k+\left(1-y_k^{\left(i\right)}\right)ln\left(1-\left(h_\Theta\left(x^{\left(i\right)}\right)\right)_k\right)\right]+\frac{\lambda}{2m}\sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_{l+1}}\left(\Theta_{ji}^{\left(l\right)}\right)^2
+\]</span></p>
+<p>（注意<span class="math inline">\(\Theta_{j0}^{\left(l\right)}\)</span>不参与正则化）<br>
+样本对数<span class="math inline">\(m\)</span><br>
+层数<span class="math inline">\(L\)</span><br>
+<span class="math inline">\(l\)</span>层的单元数<span class="math inline">\(s_l\)</span>（不含偏置项）<br>
+输出维度为<span class="math inline">\(K\)</span>，即<span class="math inline">\(y\)</span>为<span class="math inline">\(K\)</span>个值的向量。</p>
+<h2 id="反向传播算法-1">反向传播算法</h2>
+<p>其实本质还是按老样子用梯度下降法，不过这次的梯度计算比较复杂</p>
+<p><span class="math display">\[
+\frac{\partial}{\partial\Theta_{ij}^{\left(l\right)}}J\left(\Theta\right)
+\]</span></p>
+<h3 id="误差delta">误差<span class="math inline">\(\delta\)</span></h3>
+<p><span class="math display">\[
+\delta_j^{\left(L\right)}=a_j^{\left(L\right)}−y_j
+\]</span></p>
+<p><span class="math inline">\(L\)</span>层<span class="math inline">\(j\)</span>节点的“误差”，<br>
+（编程的时候注意，对于偏置项<span class="math inline">\(a_\Theta^{\left(l\right)}\)</span>没有误差）<br>
+最后一层<span class="math inline">\(L\)</span>层的误差是参考<span class="math inline">\(y\)</span>，其他部分是从<span class="math inline">\(l+1\)</span>层递推到<span class="math inline">\(l\)</span>层。</p>
+<p>（<span class="math inline">\(\delta\)</span>是<span class="math inline">\(j\times\left(L-1\right)\)</span>的二维张量（第一层没有误差<span class="math inline">\(\delta^{\left(1\right)}\)</span>）， 描述<span class="math inline">\(\Theta\)</span>映射过程中在每一个节点产生的误差）</p>
+<p>反向递推出前面的值</p>
+<p><span class="math display">\[
+\delta^{\left(l\right)}=\left(\Theta^{\left(l\right)}\right)^T\delta^{\left(l+1\right)}.∗g^\prime\left(z^{\left(l\right)}\right)
+\]</span></p>
+<p>其中</p>
+<p><span class="math display">\[
+g^\prime\left(z^{\left(l\right)}\right)=g\left(z^{\left(l\right)}\right) .∗\left(1-g\left(z^{\left(l\right)}\right)\right)=a^{\left(l\right)}.∗(1−a^{\left(l\right)})
+\]</span></p>
+<h3 id="对于每个参数theta_ijl的梯度求解方法">对于每个参数<span class="math inline">\(\Theta_{ij}^(l)\)</span>的梯度求解方法</h3>
+<p>已知训练样本数据集为<span class="math inline">\(\left\{\left(x^{\left(c\right)},y^{\left(c\right)}\right)\right\} \left(c\in\left[1,m\right]\right)\)</span><br>
+初始化<span class="math inline">\(\Delta_{ij}^{\left(l\right)}=0 \left(\forall l,i,j\right)\)</span><br>
+（<span class="math inline">\(\Delta\)</span>为<span class="math inline">\(i\times j\times l\)</span>的三维张量，不妨称之为总误差，<br>
+它用来累加储存对于所有训练样本，在<span class="math inline">\(\Theta_{ij}^{\left(l\right)}\)</span>映射过程中产生的误差）<br>
+计算所有的样本 for c = 1 : m<br>
+  前向传播初始化，设置<span class="math inline">\(a^{\left(1\right)}=x^{\left(c\right)}\)</span><br>
+  前向传播计算<span class="math inline">\(a^{\left(l\right)} \left(l\ from\ 2\ to\ L\right)\)</span><br>
+  反向传播初始化，设置<span class="math inline">\(\delta^{\left(L\right)}=a^{\left(L\right)}−y^{\left(i\right)}\)</span><br>
+  反向传播计算<span class="math inline">\(\delta^{\left(l\right)} \left(l\ from\ L-1\ to\ 2\right)\)</span><br>
+  （<span class="math inline">\(\delta^{\left(1\right)}\)</span>是输入层，没有误差）<br>
+  那么现在我们已经得到了<span class="math inline">\(a,\delta\)</span>，可以开始计算总误差<br>
+  <span class="math inline">\(\Delta_{ij}^{\left(l\right)}+=a_j^{\left(l\right)}\delta_i^{\left(l+1\right)} \left(\forall l,i,j\right)\)</span><br>
+  （上面这一步可以向量化地写成<span class="math inline">\(\Delta^{\left(l\right)}+=\delta^{\left(l+1\right)}\left(a^{\left(l\right)}\right)^T\)</span>）<br>
+把上面这个对于所有样本的循环计算完后，（当然，编程的时候建议不用循环直接用矩阵运算）<br>
+引入D，计算<br>
+<span class="math inline">\(\left(\forall l,i,j\right)\)</span><br>
+<span class="math inline">\(D_{ij}^{\left(l\right)}=\frac{1}{m}\Delta_{ij}^{\left(l\right)}+\lambda\Theta_{ij}^{\left(l\right)} \left(j\neq0\right)\)</span><br>
+<span class="math inline">\(D_{ij}^{\left(l\right)}=\frac{1}{m}\Delta_{ij}^{\left(l\right)}   \ \ \  \left(j=0\right)\)</span><br>
+好了我们终于得到了梯度的结果</p>
+<p><span class="math display">\[
+\frac{\partial}{\partial\Theta_{ij}^{\left(l\right)}}J\left(\Theta\right)=D_{ij}^{\left(l\right)}
+\]</span></p>
+<h3 id="随机初始化">随机初始化</h3>
+<p>对于神经网路的<span class="math inline">\(\Theta\)</span>，不能全部初始化为零（这样根本没法更新），<br>
+应当将其用别的初始化方法，比如随机初始化。<br>
+这样的初始化操作称为“对称破坏”，即破坏神经网络的对称性，让它真正起作用。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2021-06-07T10:37:16.734Z" itemprop="dateUpdated">2021-06-07 18:37:16</time>
+</span><br>
+
+
+        
+        文章转载请标明出处，仅供学习使用。
+        
+    </div>
+    
+    <footer>
+        <a href="http://zerlingx.com">
+            <img src="/img/avatar.jpg" alt="zerlingx">
+            zerlingx
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ai/">ai</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/">notes</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2021/04/08/机器学习纲要_04_神经网络/&title=《机器学习纲要_04_神经网络》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2021/04/08/机器学习纲要_04_神经网络/&title=《机器学习纲要_04_神经网络》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2021/04/08/机器学习纲要_04_神经网络/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《机器学习纲要_04_神经网络》 — zerlingx's blog&url=http://zerlingx.com/2021/04/08/机器学习纲要_04_神经网络/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2021/04/08/机器学习纲要_04_神经网络/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/04/27/机器学习纲要_05_卷积神经网络/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">机器学习纲要_05_卷积神经网络</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/04/05/机器学习纲要_03_逻辑回归/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">机器学习纲要_03_逻辑回归</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "vonyPRJwedvkCu0ksIMQYbmO-gzGzoHsz",
+            appKey: "O5p62bw33LShlsMSGD0y51wr",
+            avatar: "mm",
+            placeholder: "Your comment...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zerlingx &copy; 2019 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2021/04/08/机器学习纲要_04_神经网络/&title=《机器学习纲要_04_神经网络》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2021/04/08/机器学习纲要_04_神经网络/&title=《机器学习纲要_04_神经网络》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2021/04/08/机器学习纲要_04_神经网络/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《机器学习纲要_04_神经网络》 — zerlingx's blog&url=http://zerlingx.com/2021/04/08/机器学习纲要_04_神经网络/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2021/04/08/机器学习纲要_04_神经网络/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsklEQVR42u3aQW7jQAwEQP3/0xsgp13EcprkUMkCpZPhxNKUDjNEk9cVX38+r7vPf193v/3617tv3t/n2rjw8PDwWku/u96TkmVVF5q8jmTNeHh4eNu83mGQvKbqnd+/xHzNeHh4eL+Bl5Dyrbx6eODh4eH9j7xTxXF+n6TEx8PDw/spXhJGJHFAgqwGuw9lLXh4eHgxb94Ae/7zo/09PDw8vPhISLbdvG2WHBWTVb1YAx4eHt4Cr9f4z2HV19QbU/hm5Xh4eHhHeb24YTtEqEbDt3fAw8PDW+YlR0V1DGveZhsNXeHh4eEt8HqBwka7K488qu03PDw8vLO8JJbNt+y81K4utxci4+Hh4W3wqt32ajFdeHArPs5Lczw8PLwNXvL46mZ9KsbNX02hvMbDw8Nr8arbeu8x5VmG1gDBi9/i4eHhrfHy5VbbZtUIuFdG3z4RDw8Pb41XbU31/n9v0Or2wMDDw8Nb4J06HnrLrTbJegMKeHh4eGd51Y0+KakTUi+wqB5ReHh4eHu83tY/iRua4ULxZeHh4eFt8KoF7jzG7YW5vSgEDw8Pb483ecA8tM1faHWcCw8PD2+DlyxishFP/to7GK5q2oGHh4dX5CWbe1Iunyp28+i2cGc8PDy8NV6vNTVp/CcvolegR20wPDw8vAEvX/RkfGo+LjDKVPDw8PCO8pLSOR8F6P1/r4yOno6Hh4e3xstjgqQgnjCusxceHh7eUd688V9oRLWq3Or3/9wfDw8Pb4FX3WN73aWNAyk/nPDw8PA2eJPDIIH1mmH5izs2GYGHh4c3mErKN+XqeMFeJBGl1Hh4eHg/xKtu35PDplqOfzNuhYeHh/c4r9f6moSz1QgDDw8P70lesolPvsnvnw8fHM5a8PDw8GqdpnID7FQAMS/Te+MLeHh4eC3eB/8qK/DWBZsiAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'stand by (~_~)';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'welcome back (^-^)/';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

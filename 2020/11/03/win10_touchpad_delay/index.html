@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>关于win10的触摸板延迟设置问题 | zerlingx&#39;s blog | Stay hungry, stay foolish.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#39C5BB">
+    
+    
+    <meta name="keywords" content="win">
+    <meta name="description" content="关于win10的触摸板延迟设置问题 win10触摸板延迟问题 ​ 发现最近几个版本的win10系统（大概从1903开始）里，“触摸板延迟”的设置选项消失了，而且默认有大约一到两秒的延迟，即键盘上打完字，接下来的一两秒里不能用触摸板上面的左右键（有的甚至直接就不能用触摸板）。 ​ 我还是在打游戏（没错，用触摸板打）的时候发现的，拿cs打比方，wasd走路时就不能开枪，非得停下来过一秒再按左键开">
+<meta name="keywords" content="win">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于win10的触摸板延迟设置问题">
+<meta property="og:url" content="http://zerlingx.com/2020/11/03/win10_touchpad_delay/index.html">
+<meta property="og:site_name" content="zerlingx&#39;s blog">
+<meta property="og:description" content="关于win10的触摸板延迟设置问题 win10触摸板延迟问题 ​ 发现最近几个版本的win10系统（大概从1903开始）里，“触摸板延迟”的设置选项消失了，而且默认有大约一到两秒的延迟，即键盘上打完字，接下来的一两秒里不能用触摸板上面的左右键（有的甚至直接就不能用触摸板）。 ​ 我还是在打游戏（没错，用触摸板打）的时候发现的，拿cs打比方，wasd走路时就不能开枪，非得停下来过一秒再按左键开">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="http://zerlingx.com/images/win10_touchpad_delay_solution.png">
+<meta property="og:updated_time" content="2021-05-14T01:40:46.144Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于win10的触摸板延迟设置问题">
+<meta name="twitter:description" content="关于win10的触摸板延迟设置问题 win10触摸板延迟问题 ​ 发现最近几个版本的win10系统（大概从1903开始）里，“触摸板延迟”的设置选项消失了，而且默认有大约一到两秒的延迟，即键盘上打完字，接下来的一两秒里不能用触摸板上面的左右键（有的甚至直接就不能用触摸板）。 ​ 我还是在打游戏（没错，用触摸板打）的时候发现的，拿cs打比方，wasd走路时就不能开枪，非得停下来过一秒再按左键开">
+<meta name="twitter:image" content="http://zerlingx.com/images/win10_touchpad_delay_solution.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="zerlingx&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zerlingx</h5>
+          <a href="mailto:centralnode@zerlingx.com" title="centralnode@zerlingx.com" class="mail">centralnode@zerlingx.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zerlingx" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://wiki.archlinux.org/" target="_blank">
+                <i class="icon icon-lg icon-wikipedia-w"></i>
+                ArchWiki
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">关于win10的触摸板延迟设置问题</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">关于win10的触摸板延迟设置问题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-11-03T09:26:12.000Z" itemprop="datePublished" class="page-time">
+  2020-11-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/WIN/">WIN</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#关于win10的触摸板延迟设置问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">关于win10的触摸板延迟设置问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#win10触摸板延迟问题"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">win10触摸板延迟问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决方案"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">解决方案</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-win10_touchpad_delay" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">关于win10的触摸板延迟设置问题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-11-03 17:26:12" datetime="2020-11-03T09:26:12.000Z" itemprop="datePublished">2020-11-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/WIN/">WIN</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="关于win10的触摸板延迟设置问题">关于win10的触摸板延迟设置问题</h1>
+<h2 id="win10触摸板延迟问题">win10触摸板延迟问题</h2>
+<p>​ 发现最近几个版本的win10系统（大概从1903开始）里，“触摸板延迟”的设置选项消失了，而且默认有大约一到两秒的延迟，即键盘上打完字，接下来的一两秒里不能用触摸板上面的左右键（有的甚至直接就不能用触摸板）。</p>
+<p>​ 我还是在打游戏（没错，用触摸板打）的时候发现的，拿cs打比方，wasd走路时就不能开枪，非得停下来过一秒再按左键开枪才有反应。</p>
+<p>​ 哎，应该交给电脑自己的设备驱动的东西，win非要接管，闹出不少麻烦。</p>
+<h2 id="解决方案">解决方案</h2>
+<p>​ 实际上“触摸板延迟”的选项大概只是改了个名称，变成了“触摸板敏感度”。</p>
+<p>​ 甚至在查找设置里直接搜“延迟”还能搜到，然后就给你跳到下面说的这个选项。</p>
+<p>​ 在驱动正常的情况下，通过win10<strong>设置-&gt;设备-&gt;触摸板-&gt;触摸板敏感度</strong>，即可调节延迟。默认“中敏感度”即中等延迟（一两秒），改成<strong>最高敏感度即没有延迟</strong>（按键盘的时候用触摸板或鼠标会立刻打断键入，变成触摸板）。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/win10_touchpad_delay_solution.png" alt="win10_touchpad_delay_solution" title>
+                </div>
+                <div class="image-caption">win10_touchpad_delay_solution</div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2021-05-14T01:40:46.144Z" itemprop="dateUpdated">2021-05-14 09:40:46</time>
+</span><br>
+
+
+        
+        文章转载请标明出处，仅供学习使用。
+        
+    </div>
+    
+    <footer>
+        <a href="http://zerlingx.com">
+            <img src="/img/avatar.jpg" alt="zerlingx">
+            zerlingx
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/win/">win</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2020/11/03/win10_touchpad_delay/&title=《关于win10的触摸板延迟设置问题》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2020/11/03/win10_touchpad_delay/&title=《关于win10的触摸板延迟设置问题》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2020/11/03/win10_touchpad_delay/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《关于win10的触摸板延迟设置问题》 — zerlingx's blog&url=http://zerlingx.com/2020/11/03/win10_touchpad_delay/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2020/11/03/win10_touchpad_delay/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/03/12/压高公式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">压高公式——临近空间气压和密度与高度的关系</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/11/06/onenote-math-input/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">onenote使用latex或unicomath格式输入数学公式的设置</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "vonyPRJwedvkCu0ksIMQYbmO-gzGzoHsz",
+            appKey: "O5p62bw33LShlsMSGD0y51wr",
+            avatar: "mm",
+            placeholder: "Your comment...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zerlingx &copy; 2019 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2020/11/03/win10_touchpad_delay/&title=《关于win10的触摸板延迟设置问题》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2020/11/03/win10_touchpad_delay/&title=《关于win10的触摸板延迟设置问题》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2020/11/03/win10_touchpad_delay/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《关于win10的触摸板延迟设置问题》 — zerlingx's blog&url=http://zerlingx.com/2020/11/03/win10_touchpad_delay/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2020/11/03/win10_touchpad_delay/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3aS27DMAxF0ex/0y7QWdFYuI9Uipq6GhmBI/t4QPCj1wuv63v9/mW97u682399z4YlQ4aMxzL4q5BrskN/zzdUGTJkHMBYB1m+9Tpc8rDL302GDBky+AMuvNYkGTJkyNgVcMkjyS/rIlaGDBky0iK2VnZyGGnVbajFZciQ8UBGOhj4y+sPzjdkyJDxEMZVWrzc5ePMtJ33YwcZMmSMZpBmfS2+pYngunmHArEMGTJGM/hL91tptaSz/+llyJDxdEYaKDvfhjfjNnxvGTJkjGDsSu/SOzv4N/vLkCFjNKMzgExHlXwHcuBMhgwZ5zBIKsbDcToMqMFu5xsyZMgYytjVgk+LXrIDr1VlyJBxAoOUpiSYkpYZv05LYhkyZJzASLdID3J97pCHDBkyZjNqRyhqZWr6IYIhhAwZMkYz0iKzNuzkL1dLE2XIkHEmY9cRMZIUBnlrmlbKkCFjEKP2YD4eSFt1/F8yZMg4h9Hv0qVN/NrHIimjDBkypjJ4UcpTw07iuGFsKUOGjNEM0tBPg2ONwRt5MmTIOIHBBwNpKOwXxp37ZciQMYNxhYu86Ocaarc7y5AhYzSjFnD7RyVqoVyGDBknM9IjX6R8TcNurf0nQ4aM0xi1pnz/AFka9G+fKEOGDBlhEUvKYJ5WBmdDZMiQcTyjP+xMx5yt2YUMGTLGMXizPh1DpmVtMX2UIUPGaEZtMFAbCfRTxs3zDRkyZPx3xheu5CLgDHExTQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'stand by (~_~)';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'welcome back (^-^)/';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

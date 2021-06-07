@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>FFT快速傅里叶变换原理概要 | zerlingx&#39;s blog | Stay hungry, stay foolish.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#39C5BB">
+    
+    
+    <meta name="keywords" content="acm,study,math,notes">
+    <meta name="description" content="复变、控制论、ACM，学了三次忘了三次…… 在这里只是整理一下提纲，详细推导与代码推荐参考该知乎文章。  傅里叶变换 傅里叶级数的三角形式 设\(f(t)\)是以\(T\)为周期的实值函数，且在\([-\frac{T}{2},\frac{T}{2}]\)上满足迪利克雷条件， 则在\(f(t)\)的连续点处，有 \[ f(t)=\frac{a_0}{2}+\sum_{n=1}^{">
+<meta name="keywords" content="acm,study,math,notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FFT快速傅里叶变换原理概要">
+<meta property="og:url" content="http://zerlingx.com/2021/03/28/FFT快速傅里叶变换原理概要/index.html">
+<meta property="og:site_name" content="zerlingx&#39;s blog">
+<meta property="og:description" content="复变、控制论、ACM，学了三次忘了三次…… 在这里只是整理一下提纲，详细推导与代码推荐参考该知乎文章。  傅里叶变换 傅里叶级数的三角形式 设\(f(t)\)是以\(T\)为周期的实值函数，且在\([-\frac{T}{2},\frac{T}{2}]\)上满足迪利克雷条件， 则在\(f(t)\)的连续点处，有 \[ f(t)=\frac{a_0}{2}+\sum_{n=1}^{">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2021-05-14T02:05:32.052Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FFT快速傅里叶变换原理概要">
+<meta name="twitter:description" content="复变、控制论、ACM，学了三次忘了三次…… 在这里只是整理一下提纲，详细推导与代码推荐参考该知乎文章。  傅里叶变换 傅里叶级数的三角形式 设\(f(t)\)是以\(T\)为周期的实值函数，且在\([-\frac{T}{2},\frac{T}{2}]\)上满足迪利克雷条件， 则在\(f(t)\)的连续点处，有 \[ f(t)=\frac{a_0}{2}+\sum_{n=1}^{">
+    
+        <link rel="alternate" type="application/atom+xml" title="zerlingx&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zerlingx</h5>
+          <a href="mailto:centralnode@zerlingx.com" title="centralnode@zerlingx.com" class="mail">centralnode@zerlingx.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zerlingx" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://wiki.archlinux.org/" target="_blank">
+                <i class="icon icon-lg icon-wikipedia-w"></i>
+                ArchWiki
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">FFT快速傅里叶变换原理概要</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">FFT快速傅里叶变换原理概要</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-03-28T13:30:00.000Z" itemprop="datePublished" class="page-time">
+  2021-03-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Notes/">Notes</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#傅里叶变换"><span class="post-toc-number">1.</span> <span class="post-toc-text">傅里叶变换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#傅里叶级数的三角形式"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">傅里叶级数的三角形式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#傅里叶级数的物理含义"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">傅里叶级数的物理含义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#傅里叶变换-1"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">傅里叶变换</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#离散傅里叶变换-dft"><span class="post-toc-number">2.</span> <span class="post-toc-text">离散傅里叶变换 DFT</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#补充1-多项式的表示法"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">补充1 多项式的表示法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#系数表示法"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">系数表示法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#点值表示法"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">点值表示法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#多项式乘法"><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text">多项式乘法</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#补充2-复数单位根的定义与性质"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">补充2 复数单位根的定义与性质</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#单位根"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">单位根</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#n次单位向量"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">n次单位向量</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#性质一折半引理"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">性质一（折半引理）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#性质二消去引理"><span class="post-toc-number">2.2.4.</span> <span class="post-toc-text">性质二（消去引理）</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#快速傅里叶变换-fft"><span class="post-toc-number">3.</span> <span class="post-toc-text">快速傅里叶变换 FFT</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#快速傅里叶变换"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">快速傅里叶变换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#快速傅里叶逆变换"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">快速傅里叶逆变换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#快速傅里叶变换的实现方式"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">快速傅里叶变换的实现方式</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-FFT快速傅里叶变换原理概要" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">FFT快速傅里叶变换原理概要</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-03-28 21:30:00" datetime="2021-03-28T13:30:00.000Z" itemprop="datePublished">2021-03-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Notes/">Notes</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>复变、控制论、ACM，学了三次忘了三次……</p>
+<p>在这里只是整理一下提纲，详细推导与代码推荐参考<a href="https://zhuanlan.zhihu.com/p/31584464" target="_blank" rel="noopener">该知乎文章</a>。</p>
+</blockquote>
+<h2 id="傅里叶变换">傅里叶变换</h2>
+<h3 id="傅里叶级数的三角形式">傅里叶级数的三角形式</h3>
+<p>设<span class="math inline">\(f(t)\)</span>是以<span class="math inline">\(T\)</span>为周期的实值函数，且在<span class="math inline">\([-\frac{T}{2},\frac{T}{2}]\)</span>上满足迪利克雷条件，</p>
+<p>则在<span class="math inline">\(f(t)\)</span>的连续点处，有</p>
+<p><span class="math display">\[
+f(t)=\frac{a_0}{2}+\sum_{n=1}^{+\infty}{(a_n\cos{n\omega_0t}+b_n\sin{n\omega_0t})}
+\]</span></p>
+<p>其中</p>
+<p><span class="math display">\[
+\begin{aligned}
+\omega_0 &amp;=\frac{2\pi}{T} \\
+a_n &amp;=\frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}{f(t)\cos{n\omega_0t\ dt}} \\
+b_n &amp;=\frac{2}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}{f(t)\sin{n\omega_0t\ dt}}
+\end{aligned}
+\]</span></p>
+<p>在间断点处，有<span class="math inline">\(f(t)=\frac{f(t+0)+f(t-0)}{2}\)</span>。</p>
+<h3 id="傅里叶级数的物理含义">傅里叶级数的物理含义</h3>
+<p>若<span class="math inline">\(f(t)\)</span>代表信号，</p>
+<p>则由上可知，一个周期为<span class="math inline">\(T\)</span>的信号可以分解为简谐波之和。</p>
+<p>（非周期信号可以看作周期无穷大）</p>
+<h3 id="傅里叶变换-1">傅里叶变换</h3>
+<p>由于三角函数可以用自然底数的虚数幂表示，即<span class="math inline">\(e^{j\theta}=\cos{\theta}+j\sin{\theta}\)</span>，</p>
+<p>所以可以将上面的傅里叶级数换一下表示方法，即有傅里叶变换与逆变换</p>
+<p><span class="math display">\[
+\begin{aligned}
+F(\omega) &amp;=\int_{-\infty}^{+\infty}{f(t)e^{-j\omega t}\ dt} \\
+F(\omega) &amp;=\mathcal{F}[f(t)] \\
+f(t) &amp;=\mathcal{F}^{-1}[F(\omega)] \\
+f(t) &amp;=\frac{1}{2\pi}\int_{-\infty}^{+\infty}{F(\omega)e^{j\omega t}\ d\omega}
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(F(\omega)\)</span>称为像函数，<span class="math inline">\(f(t)\)</span>称为原函数。</p>
+<h2 id="离散傅里叶变换-dft">离散傅里叶变换 DFT</h2>
+<p>对于<span class="math inline">\(f(t)\)</span>进行采样，得到离散信号<span class="math inline">\(x(n)\)</span>。与上面连续函数的傅里叶变换类似，将积分改成求和，将周期<span class="math inline">\(T\)</span>改为采样次数<span class="math inline">\(N\)</span>，将连续时间<span class="math inline">\(t\)</span>变为采样的次数<span class="math inline">\(n\)</span>，得离散傅里叶变换和逆变换</p>
+<p><span class="math display">\[
+\begin{aligned}
+X[k] &amp;=\sum_{n=0}^{N-1}{x[n]e^{-j\frac{2\pi nk}{N}}} \\
+x[n] &amp;=\frac{1}{N}\sum_{k=0}^{N-1}{X[k]e^{j\frac{2\pi nk}{N}}}
+\end{aligned}
+\]</span></p>
+<p>其中<span class="math inline">\(k\in[0,N-1]\)</span>。</p>
+<p>在ACM中常用的是对于多项式的离散傅里叶变换，但在讨论它之前，先讲一些补充知识。之后在下一节对于快速傅里叶变换的讨论主要就是着眼于对多项式的处理。</p>
+<h3 id="补充1-多项式的表示法">补充1 多项式的表示法</h3>
+<p>多项式有两种表示方法：系数表示法和点值表示法。</p>
+<p>（下面讨论<span class="math inline">\(n-1\)</span>次多项式）</p>
+<h4 id="系数表示法">系数表示法</h4>
+<p><span class="math display">\[
+y=A(x)=\sum_{i=0}^{n-1}{a_i\cdot x^i}
+\]</span></p>
+<h4 id="点值表示法">点值表示法</h4>
+<p>将互不相同的<span class="math inline">\((x_0,x_1,\cdots,x_n)\)</span>代入<span class="math inline">\(A(x)\)</span>（插值），得<span class="math inline">\((y_0,y_1,\cdots,y_n)\)</span>.</p>
+<p><span class="math inline">\(n\)</span>个不同点进行插值得到<span class="math inline">\(n\)</span>组点值，即可唯一确定这个<span class="math inline">\(n-1\)</span>次多项式。</p>
+<h4 id="多项式乘法">多项式乘法</h4>
+<p>对于<span class="math inline">\(A(x)\)</span>和<span class="math inline">\(B(x)\)</span>作节点<span class="math inline">\((x_0,x_1,\cdots,x_n)\)</span>的插值，</p>
+<p>分别得点值向量<span class="math inline">\((y_a0,y_a1,\cdots,y_an)\)</span>、<span class="math inline">\((y_b0,y_b1,\cdots,y_bn)\)</span>。</p>
+<p>那么对于多项式<span class="math inline">\(C(x)=A(x)\cdot B(x)\)</span>，其点值也可由相乘得出，即<span class="math inline">\(y_{ci}=y_{ai}\cdot y_{bi}\)</span>。</p>
+<p>容易想到，用点值形式进行多项式运算更快。</p>
+<h3 id="补充2-复数单位根的定义与性质">补充2 复数单位根的定义与性质</h3>
+<h4 id="单位根">单位根</h4>
+<p>终点在复平面的单位圆上的复数向量。</p>
+<p>即上面提到过的虚数幂表示的三角函数<span class="math inline">\(e^{i\theta}\)</span>。</p>
+<h4 id="n次单位向量">n次单位向量</h4>
+<p>将单位圆均分成<span class="math inline">\(n\)</span>份，原点为起点。</p>
+<p>幅角为正且最小的向量为<span class="math inline">\(n\)</span>次单位向量，记为<span class="math inline">\(\omega_n^1\)</span>。</p>
+<p><span class="math inline">\(n\)</span>次单位向量的<span class="math inline">\(k\)</span>次幂即<span class="math inline">\(\omega_n^k\)</span>。</p>
+<h4 id="性质一折半引理">性质一（折半引理）</h4>
+<p><span class="math display">\[
+\omega_{2n}^{2k}=\omega_n^k
+\]</span></p>
+<h4 id="性质二消去引理">性质二（消去引理）</h4>
+<p><span class="math display">\[
+\omega_n^{k+\frac{n}{2}}=-\omega_n^k
+\]</span></p>
+<h2 id="快速傅里叶变换-fft">快速傅里叶变换 FFT</h2>
+<p>对于多项式<span class="math inline">\(A(x)\)</span>，其系数向量为<span class="math inline">\((a_0,a_1,\cdots,a_n)\)</span>。</p>
+<p>用<span class="math inline">\(n\)</span>次单位向量的<span class="math inline">\(0\sim n-1\)</span>次幂作为节点代入<span class="math inline">\(A(x)\)</span>作插值得点值向量<span class="math inline">\((A(\omega_n^0),A(\omega_n^1),\cdots,A(\omega_n^n))\)</span>，</p>
+<p>这个过程即多项式的离散傅里叶变换。</p>
+<p>然而，这个过程是<span class="math inline">\(O(n^2)\)</span>的，太慢了。快速傅里叶变换就是利用上面补充的性质，加快运算的方法。</p>
+<h3 id="快速傅里叶变换">快速傅里叶变换</h3>
+<p>对于</p>
+<p><span class="math display">\[
+A(x)=a_0+a_1x^1+a_2x^2+\cdots+a_{n-1}x^{n-1}
+\]</span></p>
+<p>按奇偶性分组（假设<span class="math inline">\(n\)</span>为偶数）</p>
+<p><span class="math display">\[
+\begin{aligned}
+A(x) &amp;=(a_0+a_2x^2+a_4x^4+\cdots+a_{n-2}x^{n-2})+x\cdot(a_1+a_3x^2+a_5x^4\cdots+a_{n-1}x^{n-2}) \\
+A(x) &amp;=A1(x^2)+x\cdot A2(x^2)
+\end{aligned}
+\]</span></p>
+<p>作插值<span class="math inline">\(x=\omega_n^k\)</span>，对上标分段讨论。</p>
+<p>设<span class="math inline">\(k\in[0,\frac{n}{2}-1]\)</span></p>
+<p><span class="math display">\[
+A(\omega_n^k)=A1(\omega_n^{2k})+\omega_n^k\cdot A2(\omega_n^{2k})
+\]</span></p>
+<p>根据折半引理，有</p>
+<p><span class="math display">\[
+A(\omega_n^k)=A1(\omega_{\frac{n}{2}}^k)+\omega_n^k\cdot A2(\omega_{\frac{n}{2}}^k)
+\]</span></p>
+<p>对于另一半，即<span class="math inline">\((k+\frac{n}{2})\in[\frac{n}{2},n-1]\)</span></p>
+<p>用消去原理，有</p>
+<p><span class="math display">\[
+A(\omega_n^{k+\frac{n}{2}})=A1(\omega_{\frac{n}{2}}^k)-\omega_n^k\cdot A2(\omega_{\frac{n}{2}}^k)
+\]</span></p>
+<p>可见，只要知道<span class="math inline">\(A1(x),A2(x)\)</span>在<span class="math inline">\(\omega_{\frac{n}{2}}^0,\omega_\frac{n}{2}^1,\cdots,\omega_{\frac{n}{2}}^{\frac{n}{2}-1}\)</span>的值，就可以<span class="math inline">\(O(n)\)</span>时间求<span class="math inline">\(A(x)\)</span>。</p>
+<p>每次都是一半的规模，整体的时间复杂度为<span class="math inline">\(O(n\log{n})\)</span>。</p>
+<h3 id="快速傅里叶逆变换">快速傅里叶逆变换</h3>
+<p>证明过程略。</p>
+<p>对<span class="math inline">\(A(x)\)</span>由插值节点<span class="math inline">\((\omega_n^0,\omega_n^1,\cdots,\omega_n^{n-1})\)</span>作离散傅里叶变换，得点值向量<span class="math inline">\((d_0,d_1,\cdots,d_{n-1})\)</span>，</p>
+<p>将这个点值向量作为系数向量，由插值节点<span class="math inline">\((\omega_n^0,\omega_n^{-1},\cdots,\omega_n^{-(n-1)})\)</span>再作一次变换，之后除以<span class="math inline">\(n\)</span>，</p>
+<p>得到的<span class="math inline">\((\frac{c_0}{n},\frac{c_1}{n},\cdots,\frac{c_{n-1}}{n})\)</span>就是多项式的系数向量<span class="math inline">\((a_0,a_1,\cdots,a_{n-1})\)</span>。</p>
+<h3 id="快速傅里叶变换的实现方式">快速傅里叶变换的实现方式</h3>
+<p>一般用Cooley-Tukey算法，略，详见前言的参考链接。</p>
+<p>做题用的模板如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//FFT模板</span></span><br><span class="line"><span class="comment">//最高次为n、m次的多项式相乘</span></span><br><span class="line"><span class="comment">//系数为正整数，若有负数注意最后结果的取整方式</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> f=<span class="number">1</span>,x=<span class="number">0</span>;<span class="keyword">char</span> ch;</span><br><span class="line">    <span class="keyword">do</span>&#123;ch=getchar();<span class="keyword">if</span>(ch==<span class="string">'-'</span>)f=<span class="number">-1</span>;&#125;<span class="keyword">while</span>(ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>);</span><br><span class="line">    <span class="keyword">do</span>&#123;x=x*<span class="number">10</span>+ch-<span class="string">'0'</span>;ch=getchar();&#125;<span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>);</span><br><span class="line">    <span class="keyword">return</span> f*x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//_head</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pi acos(-1)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 3000005</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">complex</span>&lt;<span class="keyword">double</span>&gt; cplx;</span><br><span class="line"><span class="keyword">int</span> n, m, l, r[N];</span><br><span class="line">cplx a[N], b[N];</span><br><span class="line"><span class="comment">//_basic</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//注意按题目设置m</span></span><br><span class="line">    m += n;</span><br><span class="line">	<span class="keyword">for</span>(n=<span class="number">1</span> ; n&lt;=m ; n&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">		l++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;n ; i++)</span><br><span class="line">		r[i]=(r[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>) | ((i&amp;<span class="number">1</span>)&lt;&lt;(l<span class="number">-1</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fft</span><span class="params">(cplx *a, <span class="keyword">int</span> flag)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;n ; i++)</span><br><span class="line">		<span class="keyword">if</span>(i &lt; r[i])</span><br><span class="line">			swap(a[i], a[r[i]]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span> ; i&lt;n ; i&lt;&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="function">cplx <span class="title">wn</span><span class="params">(<span class="built_in">cos</span>(pi/i), flag*<span class="built_in">sin</span>(pi/i))</span></span>; </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> p=i&lt;&lt;<span class="number">1</span>, j=<span class="number">0</span> ; j&lt;n ; j+=p)&#123;</span><br><span class="line">            <span class="function">cplx <span class="title">w</span><span class="params">(<span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span> ; k&lt;i ; k++, w*=wn)&#123;</span><br><span class="line">                cplx x=a[j+k], y=w*a[j+k+i];</span><br><span class="line">                a[j+k] = x+y;</span><br><span class="line">				a[j+k+i] = x-y;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//逆变换自己除n,范围0~m</span></span><br><span class="line">	<span class="keyword">if</span>(flag == <span class="number">-1</span>)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;=m ; i++)</span><br><span class="line">			a[i] /= n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//多项式最高n、m次</span></span><br><span class="line">	n = read();</span><br><span class="line">	m = read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;=n ; i++)</span><br><span class="line">		a[i] = read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;=m ; i++)</span><br><span class="line">		b[i] = read();</span><br><span class="line">	</span><br><span class="line">    <span class="comment">//初始化r[]，并将n、m变为点值表示法、系数表示法的最高次数</span></span><br><span class="line">	init();</span><br><span class="line"></span><br><span class="line">	<span class="comment">//DFT</span></span><br><span class="line">    fft(a, <span class="number">1</span>);</span><br><span class="line">	fft(b, <span class="number">1</span>);</span><br><span class="line">	<span class="comment">//点值相乘0~n</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;=n ; i++)</span><br><span class="line">		a[i] = a[i]*b[i];</span><br><span class="line">	<span class="comment">//IDFT</span></span><br><span class="line">    fft(a, <span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;=m ; i++)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d"</span>,(<span class="keyword">int</span>)(a[i].real()+<span class="number">0.5</span>));<span class="comment">//向下取整</span></span><br><span class="line">        <span class="keyword">if</span>(i == m)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">" "</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">example</span></span><br><span class="line"><span class="comment">input&gt;</span></span><br><span class="line"><span class="comment">1 2</span></span><br><span class="line"><span class="comment">1 2</span></span><br><span class="line"><span class="comment">1 2 1</span></span><br><span class="line"><span class="comment">output&gt;</span></span><br><span class="line"><span class="comment">1 4 5 2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2021-05-14T02:05:32.052Z" itemprop="dateUpdated">2021-05-14 10:05:32</time>
+</span><br>
+
+
+        
+        文章转载请标明出处，仅供学习使用。
+        
+    </div>
+    
+    <footer>
+        <a href="http://zerlingx.com">
+            <img src="/img/avatar.jpg" alt="zerlingx">
+            zerlingx
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/acm/">acm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/math/">math</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/">notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/">study</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2021/03/28/FFT快速傅里叶变换原理概要/&title=《FFT快速傅里叶变换原理概要》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2021/03/28/FFT快速傅里叶变换原理概要/&title=《FFT快速傅里叶变换原理概要》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2021/03/28/FFT快速傅里叶变换原理概要/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《FFT快速傅里叶变换原理概要》 — zerlingx's blog&url=http://zerlingx.com/2021/03/28/FFT快速傅里叶变换原理概要/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2021/03/28/FFT快速傅里叶变换原理概要/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/04/05/机器学习纲要_03_逻辑回归/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">机器学习纲要_03_逻辑回归</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/03/24/机器学习纲要_02_线性代数复习与应用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">机器学习纲要_02_线性代数复习与应用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "vonyPRJwedvkCu0ksIMQYbmO-gzGzoHsz",
+            appKey: "O5p62bw33LShlsMSGD0y51wr",
+            avatar: "mm",
+            placeholder: "Your comment...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zerlingx &copy; 2019 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2021/03/28/FFT快速傅里叶变换原理概要/&title=《FFT快速傅里叶变换原理概要》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2021/03/28/FFT快速傅里叶变换原理概要/&title=《FFT快速傅里叶变换原理概要》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2021/03/28/FFT快速傅里叶变换原理概要/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《FFT快速傅里叶变换原理概要》 — zerlingx's blog&url=http://zerlingx.com/2021/03/28/FFT快速傅里叶变换原理概要/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2021/03/28/FFT快速傅里叶变换原理概要/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsUlEQVR42u3awWpjMQwF0Pz/T2egq8KQ5l7JnmbgvFUJjZ+PC5Yq6fGIn+fX8/3n/Pl7hVdrJu963Hjw8PDwRlufbS55/anV8iPGw8PD+ze8JBgkd+8mzOTgZM94eHh4n8Brk9o8OW4/wcPDw/tfeHmQaJFtMQIPDw/vE3hJCptvaFbmaEu9h2steHh4eDFvlhz/7s/X+3t4eHh4o676/kJPirP70YSX+8TDw8O7wNuUaPNyRjuAlXy3CBh4eHh4F3j5tlrSpozbDnIle8PDw8Pb836+dtulTx1HftBvggQeHh7eBV5b85wNPyWDVi2j/pcADw8P7yivbcDn+LahVRRn46IGHh4e3g3erPw6a2LtZxxmwQMPDw/vFG/2mnwsoP3NWcL9cm94eHh4F3g30uW2nDE70OG4Ax4eHt5RXl6u3ZQG8sv91KHj4eHhneXl6Wzbqn/GT3sQeZqOh4eHd4PXtpHyjc4+mZUqooiHh4eHd5SXN8Da4YDNt34+FDw8PLzf4m0S1s2Ewn66ofiPAQ8PD+8obxYG2u3mIWf2rTclZjw8PLyjvDZtnVFnYwRtyy2qUuPh4eGteUkiO5xEGK2cN+GKUggeHh7eUV5+Tc9GCpLLfVNEflMcwcPDw7vAy5fbj2edCiR1ewwPDw/vAq8tGcxS4eIqjwcOVtMQeHh4eAve7JqejRS0oajd58uQgIeHh3eBt7myT41YRRGsfAseHh7eWd6zfNoRgfxoknWSz4u/Gx4eHt6I1167+fU9G89KGMP5CDw8PLyjvCQYtK/JE/R90aGYj8DDw8M7ypu1strya5uaH6u14OHh4X0Ar91imyK3GDw8PLzP5LVp8Sbhzgca3hwTHh4e3jVeUoyYFV43689acXh4eHi3eW0DrL24N2NY+XjBComHh4eX8v4A/6iccS4KapUAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'stand by (~_~)';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'welcome back (^-^)/';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

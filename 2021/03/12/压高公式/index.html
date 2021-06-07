@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>压高公式——临近空间气压和密度与高度的关系 | zerlingx&#39;s blog | Stay hungry, stay foolish.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#39C5BB">
+    
+    
+    <meta name="keywords" content="study,notes,physics">
+    <meta name="description" content="基本按照wiki_Barometric formula上的内容翻译。能力有限，可能出现错误。关于英制单位的部分省略，一律采用公制单位。文中的部分超链接引用同原wiki。  注 在前1000米的海拔内，可按照每升高1米气压减小11.3帕计算。 压力公式 适用于高度86km内气压计算。有两种公式，第一种适用于气温垂直递减率不等于零（多元大气）的情况： \[ P=P_b\cdot\lef">
+<meta name="keywords" content="study,notes,physics">
+<meta property="og:type" content="article">
+<meta property="og:title" content="压高公式——临近空间气压和密度与高度的关系">
+<meta property="og:url" content="http://zerlingx.com/2021/03/12/压高公式/index.html">
+<meta property="og:site_name" content="zerlingx&#39;s blog">
+<meta property="og:description" content="基本按照wiki_Barometric formula上的内容翻译。能力有限，可能出现错误。关于英制单位的部分省略，一律采用公制单位。文中的部分超链接引用同原wiki。  注 在前1000米的海拔内，可按照每升高1米气压减小11.3帕计算。 压力公式 适用于高度86km内气压计算。有两种公式，第一种适用于气温垂直递减率不等于零（多元大气）的情况： \[ P=P_b\cdot\lef">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2021-05-14T01:40:46.146Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="压高公式——临近空间气压和密度与高度的关系">
+<meta name="twitter:description" content="基本按照wiki_Barometric formula上的内容翻译。能力有限，可能出现错误。关于英制单位的部分省略，一律采用公制单位。文中的部分超链接引用同原wiki。  注 在前1000米的海拔内，可按照每升高1米气压减小11.3帕计算。 压力公式 适用于高度86km内气压计算。有两种公式，第一种适用于气温垂直递减率不等于零（多元大气）的情况： \[ P=P_b\cdot\lef">
+    
+        <link rel="alternate" type="application/atom+xml" title="zerlingx&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zerlingx</h5>
+          <a href="mailto:centralnode@zerlingx.com" title="centralnode@zerlingx.com" class="mail">centralnode@zerlingx.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zerlingx" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://wiki.archlinux.org/" target="_blank">
+                <i class="icon icon-lg icon-wikipedia-w"></i>
+                ArchWiki
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">压高公式——临近空间气压和密度与高度的关系</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">压高公式——临近空间气压和密度与高度的关系</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-03-12T06:42:00.000Z" itemprop="datePublished" class="page-time">
+  2021-03-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Notes/">Notes</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注"><span class="post-toc-number">1.</span> <span class="post-toc-text">注</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#压力公式"><span class="post-toc-number">2.</span> <span class="post-toc-text">压力公式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#密度公式"><span class="post-toc-number">3.</span> <span class="post-toc-text">密度公式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#推导"><span class="post-toc-number">4.</span> <span class="post-toc-text">推导</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-压高公式" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">压高公式——临近空间气压和密度与高度的关系</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-03-12 14:42:00" datetime="2021-03-12T06:42:00.000Z" itemprop="datePublished">2021-03-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Notes/">Notes</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>基本按照<a href="https://en.wikipedia.org/wiki/Barometric_formula" target="_blank" rel="noopener">wiki_Barometric formula</a>上的内容翻译。能力有限，可能出现错误。关于英制单位的部分省略，一律采用公制单位。文中的部分超链接引用同原wiki。</p>
+</blockquote>
+<h2 id="注">注</h2>
+<p>在前1000米的海拔内，可按照每升高1米气压减小11.3帕计算。</p>
+<h2 id="压力公式">压力公式</h2>
+<p>适用于高度86km内气压计算。有两种公式，第一种适用于<a href="https://zh.wikipedia.org/zh-cn/%E6%B0%A3%E6%BA%AB%E5%9E%82%E7%9B%B4%E9%81%9E%E6%B8%9B%E7%8E%87" target="_blank" rel="noopener">气温垂直递减率</a>不等于零（多元大气）的情况： <span class="math display">\[
+P=P_b\cdot\left[\frac{T_b+L_b\cdot(h-h_b)}{T_b}\right]^{\frac{-g_0\cdot M}{R^*\cdot L_b}}
+\]</span> 第二种适用于气温垂直递减率等于零（等温大气）的情况： <span class="math display">\[
+P=P_b\cdot \exp\left[\frac{-g_0\cdot M\cdot(h-h_b)}{R^*\cdot T_b}\right]
+\]</span> 根据下面的参数表，选取对应的公式计算。</p>
+<p>其中各代数为：</p>
+<table>
+<thead>
+<tr class="header">
+<th>代数</th>
+<th>含义</th>
+<th>单位</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(P_b\)</span></td>
+<td>参考压力</td>
+<td>Pa</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(T_b\)</span></td>
+<td>参考温度</td>
+<td>K</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(L_b\)</span></td>
+<td>气温垂直递减率（值参考<a href="https://en.wikipedia.org/wiki/International_Standard_Atmosphere" target="_blank" rel="noopener">ISA</a>）</td>
+<td>K/m</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(h\)</span></td>
+<td>高度（要计算压力的高度）</td>
+<td>m</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(h_b\)</span></td>
+<td>等级b下的参考高度</td>
+<td>m</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(R^*\)</span></td>
+<td>理想气体常数</td>
+<td>8.3144598 J/(mol·K)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(g_0\)</span></td>
+<td>重力加速度</td>
+<td>9.80665 m/s^2</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(M\)</span></td>
+<td>空气的摩尔质量</td>
+<td>0.0289644 kg/mol</td>
+</tr>
+</tbody>
+</table>
+<p>下标等级b是0到6的整数，根据需要计算的高度h所在的范围确定，进而选用对应的参考参数。</p>
+<p>举个例子，当h=30000，<span class="math inline">\(h_2\leq h&lt;h_3\)</span>，因此取b=2。</p>
+<p>参考参数表：</p>
+<table>
+<thead>
+<tr class="header">
+<th>下标</th>
+<th>高度（海拔）m</th>
+<th>压力 Pa</th>
+<th>温度 K</th>
+<th>气温垂直递减率 K/m</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>101325.00</td>
+<td>288.15</td>
+<td>-0.0065</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>11000</td>
+<td>22632.10</td>
+<td>216.65</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>20000</td>
+<td>5474.89</td>
+<td>216.65</td>
+<td>0.001</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>32000</td>
+<td>868.02</td>
+<td>228.65</td>
+<td>0.0028</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>47000</td>
+<td>110.91</td>
+<td>270.65</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>51000</td>
+<td>66.94</td>
+<td>270.65</td>
+<td>-0.0028</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>71000</td>
+<td>3.96</td>
+<td>214.65</td>
+<td>-0.002</td>
+</tr>
+</tbody>
+</table>
+<p>写个简单的matlab程序：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[P]</span> = <span class="title">barometric_formula</span><span class="params">(h)</span></span></span><br><span class="line"></span><br><span class="line">h_b = [<span class="number">0</span>, <span class="number">11000</span>, <span class="number">20000</span>, <span class="number">32000</span>, <span class="number">47000</span>, <span class="number">51000</span>, <span class="number">71000</span>, <span class="number">86000</span>];</span><br><span class="line">P_b = [<span class="number">101325.00</span>, <span class="number">22632.10</span>, <span class="number">5474.89</span>, <span class="number">868.02</span>, <span class="number">110.91</span>, <span class="number">66.94</span>, <span class="number">3.96</span>];</span><br><span class="line">T_b = [<span class="number">288.15</span>, <span class="number">216.65</span>, <span class="number">216.65</span>, <span class="number">228.65</span>, <span class="number">270.65</span>, <span class="number">270.65</span>, <span class="number">214.65</span>];</span><br><span class="line">L_b = [<span class="number">-0.0065</span>, <span class="number">0.0</span>, <span class="number">0.001</span>, <span class="number">0.0028</span>, <span class="number">0.0</span>, <span class="number">-0.0028</span>, <span class="number">-0.002</span>];</span><br><span class="line">R = <span class="number">8.3144598</span>;</span><br><span class="line">g = <span class="number">9.80665</span>;</span><br><span class="line">M = <span class="number">0.0289644</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> b = <span class="number">1</span>:<span class="number">7</span></span><br><span class="line">    <span class="keyword">if</span> h &gt;= h_b(b) &amp;&amp; h &lt;h_b(b+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> L_b(b) ~= <span class="number">0</span></span><br><span class="line">    P = P_b(b) * ((T_b(b)+L_b(b)*(h-h_b(b))) / T_b(b)) .^ ((-g*M) / (R*L_b(b)));</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    P = P_b(b) * <span class="built_in">exp</span>((-g*M*(h-h_b(b))) / (R*T_b(b)));</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="密度公式">密度公式</h2>
+<p>与上面压力公式同理，有两个公式。 <span class="math display">\[
+\rho=\rho_b\cdot\left[\frac{T_b}{T_b+L_b\cdot(h-h_b)}\right]^{(1+\frac{g_0\cdot M}{R*\cdot L_b})}
+\]</span></p>
+<p><span class="math display">\[
+\rho=\rho_b\cdot\exp\left[\frac{-g_0\cdot M\cdot(h-h_b)}{R^*\cdot T_b}\right]
+\]</span></p>
+<p>密度<span class="math inline">\(\rho\)</span>的单位为kg/m^3。</p>
+<table>
+<thead>
+<tr class="header">
+<th>下标</th>
+<th>密度 kg/m^3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>1.2250</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>0.36391</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>0.08803</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>0.01322</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>0.00143</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>0.00086</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>0.000064</td>
+</tr>
+</tbody>
+</table>
+<h2 id="推导">推导</h2>
+<p>理想气体方程</p>
+<p><span class="math inline">\(P=\frac{\rho}{M}\cdot R^*T\)</span></p>
+<p>静流体力学压力微分</p>
+<p><span class="math inline">\(dP=-\rho gdz\)</span></p>
+<p>两边除以<span class="math inline">\(P\)</span></p>
+<p><span class="math inline">\(\frac{dP}{P}=-\frac{Mgdz}{R^*T}\)</span></p>
+<p>对高度<span class="math inline">\(z\)</span>积分</p>
+<p><span class="math inline">\(P=P_0e^{-\int_0^z{Mgdz/R^*T}}\)</span></p>
+<p>假设温度线性为变化<span class="math inline">\(T=T_0+L\cdot z\)</span>，则有</p>
+<p><span class="math inline">\(P=P_0\cdot\left[\frac{T_0}{T}\right]^{\frac{Mg}{R^*L}}\)</span></p>
+<p>若温度为常数，则有</p>
+<p><span class="math inline">\(P=P_0e^{-Mgz/R^*T}\)</span></p>
+<p>具体计算如前两节根据参数性质分层。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2021-05-14T01:40:46.146Z" itemprop="dateUpdated">2021-05-14 09:40:46</time>
+</span><br>
+
+
+        
+        文章转载请标明出处，仅供学习使用。
+        
+    </div>
+    
+    <footer>
+        <a href="http://zerlingx.com">
+            <img src="/img/avatar.jpg" alt="zerlingx">
+            zerlingx
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/">notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/physics/">physics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/">study</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2021/03/12/压高公式/&title=《压高公式——临近空间气压和密度与高度的关系》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2021/03/12/压高公式/&title=《压高公式——临近空间气压和密度与高度的关系》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2021/03/12/压高公式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《压高公式——临近空间气压和密度与高度的关系》 — zerlingx's blog&url=http://zerlingx.com/2021/03/12/压高公式/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2021/03/12/压高公式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/03/22/机器学习纲要_01_机器学习的基本模型和数学描述/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">机器学习纲要_01_机器学习的基本模型和数学描述</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/11/03/win10_touchpad_delay/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">关于win10的触摸板延迟设置问题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "vonyPRJwedvkCu0ksIMQYbmO-gzGzoHsz",
+            appKey: "O5p62bw33LShlsMSGD0y51wr",
+            avatar: "mm",
+            placeholder: "Your comment...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zerlingx &copy; 2019 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2021/03/12/压高公式/&title=《压高公式——临近空间气压和密度与高度的关系》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2021/03/12/压高公式/&title=《压高公式——临近空间气压和密度与高度的关系》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2021/03/12/压高公式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《压高公式——临近空间气压和密度与高度的关系》 — zerlingx's blog&url=http://zerlingx.com/2021/03/12/压高公式/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2021/03/12/压高公式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIElEQVR42u3aW47CMBAEQO5/afYEMd12slLsyhcKbHCx0mhen098fYfX1WeS++PP3HxhYGC8lpEfcfyE5M7VQXPeJRUDA+MAxvhw7RcnTx6H5vxsGBgYGOMgmAfuPHRiYGBgrDCSBDEJoHmQxcDAwJhrpeVp373J4m21OAYGxgsZedf9/18/Mt/AwMB4FWOu1Fxp4ifla30qDAyMrRnrI8yVYWcSWMeJIAYGxgmMvBGWtO9z6kq5e/l/wMDA2JqRB768fmyXNpYGBhgYGMcw2oOOj5sH3GTtrM5tMTAwNmIkgS9pq7UBOrmfN+MwMDD2ZrRrXisjz7k0NCqVMTAwjmHkyV87gGyRdSmLgYGxNaNth+VtsnYkMFdUF9NRDAyM1zJWHrS+JNF+y4+FMAwMjAMYbaqXL421r+uQjYGBsTVj/MbcoZNG2xPFMAYGxq6MZJFivQE3N5gsRggYGBgHMNYPlFM/y1c938DAwHg5Y6X1344h23I3eT4GBsaZjDxBbBv6OWkOj4GBcQKjPW7baMuvubCOgYGxN6MNeXMDgLmVixv+CgMD4+WMuVCYt9vmGHUxjIGBsTWjbce348bxUe4tejEwMPZmrLfb8sRxZYHjx0+AgYFxAOOJsWKbVrbLFtEbGBgYxzPaFPC5MI2BgYGRp4ZtMy4pfaPQjIGBcQBjpYhtVzFafLEzgoGBsSmjLR3bYUC7RpZPMzAwMA5g/AHve8J4BV0avAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'stand by (~_~)';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'welcome back (^-^)/';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

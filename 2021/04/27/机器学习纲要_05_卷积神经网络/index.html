@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>机器学习纲要_05_卷积神经网络 | zerlingx&#39;s blog | Stay hungry, stay foolish.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#39C5BB">
+    
+    
+    <meta name="keywords" content="notes,ai">
+    <meta name="description" content="概述 深层神经网络问题导入 常见的神经网络                                                                                              05_p1              （NN，CNN，RNN） 不同神经网络的应用">
+<meta name="keywords" content="notes,ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习纲要_05_卷积神经网络">
+<meta property="og:url" content="http://zerlingx.com/2021/04/27/机器学习纲要_05_卷积神经网络/index.html">
+<meta property="og:site_name" content="zerlingx&#39;s blog">
+<meta property="og:description" content="概述 深层神经网络问题导入 常见的神经网络                                                                                              05_p1              （NN，CNN，RNN） 不同神经网络的应用">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p1.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p2.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p3.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p4.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p5.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p6.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p7.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p8.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p9.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p10.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p5.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p11.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p12.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p13.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p14.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p15.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p16.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p17.png">
+<meta property="og:image" content="http://zerlingx.com/images/machine_learning_2021/05_p18.png">
+<meta property="og:updated_time" content="2021-06-07T10:37:19.397Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习纲要_05_卷积神经网络">
+<meta name="twitter:description" content="概述 深层神经网络问题导入 常见的神经网络                                                                                              05_p1              （NN，CNN，RNN） 不同神经网络的应用">
+<meta name="twitter:image" content="http://zerlingx.com/images/machine_learning_2021/05_p1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="zerlingx&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zerlingx</h5>
+          <a href="mailto:centralnode@zerlingx.com" title="centralnode@zerlingx.com" class="mail">centralnode@zerlingx.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zerlingx" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://wiki.archlinux.org/" target="_blank">
+                <i class="icon icon-lg icon-wikipedia-w"></i>
+                ArchWiki
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">机器学习纲要_05_卷积神经网络</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">机器学习纲要_05_卷积神经网络</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-04-26T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2021-04-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AI/">AI</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#概述"><span class="post-toc-number">1.</span> <span class="post-toc-text">概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深层神经网络问题导入"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">深层神经网络问题导入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常见的神经网络"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">常见的神经网络</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#不同神经网络的应用"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">不同神经网络的应用</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一般的神经网络存在的问题"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">一般的神经网络存在的问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#图像模式的特性"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">图像模式的特性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#神经网络概念引出"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">神经网络概念引出</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#对图像模式特性的两个问题的分析"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">对图像模式特性的两个问题的分析</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#cnn结构基础"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">CNN结构基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#卷积"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">卷积</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常用滤波器举例"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">常用滤波器举例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#池化"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">池化</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#cnn基本框架"><span class="post-toc-number">2.</span> <span class="post-toc-text">CNN基本框架</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输入层"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">输入层</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#卷积层"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">卷积层</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#灰度图像上的单核卷积"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">灰度图像上的单核卷积</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#rgb图像上的单核卷积"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">RGB图像上的单核卷积</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多个卷积核"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">多个卷积核</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#stride"><span class="post-toc-number">2.2.4.</span> <span class="post-toc-text">stride</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#padding"><span class="post-toc-number">2.2.5.</span> <span class="post-toc-text">padding</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#激活层"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">激活层</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#池化层"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">池化层</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#全连接层"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">全连接层</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-机器学习纲要_05_卷积神经网络" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">机器学习纲要_05_卷积神经网络</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-04-27 00:00:00" datetime="2021-04-26T16:00:00.000Z" itemprop="datePublished">2021-04-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AI/">AI</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="概述">概述</h1>
+<h2 id="深层神经网络问题导入">深层神经网络问题导入</h2>
+<h3 id="常见的神经网络">常见的神经网络</h3>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p1.png" alt="05_p1" title>
+                </div>
+                <div class="image-caption">05_p1</div>
+            </figure>
+<p>（NN，CNN，RNN）</p>
+<h3 id="不同神经网络的应用">不同神经网络的应用</h3>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p2.png" alt="05_p2" title>
+                </div>
+                <div class="image-caption">05_p2</div>
+            </figure>
+<p>根据不同的问题，需要不同的算法。</p>
+<h2 id="一般的神经网络存在的问题">一般的神经网络存在的问题</h2>
+<p>之前介绍的一般的神经网络也可以称为全连接神经网络。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p3.png" alt="05_p3" title>
+                </div>
+                <div class="image-caption">05_p3</div>
+            </figure>
+<p>所有节点之间相互连接，计算量仍然很大。</p>
+<h2 id="图像模式的特性">图像模式的特性</h2>
+<p>考虑图像识别问题<br>
+对于一张位图（一般像素的，不是矢量的），<br>
+要识别其内容，我们并不需要考虑所有的像素，即识别东西靠的是一部分特征，<br>
+因此，我们需要一种提取局部特征的方法。<br>
+另外，这种特征在一定程度的缩放下仍然有效。（图片放大缩小也认得出来）<br>
+<span class="math inline">\(\Rightarrow\)</span><br>
+1、关键的是局部特征。<br>
+2、特征可以缩放。</p>
+<h2 id="神经网络概念引出">神经网络概念引出</h2>
+<h3 id="对图像模式特性的两个问题的分析">对图像模式特性的两个问题的分析</h3>
+<p>对于第一个问题，<br>
+需要定义一种提取局部特征的方法，<br>
+然后用这种方法遍历整张图片。<br>
+<span class="math inline">\(\Rightarrow\)</span><br>
+卷积</p>
+<p>对于第二个问题，<br>
+在神经网络逐层累加的过程中，可以直接对图像进行缩放。<br>
+<span class="math inline">\(\Rightarrow\)</span><br>
+池化</p>
+<h2 id="cnn结构基础">CNN结构基础</h2>
+<p>卷积层——激活函数——池化层——全连接层</p>
+<p>简单解释一下</p>
+<h3 id="卷积">卷积</h3>
+<p>（又称空域滤波）<br>
+对一定范围内的输入进行线性运算，输出结果到下一层。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p4.png" alt="05_p4" title>
+                </div>
+                <div class="image-caption">05_p4</div>
+            </figure>
+<p>以上图为例子，输入为<span class="math inline">\(f\)</span>输出（下一层）为<span class="math inline">\(g\)</span>，<br>
+用了一个<span class="math inline">\(3\times3\)</span>的卷积核（又称滤波器，即一组运算的参数和方法）</p>
+<p><span class="math display">\[
+g\left(x,y\right)=\sum_{s=-a}^{a}\sum_{t=-b}^{b}w\left(s,t\right)f\left(x+s,y+t\right)
+\]</span></p>
+<p>（显然，就是二维卷积）</p>
+<p>再拿个有数字的实例</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p5.png" alt="05_p5" title>
+                </div>
+                <div class="image-caption">05_p5</div>
+            </figure>
+<h3 id="常用滤波器举例">常用滤波器举例</h3>
+<p><strong>盒滤波器</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p6.png" alt="05_p6" title>
+                </div>
+                <div class="image-caption">05_p6</div>
+            </figure>
+<p>简单的求平均，显然，可以把图片模糊化。</p>
+<p><strong>高斯滤波器</strong></p>
+<p>同理，这就叫高斯模糊。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p7.png" alt="05_p7" title>
+                </div>
+                <div class="image-caption">05_p7</div>
+            </figure>
+<p><strong>锐化用的滤波器</strong>的基础设计</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p8.png" alt="05_p8" title>
+                </div>
+                <div class="image-caption">05_p8</div>
+            </figure>
+<h3 id="池化">池化</h3>
+<p>降低数据复杂度的运算，<br>
+比如“最大池化‘，选取特定范围输入中的最大值，输出到下一层。<br>
+（感觉其实就是把线性运算改成其他功能的函数的卷积）</p>
+<h1 id="cnn基本框架">CNN基本框架</h1>
+<p>输入层——卷积层——激活层——池化层——全连接层<br>
+（卷积、激活、池化即类似隐层，可以有多层，<br>
+全连接层即最后的结果经过一次全连接的运算后输出）</p>
+<h2 id="输入层">输入层</h2>
+<p>没啥好说的，略。</p>
+<h2 id="卷积层">卷积层</h2>
+<p>计算机如何知道图上有什么物体——检测图像的边缘</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p9.png" alt="05_p9" title>
+                </div>
+                <div class="image-caption">05_p9</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p10.png" alt="05_p10" title>
+                </div>
+                <div class="image-caption">05_p10</div>
+            </figure>
+<h3 id="灰度图像上的单核卷积">灰度图像上的单核卷积</h3>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p5.png" alt="05_p5" title>
+                </div>
+                <div class="image-caption">05_p5</div>
+            </figure>
+<p><strong>感受野</strong>：一个神经元连接到的输入区域。</p>
+<h3 id="rgb图像上的单核卷积">RGB图像上的单核卷积</h3>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p11.png" alt="05_p11" title>
+                </div>
+                <div class="image-caption">05_p11</div>
+            </figure>
+<p>输入有三层，那么需要的卷积核深度为三。<br>
+卷积核深度=输入数据的层数（channel）</p>
+<h3 id="多个卷积核">多个卷积核</h3>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p12.png" alt="05_p12" title>
+                </div>
+                <div class="image-caption">05_p12</div>
+            </figure>
+<p>一个卷积核，提取一种模式，对应一层输出，<br>
+多个卷积核就有多层输出。</p>
+<h3 id="stride">stride</h3>
+<p>卷积核一次滑动的步长。</p>
+<h3 id="padding">padding</h3>
+<p>一般选项有两种padding=valid/same（不补零/补零）<br>
+即在输入的周围补不补零。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p13.png" alt="05_p13" title>
+                </div>
+                <div class="image-caption">05_p13</div>
+            </figure>
+<p>显然，stride和padding都会影响输出层的大小。</p>
+<p>05_p13：<br>
+<span class="math inline">\(W_1×H_1×D_1\)</span></p>
+<p><strong>超参数</strong>：<br>
+层数，<span class="math inline">\(K\)</span><br>
+维数，<span class="math inline">\(F\)</span>（一般每层都是<span class="math inline">\(F\times F\)</span>方阵）<br>
+步长stride，<span class="math inline">\(S\)</span><br>
+补零padding，<span class="math inline">\(P\)</span>（补充的维数）</p>
+<p><strong>输出</strong>：<br>
+<span class="math inline">\(W_2×H_2×D_2\)</span><br>
+<span class="math inline">\(W_2=\frac{W_1+2P-F}{S}+1\)</span><br>
+<span class="math inline">\(H_2=\frac{H_1+2P-F}{S}+1\)</span><br>
+<span class="math inline">\(D_2=K\)</span></p>
+<h2 id="激活层">激活层</h2>
+<p>往模型中加入非线性元素，能表示更大范围的函数。<br>
+一般不在同一个网络中使用多种激活函数。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p14.png" alt="05_p14" title>
+                </div>
+                <div class="image-caption">05_p14</div>
+            </figure>
+<h2 id="池化层">池化层</h2>
+<p>在width和height的维度上进行下采样，不改变depth的维度。</p>
+<p>池化过程举例</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p15.png" alt="05_p15" title>
+                </div>
+                <div class="image-caption">05_p15</div>
+            </figure>
+<p>上面即使用<span class="math inline">\(2\times2\)</span>,stride=2的卷积核进行池化，<br>
+相当于缩小为50%。<br>
+该卷积核是人为定义的，不是通过学习获得，不算做参数。</p>
+<p>这样能成倍减少计算量。</p>
+<p>不同的池化方法</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p16.png" alt="05_p16" title>
+                </div>
+                <div class="image-caption">05_p16</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p17.png" alt="05_p17" title>
+                </div>
+                <div class="image-caption">05_p17</div>
+            </figure>
+<h2 id="全连接层">全连接层</h2>
+<p>将多层的特征映射抻直成一个一维的向量。<br>
+采用全连接的方式将向量连接向输出层。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\machine_learning_2021\05_p18.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2021-06-07T10:37:19.397Z" itemprop="dateUpdated">2021-06-07 18:37:19</time>
+</span><br>
+
+
+        
+        文章转载请标明出处，仅供学习使用。
+        
+    </div>
+    
+    <footer>
+        <a href="http://zerlingx.com">
+            <img src="/img/avatar.jpg" alt="zerlingx">
+            zerlingx
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ai/">ai</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/">notes</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2021/04/27/机器学习纲要_05_卷积神经网络/&title=《机器学习纲要_05_卷积神经网络》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2021/04/27/机器学习纲要_05_卷积神经网络/&title=《机器学习纲要_05_卷积神经网络》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2021/04/27/机器学习纲要_05_卷积神经网络/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《机器学习纲要_05_卷积神经网络》 — zerlingx's blog&url=http://zerlingx.com/2021/04/27/机器学习纲要_05_卷积神经网络/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2021/04/27/机器学习纲要_05_卷积神经网络/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/05/14/热力计算作业_杨逸韬/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">固体火箭发动机燃烧产物热力计算</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/04/08/机器学习纲要_04_神经网络/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">机器学习纲要_04_神经网络</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "vonyPRJwedvkCu0ksIMQYbmO-gzGzoHsz",
+            appKey: "O5p62bw33LShlsMSGD0y51wr",
+            avatar: "mm",
+            placeholder: "Your comment...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zerlingx &copy; 2019 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2021/04/27/机器学习纲要_05_卷积神经网络/&title=《机器学习纲要_05_卷积神经网络》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2021/04/27/机器学习纲要_05_卷积神经网络/&title=《机器学习纲要_05_卷积神经网络》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2021/04/27/机器学习纲要_05_卷积神经网络/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《机器学习纲要_05_卷积神经网络》 — zerlingx's blog&url=http://zerlingx.com/2021/04/27/机器学习纲要_05_卷积神经网络/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2021/04/27/机器学习纲要_05_卷积神经网络/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACr0lEQVR42u3a0U7DMAwF0P3/T4PEExK0u7bjMaTTJ9R1aU6QEs/24xFfH1/Xzzvf7/985ur55Lv3zx++8PDw8FpTz1+fkD6CK1m+qzv5yHh4eHh7vPvD4Ap8f786uerbkwMMDw8P7295+af3R8X9QuTfxcPDw3t/Xh5kz7d+PDw8vPfnJcmIaiohSc7myY71XAseHh5ezKsWwN7h78X6Hh4eHt6gqp5suEmKoTpab26/jI+Hh4e3wMvL9lVMD38qORL1i+Hh4eENeL00QR5w54W05CCpHjB4eHh4G7wkCZu3VfUaAibPP5kbHh4e3lFevgVXp1U9QiZJ5HKuBQ8PD2+Nl5PuJ5qPOQc3X4CHh4c3qLknr8yLT/cLcSCDErR54eHh4Z3l9RKsUTg7SMtOEsF4eHh4r+HNC1T58/lGf6CNAA8PD2+BNylK5cfGpDWhF7Lj4eHh7fF6qYE8DTFJCidLEP2v8PDw8BZ4PVivvWB+2DzyCw8PD2+Nlx8MOXvjLeVUBR4eHt4yrzdQPqHe8VA9nC7re3h4eHiHeL3UQ4LMt/VqOF5OoODh4eEd5eXl/F5hLGkayBu5quUxPDw8vA3epDzfS0P0pthbIDw8PLwNXjKtfAkmrQDV0ZKR8fDw8F7Jq5Ly705KZeUUMx4eHt4LeXlQWw2Uq21Yk7fj4eHhbfDyglP+aXXqvf08T1vg4eHhneVVf/bnm36v4eDRup6E1Hh4eHjLvOp23wu+qwtXPcDw8PDw9niTzXdyqEzC6Lw5DA8PD2+PN08r5IWx/I35D4An4+Dh4eGt8aqTruLzQLxXHrtcIDw8PLw/5Z1qMqgGx8ly4OHh4f0XXrVP4T4gzrMmSSIYDw8Pb5uXF596gfIkXM4XCA8PD+81vFFj06CVapI4ns8QDw8PrzXDT1g9u2Bz+HrbAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'stand by (~_~)';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'welcome back (^-^)/';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

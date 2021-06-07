@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>固体火箭发动机燃烧产物热力计算 | zerlingx&#39;s blog | Stay hungry, stay foolish.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#39C5BB">
+    
+    
+    <meta name="keywords" content="study,notes,physics">
+    <meta name="description" content="推进理论课的一次热力计算作业，还是挺有趣的，可以作为简单的案例参考。主要难点在于利用平衡常数法计算平衡组分，使用的方程、设计的计算链顺序对结果有重要的影响。物性参数主要参考北航的教材《固体火箭发动机原理》，如果需要找其他组分的参数也可以上NASA的网站查询。  工作条件和计算参数">
+<meta name="keywords" content="study,notes,physics">
+<meta property="og:type" content="article">
+<meta property="og:title" content="固体火箭发动机燃烧产物热力计算">
+<meta property="og:url" content="http://zerlingx.com/2021/05/14/热力计算作业_杨逸韬/index.html">
+<meta property="og:site_name" content="zerlingx&#39;s blog">
+<meta property="og:description" content="推进理论课的一次热力计算作业，还是挺有趣的，可以作为简单的案例参考。主要难点在于利用平衡常数法计算平衡组分，使用的方程、设计的计算链顺序对结果有重要的影响。物性参数主要参考北航的教材《固体火箭发动机原理》，如果需要找其他组分的参数也可以上NASA的网站查询。  工作条件和计算参数">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="http://zerlingx.com/images/p1_工作条件和计算参数.png">
+<meta property="og:updated_time" content="2021-05-14T06:01:05.781Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="固体火箭发动机燃烧产物热力计算">
+<meta name="twitter:description" content="推进理论课的一次热力计算作业，还是挺有趣的，可以作为简单的案例参考。主要难点在于利用平衡常数法计算平衡组分，使用的方程、设计的计算链顺序对结果有重要的影响。物性参数主要参考北航的教材《固体火箭发动机原理》，如果需要找其他组分的参数也可以上NASA的网站查询。  工作条件和计算参数">
+<meta name="twitter:image" content="http://zerlingx.com/images/p1_工作条件和计算参数.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="zerlingx&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zerlingx</h5>
+          <a href="mailto:centralnode@zerlingx.com" title="centralnode@zerlingx.com" class="mail">centralnode@zerlingx.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zerlingx" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://wiki.archlinux.org/" target="_blank">
+                <i class="icon icon-lg icon-wikipedia-w"></i>
+                ArchWiki
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">固体火箭发动机燃烧产物热力计算</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">固体火箭发动机燃烧产物热力计算</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-05-14T01:22:00.000Z" itemprop="datePublished" class="page-time">
+  2021-05-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Notes/">Notes</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#工作条件和计算参数"><span class="post-toc-number">1.</span> <span class="post-toc-text">工作条件和计算参数</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#燃烧室的热力计算"><span class="post-toc-number">2.</span> <span class="post-toc-text">燃烧室的热力计算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算固体推进剂的假定化学式"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">计算固体推进剂的假定化学式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算推进剂总焓"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">计算推进剂总焓</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#燃烧室热力计算分析"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">燃烧室热力计算分析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#建立计算时所用的化学平衡常数数据库"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">建立计算时所用的化学平衡常数数据库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算给定压强和温度下燃烧产物的平衡组分和焓"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">计算给定压强和温度下燃烧产物的平衡组分和焓</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#平衡组分计算"><span class="post-toc-number">2.5.1.</span> <span class="post-toc-text">平衡组分计算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#计算链设计"><span class="post-toc-number">2.5.1.1.</span> <span class="post-toc-text">计算链设计</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#平衡组分计算程序"><span class="post-toc-number">2.5.1.2.</span> <span class="post-toc-text">平衡组分计算程序</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#燃烧产物焓的计算"><span class="post-toc-number">2.5.2.</span> <span class="post-toc-text">燃烧产物焓的计算</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#绝热燃烧温度的计算"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">绝热燃烧温度的计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#绝热燃烧温度下燃烧产物的性质分析"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">绝热燃烧温度下燃烧产物的性质分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#燃烧产物的平衡组分"><span class="post-toc-number">2.7.1.</span> <span class="post-toc-text">燃烧产物的平衡组分</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#燃烧产物的热力学性质"><span class="post-toc-number">2.7.2.</span> <span class="post-toc-text">燃烧产物的热力学性质</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#燃烧室出口处的理论特征速度"><span class="post-toc-number">2.7.3.</span> <span class="post-toc-text">燃烧室出口处的理论特征速度</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#喷管流动过程热力计算"><span class="post-toc-number">3.</span> <span class="post-toc-text">喷管流动过程热力计算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#喷管流动过程分析"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">喷管流动过程分析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#喷管出口截面处燃烧产物的平衡组分"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">喷管出口截面处燃烧产物的平衡组分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#喷管出口截面处燃烧产物的热力学性质"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">喷管出口截面处燃烧产物的热力学性质</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#发动机理论性能参数计算"><span class="post-toc-number">4.</span> <span class="post-toc-text">发动机理论性能参数计算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#发动机理论比冲计算"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">发动机理论比冲计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#发动机理论推力系数计算"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">发动机理论推力系数计算</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-热力计算作业_杨逸韬" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">固体火箭发动机燃烧产物热力计算</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-05-14 09:22:00" datetime="2021-05-14T01:22:00.000Z" itemprop="datePublished">2021-05-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Notes/">Notes</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>推进理论课的一次热力计算作业，还是挺有趣的，可以作为简单的案例参考。主要难点在于利用平衡常数法计算平衡组分，使用的方程、设计的计算链顺序对结果有重要的影响。物性参数主要参考北航的教材《固体火箭发动机原理》，如果需要找其他组分的参数也可以上NASA的网站查询。</p>
+</blockquote>
+<h1 id="工作条件和计算参数">工作条件和计算参数</h1>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="\images\p1_工作条件和计算参数.png" alt="p1_工作条件和计算参数.png" title>
+                </div>
+                <div class="image-caption">p1_工作条件和计算参数.png</div>
+            </figure>
+<h1 id="燃烧室的热力计算">燃烧室的热力计算</h1>
+<h2 id="计算固体推进剂的假定化学式">计算固体推进剂的假定化学式</h2>
+<p>每千克中各元素物质的量为</p>
+<p><span class="math display">\[
+\begin{aligned}
+n_C &amp;=\frac{1000\times20.5\%\times35.89\%}{12}+\frac{1000\times4.0\%}{104}\times8+\frac{1000\times1.5\%\times72.94\%}{12} &amp;=10.12\ mol/kg \\
+n_H &amp;=\frac{1000\times74.0\%}{117.5}\times4+\frac{1000\times20.5\%\times6.10\%}{1}+\frac{1000\times4.0\%}{104}\times8+\frac{1000\times1.5\%\times7.03\%}{1} &amp;=41.83\ mol/kg \\
+n_O &amp;=\frac{1000\times74.0\%}{117.5}\times4+\frac{1000\times20.5\%\times20.28\%}{16}+\frac{1000\times1.5\%\times20.04\%}{16} &amp;=27.98\ mol/kg \\
+n_N &amp;=\frac{1000\times74.0\%}{117.5}\times1 &amp;=6.30\ mol/kg \\
+n_S &amp;=\frac{1000\times20.5\%\times37.74\%}{32} &amp;=2.42\ mol/kg \\
+n_{Cl} &amp;=\frac{1000\times74.0\%}{117.5}\times1 &amp;=6.30\ mol/kg \\
+\end{aligned}
+\]</span></p>
+<p>假定化学式为<span class="math inline">\(C_{10.12}H_{41.83}O_{27.98}N_{6.30}S_{2.42}Cl_{6.30}\)</span>。</p>
+<h2 id="计算推进剂总焓">计算推进剂总焓</h2>
+<p>推进剂初温为<span class="math inline">\(298K\)</span>，以该温度为参考温度的生成焓即该温度下的总焓。</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; H_{f,1}^{298}=-290.37,\quad H_{f,2}^{298}=1060.23,\quad H_{f,3}^{298}=103.34,\quad H_{f,4}^{298}=-1435.11 &amp;(kJ/mol) \\
+&amp; n_1=6.298,\quad n_2=0.205,\quad, n_3=0.3846,\quad n_4=0.015 &amp;(mol/kg推进剂) \\
+&amp; I_p=\sum{n_iI_i}=\sum{n_iH_{f,i}^{298}}=-1593.19 &amp;(kJ/kg推进剂) \\
+\end{aligned}
+\]</span></p>
+<h2 id="燃烧室热力计算分析">燃烧室热力计算分析</h2>
+<p><strong>推进剂含有的元素</strong>共6种：<span class="math inline">\(C,H,O,N,S,Cl\)</span>。</p>
+<p>假设<strong>燃烧产物</strong>共有12种，其中主要组分：<span class="math inline">\(CO,CO_2,H_2,H_2O,N_2\)</span>，次要组分：<span class="math inline">\(H,O_2,OH,NO,Cl,HCl,SO_2\)</span>。</p>
+<p>推进剂所含元素与燃烧产物、中间产物之间的关系为</p>
+<p><span class="math display">\[
+\begin{aligned}
+C &amp;\rightarrow CO_2,CO \\
+H &amp;\rightarrow H_2O,H_2,HCl,OH,H \\
+O &amp;\rightarrow CO_2,CO,H_2O,OH,SO_2,O_2,O,NO \\
+N &amp;\rightarrow N_2,NO,N \\
+Cl &amp;\rightarrow HCl,Cl \\
+S &amp;\rightarrow SO_2 \\
+\end{aligned}
+\]</span></p>
+<p>对于每种元素列出共6个<strong>质量守恒方程</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+10.12\ mol/kg=N_C &amp;=n_{CO_2}+n_{CO} \\
+41.83\ mol/kg=N_H &amp;=2n_{H_2O}+2n_{H_2}+n_{HCl}+n_{OH}+n_H \\
+27.98\ mol/kg=N_O &amp;=2n_{CO_2}+n_{CO}+n_{H_2O}+n_{OH}+2n_{SO_2}+2n_{O_2}+n_{NO} \\
+6.30\ mol/kg=N_N &amp;=2n_{N_2}+n_{NO} \\
+6.30\ mol/kg=N_{Cl} &amp;=n_{HCl}+n_{Cl} \\
+2.42\ mol/kg=N_S &amp;=n_{SO_2} \\
+\end{aligned}
+\]</span></p>
+<p>列出可能的6个<strong>化学平衡方程</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; CO_2\leftrightharpoons CO+\frac{1}{2}O_2,&amp; K_{p,CO_2}(\frac{p}{n_g})^{-\frac{1}{2}} &amp;=\frac{n_{CO}n_{O_2}^{\frac{1}{2}}}{n_{CO_2}} \\
+&amp; CO_2+H_2\leftrightharpoons CO+H_2O, &amp; K_{p,act} &amp;=\frac{n_{CO}n_{H_2O}}{n_{CO_2}n_{H_2}}\quad(act) \\
+&amp; H_2O\leftrightharpoons OH+\frac{1}{2}H_2, &amp; K_{p,H_2O(b)}(\frac{p}{n_g})^{-\frac{1}{2}} &amp;=\frac{n_{OH}n_{H_2}^{\frac{1}{2}}}{n_{H_2O}} \\
+&amp; N_2+O_2\leftrightharpoons2NO, &amp; K_{p,NO} &amp;=\frac{n_{NO}^2}{n_{N_2}n_{O_2}} \\
+&amp; H_2\leftrightharpoons2H, &amp; K_{p,H_2}(\frac{p}{n_g})^{-1} &amp;=\frac{n_H^2}{n_{H_2}} \\
+&amp; HCl\leftrightharpoons H+Cl, &amp; K_{p,HCl}(\frac{p}{n_g})^{-1} &amp;=\frac{n_Hn_{Cl}}{n_{HCl}} \\
+\end{aligned}
+\]</span></p>
+<h2 id="建立计算时所用的化学平衡常数数据库">建立计算时所用的化学平衡常数数据库</h2>
+<p>参考北京航空航天大学的《固体火箭发动机原理》，导入需要的化学平衡常数数据。</p>
+<p>为了方便使用，写作matlab矩阵和函数的形式。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">kp_out</span> = <span class="title">kp</span><span class="params">(comp, temp)</span></span></span><br><span class="line"><span class="comment">% comp in 2~10, temp in 300~5999</span></span><br><span class="line"></span><br><span class="line">K = [<span class="comment">%1 T 2 co2      3 h2oa     4 act     5 h2ob     6 no       7 h2       8 o2       9 n2       10 hcl</span></span><br><span class="line">     <span class="comment">%注：部分数据没有用到</span></span><br><span class="line">    [<span class="number">300</span>  <span class="number">0.1825e-44</span> <span class="number">0.1637e-30</span> <span class="number">0.1115e-4</span> <span class="number">0.5140e-40</span> <span class="number">0.6635e-30</span> <span class="number">0.1813e-70</span> <span class="number">0.8191e-80</span> <span class="number">0.216e-118</span> <span class="number">5.0582e-71</span>],</span><br><span class="line">    [<span class="number">400</span>  <span class="number">0.3895e-32</span> <span class="number">0.5759e-20</span> <span class="number">0.6764e-8</span> <span class="number">0.1237e-33</span> <span class="number">0.4898e-22</span> <span class="number">0.1811e-51</span> <span class="number">0.3084e-58</span> <span class="number">0.3395e-87</span> <span class="number">3.3305e-51</span>],</span><br><span class="line">    [<span class="number">500</span>  <span class="number">0.9886e-25</span> <span class="number">0.1302e-22</span> <span class="number">0.7593e-2</span> <span class="number">0.3518e-25</span> <span class="number">0.2587e-17</span> <span class="number">0.4899e-40</span> <span class="number">0.2944e-45</span> <span class="number">0.1879e-68</span> <span class="number">7.0437e-41</span>],</span><br><span class="line"></span><br><span class="line">    [<span class="number">600</span>  <span class="number">0.8624e-20</span> <span class="number">0.2333e-18</span> <span class="number">0.3695e-1</span> <span class="number">0.3400e-21</span> <span class="number">0.3648e-14</span> <span class="number">0.2153e-32</span> <span class="number">0.1387e-35</span> <span class="number">0.6218e-55</span> <span class="number">2.2558e-33</span>],</span><br><span class="line">    [<span class="number">700</span>  <span class="number">0.2900e-16</span> <span class="number">0.2614e-15</span> <span class="number">0.1109</span>    <span class="number">0.1265e-17</span> <span class="number">0.6489e-12</span> <span class="number">0.6425e-27</span> <span class="number">0.2240e-30</span> <span class="number">0.5633e-47</span> <span class="number">7.1318e-28</span>],</span><br><span class="line">    [<span class="number">800</span>  <span class="number">0.1277e-13</span> <span class="number">0.5156e-13</span> <span class="number">0.2475</span>    <span class="number">0.6119e-15</span> <span class="number">0.3163e-10</span> <span class="number">0.8426e-23</span> <span class="number">0.1084e-25</span> <span class="number">0.3010e-40</span> <span class="number">8.6636e-24</span>],</span><br><span class="line">    [<span class="number">900</span>  <span class="number">0.1445e-11</span> <span class="number">0.3185e-11</span> <span class="number">0.4537</span>    <span class="number">0.7568e-13</span> <span class="number">0.6495e-9</span>  <span class="number">0.1369e-19</span> <span class="number">0.4450e-22</span> <span class="number">0.5230e-35</span> <span class="number">1.3301e-20</span>],</span><br><span class="line">    [<span class="number">1000</span> <span class="number">0.6331e-10</span> <span class="number">0.8728e-10</span> <span class="number">0.7254</span>    <span class="number">0.3604e-11</span> <span class="number">0.7302e-8</span>  <span class="number">0.5148e-17</span> <span class="number">0.3651e-19</span> <span class="number">0.8239e-31</span> <span class="number">4.7852e-18</span>],</span><br><span class="line"></span><br><span class="line">    [<span class="number">1100</span> <span class="number">0.1389e-8</span>  <span class="number">0.1314e-8</span>  <span class="number">1.0560</span>    <span class="number">0.8519e-10</span> <span class="number">0.5277e-7</span>  <span class="number">0.6676e-15</span> <span class="number">0.8820e-17</span> <span class="number">0.2262e-27</span> <span class="number">5.9776e-16</span>],</span><br><span class="line">    [<span class="number">1200</span> <span class="number">0.1814e-7</span>  <span class="number">0.1267e-7</span>  <span class="number">1.4320</span>    <span class="number">0.1198e-8</span>  <span class="number">0.2752e-6</span>  <span class="number">0.3886e-18</span> <span class="number">0.8630e-15</span> <span class="number">0.1673e-24</span> <span class="number">3.3731e-14</span>],</span><br><span class="line">    [<span class="number">1300</span> <span class="number">0.1591e-6</span>  <span class="number">0.8648e-7</span>  <span class="number">1.8400</span>    <span class="number">0.1116e-7</span>  <span class="number">0.1112e-5</span>  <span class="number">0.1220e-11</span> <span class="number">0.4191e-13</span> <span class="number">0.4503e-22</span> <span class="number">1.0313e-12</span>],</span><br><span class="line">    [<span class="number">1400</span> <span class="number">0.1020e-5</span>  <span class="number">0.4501e-6</span>  <span class="number">2.2660</span>    <span class="number">0.7603e-7</span>  <span class="number">0.3680e-5</span>  <span class="number">0.2358e-10</span> <span class="number">0.1178e-11</span> <span class="number">0.5478e-20</span> <span class="number">1.9467e-11</span>],</span><br><span class="line">    [<span class="number">1500</span> <span class="number">0.5087e-5</span>  <span class="number">0.1885e-5</span>  <span class="number">2.6990</span>    <span class="number">0.4016e-6</span>  <span class="number">0.1039e-4</span>  <span class="number">0.3087e-9</span>  <span class="number">0.2118e-10</span> <span class="number">0.3527e-18</span> <span class="number">2.4963e-10</span>],</span><br><span class="line"></span><br><span class="line">    [<span class="number">1600</span> <span class="number">0.2074e-4</span>  <span class="number">0.6615e-5</span>  <span class="number">3.1350</span>    <span class="number">0.1726e-5</span>  <span class="number">0.2575e-4</span>  <span class="number">0.2944e-8</span>  <span class="number">0.2657e-9</span>  <span class="number">0.1357e-16</span> <span class="number">2.3911e-9</span> ],</span><br><span class="line">    [<span class="number">1700</span> <span class="number">0.7131e-4</span>  <span class="number">0.2005e-4</span>  <span class="number">3.5550</span>    <span class="number">0.6250e-5</span>  <span class="number">0.5738e-4</span>  <span class="number">0.2162e-7</span>  <span class="number">0.2486e-8</span>  <span class="number">0.3393e-15</span> <span class="number">1.6878e-8</span> ],</span><br><span class="line">    [<span class="number">1800</span> <span class="number">0.2135e-3</span>  <span class="number">0.5388e-4</span>  <span class="number">3.9670</span>    <span class="number">0.1964e-4</span>  <span class="number">0.1170e-3</span>  <span class="number">0.1277e-6</span>  <span class="number">0.1819e-7</span>  <span class="number">0.5961e-14</span> <span class="number">9.8107e-8</span> ],</span><br><span class="line">    [<span class="number">1900</span> <span class="number">0.5687e-3</span>  <span class="number">0.1303e-3</span>  <span class="number">4.3630</span>    <span class="number">0.5475e-4</span>  <span class="number">0.2213e-3</span>  <span class="number">0.6267e-6</span>  <span class="number">0.1080e-6</span>  <span class="number">0.7761e-13</span> <span class="number">4.7512e-7</span> ],</span><br><span class="line">    [<span class="number">2000</span> <span class="number">0.1871e-2</span>  <span class="number">0.2892e-3</span>  <span class="number">4.7410</span>    <span class="number">0.1378e-3</span>  <span class="number">0.3926e-3</span>  <span class="number">0.2631e-5</span>  <span class="number">0.5376e-6</span>  <span class="number">0.7829e-12</span> <span class="number">1.9697e-6</span> ],</span><br><span class="line"></span><br><span class="line">    [<span class="number">2100</span> <span class="number">0.3035e-2</span>  <span class="number">0.5954e-3</span>  <span class="number">5.0970</span>    <span class="number">0.3178e-3</span>  <span class="number">0.6595e-3</span>  <span class="number">0.9658e-5</span>  <span class="number">0.2299e-5</span>  <span class="number">0.6349e-11</span> <span class="number">7.1433e-6</span> ],</span><br><span class="line">    [<span class="number">2200</span> <span class="number">0.6240e-2</span>  <span class="number">0.1149e-2</span>  <span class="number">5.4300</span>    <span class="number">0.6797e-3</span>  <span class="number">0.1057e-2</span>  <span class="number">0.3155e-4</span>  <span class="number">0.8624e-5</span>  <span class="number">0.4263e-10</span> <span class="number">2.3083e-5</span> ],</span><br><span class="line">    [<span class="number">2300</span> <span class="number">0.1208e-1</span>  <span class="number">0.2094e-2</span>  <span class="number">5.7460</span>    <span class="number">0.1361e-2</span>  <span class="number">0.1625e-2</span>  <span class="number">0.9313e-4</span>  <span class="number">0.2885e-4</span>  <span class="number">0.2429e-9</span>  <span class="number">6.7468e-5</span> ],</span><br><span class="line">    [<span class="number">2400</span> <span class="number">0.2195e-1</span>  <span class="number">0.3634e-2</span>  <span class="number">6.0390</span>    <span class="number">0.2573e-2</span>  <span class="number">0.2410e-2</span>  <span class="number">0.2516e-3</span>  <span class="number">0.6738e-4</span>  <span class="number">0.1198e-8</span>  <span class="number">1.8055e-4</span> ],</span><br><span class="line">    [<span class="number">2500</span> <span class="number">0.3810e-1</span>  <span class="number">0.6037e-2</span>  <span class="number">6.3110</span>    <span class="number">0.4625e-2</span>  <span class="number">0.3391e-2</span>  <span class="number">0.6284e-3</span>  <span class="number">0.2423e-3</span>  <span class="number">0.5206e-8</span>  <span class="number">4.4720e-4</span> ],</span><br><span class="line"></span><br><span class="line">    [<span class="number">2600</span> <span class="number">0.6333e-1</span>  <span class="number">0.9649e-2</span>  <span class="number">6.5630</span>    <span class="number">0.7947e-2</span>  <span class="number">0.4840e-2</span>  <span class="number">0.1464e-2</span>  <span class="number">0.6215e-3</span>  <span class="number">0.2023e-7</span>  <span class="number">1.0335e-3</span> ],</span><br><span class="line">    [<span class="number">2700</span> <span class="number">0.1013</span>     <span class="number">0.1490e-1</span>  <span class="number">6.7940</span>    <span class="number">0.1312e-1</span>  <span class="number">0.6592e-2</span>  <span class="number">0.3207e-2</span>  <span class="number">0.1487e-2</span>  <span class="number">0.7114e-7</span>  <span class="number">2.2470e-3</span> ],</span><br><span class="line">    [<span class="number">2800</span> <span class="number">0.1565</span>     <span class="number">0.2233e-1</span>  <span class="number">7.0080</span>    <span class="number">0.2081e-1</span>  <span class="number">0.8786e-2</span>  <span class="number">0.6649e-2</span>  <span class="number">0.3345e-2</span>  <span class="number">0.2289e-6</span>  <span class="number">4.5983e-3</span> ],</span><br><span class="line">    [<span class="number">2900</span> <span class="number">0.2345</span>     <span class="number">0.3256e-1</span>  <span class="number">7.2020</span>    <span class="number">0.3228e-1</span>  <span class="number">0.1146e-1</span>  <span class="number">0.1312e-1</span>  <span class="number">0.7117e-2</span>  <span class="number">0.5797e-6</span>  <span class="number">9.0698e-3</span> ],</span><br><span class="line">    [<span class="number">3000</span> <span class="number">0.3417</span>     <span class="number">0.4628e-1</span>  <span class="number">7.3820</span>    <span class="number">0.4841e-1</span>  <span class="number">0.1472e-1</span>  <span class="number">0.2475e-1</span>  <span class="number">0.1441e-1</span>  <span class="number">0.1879e-5</span>  <span class="number">1.7070e-2</span> ],</span><br><span class="line"></span><br><span class="line">    [<span class="number">3100</span> <span class="number">0.4854</span>     <span class="number">0.6436e-1</span>  <span class="number">7.5430</span>    <span class="number">0.7074e-1</span>  <span class="number">0.1858e-1</span>  <span class="number">0.4485e-1</span>  <span class="number">0.2786e-1</span>  <span class="number">0.4866e-5</span>  <span class="number">3.0648e-2</span> ],</span><br><span class="line">    [<span class="number">3200</span> <span class="number">0.6744</span>     <span class="number">0.8770e-1</span>  <span class="number">7.6900</span>    <span class="number">0.1009</span>     <span class="number">0.2310e-1</span>  <span class="number">0.7836e-1</span>  <span class="number">0.5174e-1</span>  <span class="number">0.1189e-4</span>  <span class="number">5.3620e-2</span> ],</span><br><span class="line">    [<span class="number">3300</span> <span class="number">0.9179</span>     <span class="number">0.1173</span>     <span class="number">7.8210</span>    <span class="number">0.1410</span>     <span class="number">0.2833e-1</span>  <span class="number">0.1324</span>     <span class="number">0.9253e-1</span>  <span class="number">0.2751e-4</span>  <span class="number">8.9557e-2</span> ],</span><br><span class="line">    [<span class="number">3400</span> <span class="number">1.2260</span>     <span class="number">0.1544</span>     <span class="number">7.9410</span>    <span class="number">0.1933</span>     <span class="number">0.3431e-1</span>  <span class="number">0.2170</span>     <span class="number">0.1600</span>     <span class="number">0.6054e-4</span>  <span class="number">1.4612e-1</span> ],</span><br><span class="line">    [<span class="number">3500</span> <span class="number">1.6100</span>     <span class="number">0.2000</span>     <span class="number">8.0480</span>    <span class="number">0.2601</span>     <span class="number">0.4115e-1</span>  <span class="number">0.3459</span>     <span class="number">0.2680</span>     <span class="number">0.1278e-3</span>  <span class="number">2.3195e-1</span> ],</span><br><span class="line"></span><br><span class="line">    [<span class="number">3600</span> <span class="number">2.0810</span>     <span class="number">0.2556</span>     <span class="number">8.1430</span>    <span class="number">0.3444</span>     <span class="number">0.4882e-1</span>  <span class="number">0.5374</span>     <span class="number">0.4364</span>     <span class="number">0.2587e-3</span>  <span class="number">0.3585</span>    ],</span><br><span class="line">    [<span class="number">3700</span> <span class="number">2.6520</span>     <span class="number">0.3222</span>     <span class="number">8.2280</span>    <span class="number">0.4492</span>     <span class="number">0.5736e-1</span>  <span class="number">0.8156</span>     <span class="number">0.6926</span>     <span class="number">0.5042e-3</span>  <span class="number">0.5428</span>    ],</span><br><span class="line">    [<span class="number">3800</span> <span class="number">3.3340</span>     <span class="number">0.4017</span>     <span class="number">8.2990</span>    <span class="number">0.5780</span>     <span class="number">0.6677e-1</span>  <span class="number">1.2120</span>     <span class="number">1.0730</span>     <span class="number">0.9491e-3</span>  <span class="number">0.8219</span>    ],</span><br><span class="line">    [<span class="number">3900</span> <span class="number">4.1410</span>     <span class="number">0.4951</span>     <span class="number">8.3640</span>    <span class="number">0.7343</span>     <span class="number">0.7720e-1</span>  <span class="number">1.7630</span>     <span class="number">1.6240</span>     <span class="number">0.1731e-2</span>  <span class="number">1.1655</span>    ],</span><br><span class="line">    [<span class="number">4000</span> <span class="number">5.0870</span>     <span class="number">0.6042</span>     <span class="number">8.4180</span>    <span class="number">0.9217</span>     <span class="number">0.8851e-1</span>  <span class="number">2.5190</span>     <span class="number">2.4080</span>     <span class="number">0.3063e-2</span>  <span class="number">1.6630</span>    ],</span><br><span class="line"></span><br><span class="line">    [<span class="number">4100</span> <span class="number">6.1810</span>     <span class="number">0.7303</span>     <span class="number">8.4650</span>    <span class="number">1.1450</span>     <span class="number">0.1008</span>     <span class="number">3.5380</span>     <span class="number">3.5050</span>     <span class="number">0.5276e-2</span>  <span class="number">2.3254</span>    ],</span><br><span class="line">    [<span class="number">4200</span> <span class="number">7.4420</span>     <span class="number">0.8750</span>     <span class="number">8.5060</span>    <span class="number">1.4070</span>     <span class="number">0.1141</span>     <span class="number">4.8890</span>     <span class="number">5.0100</span>     <span class="number">0.8857e-2</span>  <span class="number">3.2063</span>    ],</span><br><span class="line">    [<span class="number">4300</span> <span class="number">8.8740</span>     <span class="number">1.0400</span>     <span class="number">8.5310</span>    <span class="number">1.7130</span>     <span class="number">0.1283</span>     <span class="number">6.6580</span>     <span class="number">7.0460</span>     <span class="number">0.1452e-1</span>  <span class="number">4.3562</span>    ],</span><br><span class="line">    [<span class="number">4400</span> <span class="number">10.5000</span>    <span class="number">1.2280</span>     <span class="number">8.5570</span>    <span class="number">2.0670</span>     <span class="number">0.1436</span>     <span class="number">8.9390</span>     <span class="number">9.7540</span>     <span class="number">0.2330e-1</span>  <span class="number">5.8385</span>    ],</span><br><span class="line">    [<span class="number">4500</span> <span class="number">12.5300</span>    <span class="number">1.4370</span>     <span class="number">8.5760</span>    <span class="number">2.4750</span>     <span class="number">0.1598</span>     <span class="number">11.8500</span>    <span class="number">13.3100</span>    <span class="number">0.3660e-1</span>  <span class="number">7.7233</span>    ],</span><br><span class="line"></span><br><span class="line">    [<span class="number">4600</span> <span class="number">14.3600</span>    <span class="number">1.6730</span>     <span class="number">8.5860</span>    <span class="number">2.9400</span>     <span class="number">0.1770</span>     <span class="number">15.5200</span>    <span class="number">17.9300</span>    <span class="number">0.5641e-1</span>  <span class="number">10.0970</span>   ],</span><br><span class="line">    [<span class="number">4700</span> <span class="number">16.5200</span>    <span class="number">1.9340</span>     <span class="number">8.5920</span>    <span class="number">3.4660</span>     <span class="number">0.1952</span>     <span class="number">20.0800</span>    <span class="number">23.8300</span>    <span class="number">0.8541e-1</span>  <span class="number">13.0530</span>   ],</span><br><span class="line">    [<span class="number">4800</span> <span class="number">19.1100</span>    <span class="number">2.2240</span>     <span class="number">8.5920</span>    <span class="number">4.0610</span>     <span class="number">0.2143</span>     <span class="number">25.7200</span>    <span class="number">31.3200</span>    <span class="number">0.1271</span>     <span class="number">16.6850</span>   ],</span><br><span class="line">    [<span class="number">4900</span> <span class="number">21.8400</span>    <span class="number">2.5430</span>     <span class="number">8.5880</span>    <span class="number">4.7290</span>     <span class="number">0.2343</span>     <span class="number">32.6200</span>    <span class="number">40.7000</span>    <span class="number">0.1863</span>     <span class="number">21.14450</span>  ],</span><br><span class="line">    [<span class="number">5000</span> <span class="number">24.8300</span>    <span class="number">2.8940</span>     <span class="number">8.5780</span>    <span class="number">5.4730</span>     <span class="number">0.2553</span>     <span class="number">40.9900</span>    <span class="number">52.3400</span>    <span class="number">0.2689</span>     <span class="number">26.5340</span>   ],</span><br><span class="line"></span><br><span class="line">    [<span class="number">5100</span> <span class="number">28.0600</span>    <span class="number">3.2760</span>     <span class="number">8.5670</span>    <span class="number">6.2980</span>     <span class="number">0.2771</span>     <span class="number">51.0100</span>    <span class="number">66.6500</span>    <span class="number">0.3828</span>     <span class="number">33.0700</span>   ],</span><br><span class="line">    [<span class="number">5200</span> <span class="number">31.5800</span>    <span class="number">3.6940</span>     <span class="number">8.5490</span>    <span class="number">7.2090</span>     <span class="number">0.2997</span>     <span class="number">62.9800</span>    <span class="number">84.1000</span>    <span class="number">0.5379</span>     <span class="number">40.7200</span>   ],</span><br><span class="line">    [<span class="number">5300</span> <span class="number">35.3700</span>    <span class="number">4.1460</span>     <span class="number">8.5310</span>    <span class="number">8.2130</span>     <span class="number">0.3234</span>     <span class="number">77.1400</span>    <span class="number">105.2000</span>   <span class="number">0.7464</span>     <span class="number">49.8430</span>   ],</span><br><span class="line">    [<span class="number">5400</span> <span class="number">39.4100</span>    <span class="number">4.6340</span>     <span class="number">8.5040</span>    <span class="number">9.3110</span>     <span class="number">0.3478</span>     <span class="number">93.7800</span>    <span class="number">130.5000</span>   <span class="number">1.0230</span>     <span class="number">60.5660</span>   ],</span><br><span class="line">    [<span class="number">5500</span> <span class="number">43.7500</span>    <span class="number">5.1600</span>     <span class="number">8.4780</span>    <span class="number">10.5100</span>    <span class="number">0.3731</span>     <span class="number">113.2000</span>   <span class="number">160.6000</span>   <span class="number">1.3890</span>     <span class="number">73.0810</span>   ],</span><br><span class="line"></span><br><span class="line">    [<span class="number">5600</span> <span class="number">48.3700</span>    <span class="number">5.7270</span>     <span class="number">8.4450</span>    <span class="number">11.8100</span>    <span class="number">0.3988</span>     <span class="number">135.7000</span>   <span class="number">196.3000</span>   <span class="number">1.8640</span>     <span class="number">87.6000</span>   ],</span><br><span class="line">    [<span class="number">5700</span> <span class="number">53.2700</span>    <span class="number">6.3330</span>     <span class="number">8.4120</span>    <span class="number">13.2300</span>    <span class="number">0.4258</span>     <span class="number">161.7000</span>   <span class="number">238.1000</span>   <span class="number">2.4750</span>     <span class="number">104.3566</span>  ],</span><br><span class="line">    [<span class="number">5800</span> <span class="number">58.4800</span>    <span class="number">6.9810</span>     <span class="number">8.3770</span>    <span class="number">14.7600</span>    <span class="number">0.4533</span>     <span class="number">191.5000</span>   <span class="number">287.0000</span>   <span class="number">3.2610</span>     <span class="number">123.5633</span>  ],</span><br><span class="line">    [<span class="number">5900</span> <span class="number">63.9600</span>    <span class="number">7.6700</span>     <span class="number">8.3390</span>    <span class="number">16.4000</span>    <span class="number">0.4812</span>     <span class="number">225.5000</span>   <span class="number">343.8000</span>   <span class="number">4.2560</span>     <span class="number">145.5170</span>  ],</span><br><span class="line">    [<span class="number">6000</span> <span class="number">69.7400</span>    <span class="number">8.4050</span>     <span class="number">8.2990</span>    <span class="number">18.1800</span>    <span class="number">0.5100</span>     <span class="number">264.0000</span>   <span class="number">409.4000</span>   <span class="number">5.5080</span>     <span class="number">170.4113</span>  ],</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">cnt = <span class="built_in">floor</span>(temp/<span class="number">100</span>)<span class="number">-2</span>;</span><br><span class="line">kp_out = K(cnt, comp) + (temp-(cnt+<span class="number">2</span>)*<span class="number">100</span>) * ((K(cnt+<span class="number">1</span>, comp)-K(cnt, comp))/<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="计算给定压强和温度下燃烧产物的平衡组分和焓">计算给定压强和温度下燃烧产物的平衡组分和焓</h2>
+<h3 id="平衡组分计算">平衡组分计算</h3>
+<p>将2.3中的方程转化。用迭代法进行计算。</p>
+<h4 id="计算链设计">计算链设计</h4>
+<p>先将次要组分<span class="math inline">\(H,O_2,OH,NO,Cl\)</span>视为零，根据线性方程，先计算简单的几个。</p>
+<p><span class="math display">\[
+\begin{aligned}
+n_{SO_2} &amp;=N_S &amp;(1)\\
+n_{HCl} &amp;=N_{Cl}-n_{Cl} &amp;(2) \\
+n_{N_2} &amp;=\frac{1}{2}(N_N-n_{NO}) &amp;(3) \\
+\end{aligned}
+\]</span></p>
+<p>接下来还有主要组分<span class="math inline">\(CO,CO_2,H_2,H_2O\)</span>需要计算，</p>
+<p>相关元素<span class="math inline">\(C,O,H\)</span>只有三个线性方程（质量守恒），不过再加上水煤气反应方程式<span class="math inline">\((act)\)</span>就有四个方程，可以求解了。 <span class="math display">\[
+\begin{aligned}
+n_{CO} &amp;= N_C-n_{CO_2} &amp;(4) \\
+n_{H_2O} &amp;= N_O-n_{CO_2}-N_C-n_{OH}-2n_{SO_2}-2n_{O_2}-n_{NO} &amp;(5) \\
+n_{H_2} &amp;= \frac{1}{2}(N_H-n_{HCl}-n_{OH}-n_H)-(N_O-n_{CO_2}-N_C-n_{OH}-2n_{SO_2}-2n_{O_2}-n_{NO}) &amp;(6) \\
+K_{p,act}n_{CO_2}n_{H_2} &amp;= n_{CO}n_{H_2O} &amp;(7) \\
+\end{aligned}
+\]</span> 具体来说，先把式（4）（5）（6）代入（7）求出<span class="math inline">\(n_{CO_2}\)</span>，再代回求解<span class="math inline">\(n_{CO},n_{H_2O},n_{H_2}\)</span>。</p>
+<p>那么现在，已经获得了主要组分<span class="math inline">\(n_{CO},n_{CO_2},n_{H_2},n_{H_2O},n_{N_2}\)</span>和次要组分中的<span class="math inline">\(n_{HCl},n_{SO2}\)</span>，可以反过来计算之前被视为零的量。 <span class="math display">\[
+\begin{aligned}
+n_g &amp;= \sum{n_i} \\
+n_H &amp;=\left[K_{p,H_2}\left(\frac{p}{n_g}\right)^{-1}n_{H_2}\right]^{\frac{1}{2}} &amp;(8) \\
+n_{O_2} &amp;=\left[K_{p,CO_2}\left(\frac{p}{n_g}\right)^{-\frac{1}{2}}n_{CO_2}n_{CO}^{-1}\right]^2 &amp;(9) \\
+n_{OH} &amp;=K_{p,H_2O(b)}\left(\frac{p}{n_g}\right)^{-\frac{1}{2}}n_{H_2O}n_{H_2}^{-\frac{1}{2}} &amp;(10) \\
+n_{NO} &amp;=\left[K_{p,NO}n_{N_2}n_{O_2}\right]^{\frac{1}{2}} &amp;(11) \\
+n_{Cl} &amp;=K_{p,HCl}(\frac{p}{n_g})^{-1}n_{HCl}n_H^{-1} &amp;(12) \\
+\end{aligned}
+\]</span> 迭代计算，直到收敛。</p>
+<h4 id="平衡组分计算程序">平衡组分计算程序</h4>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">N</span> = <span class="title">cal_n</span><span class="params">(t, p)</span></span></span><br><span class="line"></span><br><span class="line">NC=<span class="number">10.12</span>;NH=<span class="number">41.83</span>;NO=<span class="number">27.98</span>;NN=<span class="number">6.30</span>;NS=<span class="number">2.42</span>;NCL=<span class="number">6.30</span>;</span><br><span class="line">h=<span class="number">0</span>;o2=<span class="number">0</span>;oh=<span class="number">0</span>;no=<span class="number">0</span>;cl=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">steps = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> steps &lt; <span class="number">50</span></span><br><span class="line">    steps = steps+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    so2 = NS;</span><br><span class="line">    hcl = NCL-cl;</span><br><span class="line">    n2 = <span class="number">1</span>/<span class="number">2</span>*(NN-no);</span><br><span class="line"></span><br><span class="line">    syms co2;</span><br><span class="line">    co2 = solve(kp(<span class="number">4</span>,t)*co2*(<span class="number">1</span>/<span class="number">2</span>*(NH-hcl-oh-h)-(NO-co2-NC-oh<span class="number">-2</span>*so2<span class="number">-2</span>*o2-no))==(NC-co2)*(NO-co2-NC-oh<span class="number">-2</span>*so2<span class="number">-2</span>*o2-no), co2);</span><br><span class="line">    co2 = vpa(co2(co2&gt;<span class="number">0</span>),<span class="number">7</span>);</span><br><span class="line">    co = NC-co2;</span><br><span class="line">    h2o = NO-co2-NC-oh<span class="number">-2</span>*so2<span class="number">-2</span>*o2-no;</span><br><span class="line">    h2 = <span class="number">1</span>/<span class="number">2</span>*(NH-hcl-oh-h)-h2o;</span><br><span class="line"></span><br><span class="line">    h_old=h;o2_old=o2;oh_old=oh;no_old=no;cl_old=cl;</span><br><span class="line">    ng = co+co2+h2+h2o+n2+h+o2+oh+no+cl+hcl+so2;</span><br><span class="line">    w = p/ng;</span><br><span class="line">    h = (kp(<span class="number">7</span>,t)*w^(<span class="number">-1</span>)*h2)^(<span class="number">1</span>/<span class="number">2</span>);</span><br><span class="line">    o2 = (kp(<span class="number">2</span>,t)*w^(<span class="number">-1</span>/<span class="number">2</span>)*co2*co^(<span class="number">-1</span>))^<span class="number">2</span>;</span><br><span class="line">    oh = kp(<span class="number">5</span>,t)*w^(<span class="number">-1</span>/<span class="number">2</span>)*h2o*h2^(<span class="number">-1</span>/<span class="number">2</span>);</span><br><span class="line">    no = (kp(<span class="number">6</span>,t)*n2*o2)^(<span class="number">1</span>/<span class="number">2</span>);</span><br><span class="line">    cl = kp(<span class="number">10</span>,t)*w^(<span class="number">-1</span>)*hcl*h^(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">    delta = <span class="built_in">sqrt</span>(<span class="built_in">abs</span>((h_old-h)/h_old)^<span class="number">2</span>+<span class="built_in">abs</span>((o2_old-o2)/o2_old)^<span class="number">2</span>+<span class="built_in">abs</span>((oh_old-oh)/oh_old)^<span class="number">2</span>+<span class="built_in">abs</span>((no_old-no)/no_old)^<span class="number">2</span>+<span class="built_in">abs</span>((cl_old-cl)/cl_old)^<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">if</span> delta &lt; <span class="number">0.001</span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% fprintf("end, steps=%d, delta=%f\n", steps, delta);</span></span><br><span class="line"><span class="comment">%   1   2   3   4   5   6   7   8   9   10  11  12  13</span></span><br><span class="line">N=[ co  co2 h2  h2o n2  h   o2  oh  no  cl  hcl so2 ng];</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="燃烧产物焓的计算">燃烧产物焓的计算</h3>
+<p>同样，预先准备可能用到的物质在一定范围内的总焓。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ic_out</span> = <span class="title">ic</span><span class="params">(comp, temp)</span></span></span><br><span class="line"><span class="comment">%temp in 2600~3000</span></span><br><span class="line"><span class="comment">%cal/mol</span></span><br><span class="line">I = [<span class="comment">%co        co2         h2          h2o         n2          h           o2          oh          no          cl          hcl         so2         T</span></span><br><span class="line">    [<span class="number">-7573.2</span>    <span class="number">-63292.4</span>    <span class="number">17743.5</span>     <span class="number">-33030.3</span>    <span class="number">18675.1</span>     <span class="number">63542.0</span>     <span class="number">19698.4</span>     <span class="number">28044.5</span>     <span class="number">40776.8</span>     <span class="number">41042.1</span>     <span class="number">-3718.4</span>     <span class="number">-40741.8</span>    <span class="number">2600</span>],</span><br><span class="line">    [<span class="number">-6689.5</span>    <span class="number">-61803.2</span>    <span class="number">18609.5</span>     <span class="number">-31762.6</span>    <span class="number">19554.5</span>     <span class="number">64038.3</span>     <span class="number">20636.4</span>     <span class="number">28913.1</span>     <span class="number">41669.1</span>     <span class="number">41547.1</span>     <span class="number">-2840.5</span>     <span class="number">-39328.2</span>    <span class="number">2700</span>],</span><br><span class="line">    [<span class="number">-5803.9</span>    <span class="number">-60309.3</span>    <span class="number">19481.3</span>     <span class="number">-30487.6</span>    <span class="number">20436.0</span>     <span class="number">64535.6</span>     <span class="number">21579.4</span>     <span class="number">29786.4</span>     <span class="number">42563.2</span>     <span class="number">42051.6</span>     <span class="number">-1959.3</span>     <span class="number">-37932.0</span>    <span class="number">2800</span>],</span><br><span class="line">    [<span class="number">-4916.6</span>    <span class="number">-58811.1</span>    <span class="number">20358.9</span>     <span class="number">-29285.7</span>    <span class="number">21319.5</span>     <span class="number">65032.4</span>     <span class="number">22527.3</span>     <span class="number">30664.0</span>     <span class="number">43458.9</span>     <span class="number">12555.6</span>     <span class="number">-1074.9</span>     <span class="number">-36493.3</span>    <span class="number">2900</span>],</span><br><span class="line">    [<span class="number">-4027.6</span>    <span class="number">-57308.8</span>    <span class="number">21242.1</span>     <span class="number">-27917.4</span>    <span class="number">22204.7</span>     <span class="number">65529.2</span>     <span class="number">23480.0</span>     <span class="number">31545.8</span>     <span class="number">44356.3</span>     <span class="number">43059.2</span>     <span class="number">-187.8</span>      <span class="number">-35072.1</span>    <span class="number">3000</span>],</span><br><span class="line"></span><br><span class="line">    [<span class="number">-3136.0</span>    <span class="number">-55802.6</span>    <span class="number">22130.6</span>     <span class="number">-26623.4</span>    <span class="number">23091.6</span>     <span class="number">66026.0</span>     <span class="number">24437.3</span>     <span class="number">32431.6</span>     <span class="number">45255.1</span>     <span class="number">43562.4</span>     <span class="number">702.1</span>       <span class="number">-33648.6</span>    <span class="number">3100</span>],</span><br><span class="line">    [<span class="number">-2244.0</span>    <span class="number">-54292.7</span>    <span class="number">23024.4</span>     <span class="number">-25324.1</span>    <span class="number">23980.2</span>     <span class="number">66522.8</span>     <span class="number">25399.1</span>     <span class="number">33321.1</span>     <span class="number">46155.4</span>     <span class="number">44065.2</span>     <span class="number">1594.5</span>      <span class="number">-32222.7</span>    <span class="number">3200</span>],</span><br><span class="line">    [<span class="number">-1350.7</span>    <span class="number">-52779.2</span>    <span class="number">23923.3</span>     <span class="number">-24020.0</span>    <span class="number">24870.2</span>     <span class="number">67019.6</span>     <span class="number">26365.2</span>     <span class="number">34214.2</span>     <span class="number">47057.1</span>     <span class="number">44567.9</span>     <span class="number">2489.4</span>      <span class="number">-30794.6</span>    <span class="number">3300</span>],</span><br><span class="line">    [<span class="number">-456.2</span>     <span class="number">-51262.4</span>    <span class="number">24827.2</span>     <span class="number">-22711.4</span>    <span class="number">25761.6</span>     <span class="number">67516.4</span>     <span class="number">27335.5</span>     <span class="number">35110.7</span>     <span class="number">47960.2</span>     <span class="number">45069.9</span>     <span class="number">3386.6</span>      <span class="number">-29364.5</span>    <span class="number">3400</span>],</span><br><span class="line">    [<span class="number">439.6</span>      <span class="number">-49742.4</span>    <span class="number">25736.0</span>     <span class="number">-21396.7</span>    <span class="number">26654.3</span>     <span class="number">68013.2</span>     <span class="number">28309.7</span>     <span class="number">36010.6</span>     <span class="number">48864.5</span>     <span class="number">45571.9</span>     <span class="number">4286.0</span>      <span class="number">-27932.2</span>    <span class="number">3500</span>],</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">cnt = <span class="built_in">floor</span>(temp/<span class="number">100</span>)<span class="number">-25</span>;</span><br><span class="line">ic_out = I(cnt, comp) + (temp-(cnt+<span class="number">25</span>)*<span class="number">100</span>) * ((I(cnt+<span class="number">1</span>, comp)-I(cnt, comp))/<span class="number">100</span>);</span><br><span class="line">ic_out = ic_out*<span class="number">4.184</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>每千克推进剂产生的燃烧产物的总焓计算方法为<span class="math inline">\(I_c=\sum{n_iI_i}\)</span>。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum_ic</span> = <span class="title">cal_ic</span><span class="params">(t, p)</span></span></span><br><span class="line"></span><br><span class="line">N = cal_n(t, p);</span><br><span class="line">sum_ic = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="number">12</span></span><br><span class="line">    sum_ic = sum_ic + N(<span class="built_in">i</span>) * ic(<span class="built_in">i</span>, t);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="绝热燃烧温度的计算">绝热燃烧温度的计算</h2>
+<p>用上述程序计算压强<span class="math inline">\(50.66e5\ Pa\)</span>下<span class="math inline">\(T_{f1}=2600\ K\)</span>和<span class="math inline">\(T_{f2}=3499\ K\)</span>时的燃烧产物总焓分别为<span class="math inline">\(-2073.66\ kJ/kg推进剂,-476.49\ kJ/kg推进剂\)</span>，那么显然绝热燃烧温度<span class="math inline">\(T_f\)</span>在它们之间，可以线性插值计算得出结果。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">out_tf</span> = <span class="title">cal_tf</span><span class="params">(p)</span></span></span><br><span class="line"></span><br><span class="line">t1 = <span class="number">2600</span>;t2 = <span class="number">3499</span>;</span><br><span class="line">ip = <span class="number">-1593190</span>;</span><br><span class="line"></span><br><span class="line">i1 = cal_ic(t1, p);</span><br><span class="line">i2 = cal_ic(t2, p);</span><br><span class="line">out_tf = t1+(ip-i1)/(i2-i1)*(t2-t1);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>即 <span class="math display">\[
+T_f=T_{f1}+\frac{I_p-I_{c1}}{I_{c2}-I_{c1}}(T_{f2}-T_{f1})=2870.44\ K
+\]</span> 进行验证，得<span class="math inline">\(50.66e5\ Pa,2870.44\ K\)</span>时<span class="math inline">\(I_c=-1600.83\ kJ/kg推进剂\approx I_p\)</span>成立。</p>
+<h2 id="绝热燃烧温度下燃烧产物的性质分析">绝热燃烧温度下燃烧产物的性质分析</h2>
+<h3 id="燃烧产物的平衡组分">燃烧产物的平衡组分</h3>
+<p>将压强和温度<span class="math inline">\(T_f\)</span>代入前面的平衡常数法的燃烧产物组分计算程序，得此时组分为。（<span class="math inline">\(mol/kg推进剂\)</span>）</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(CO\)</span></th>
+<th><span class="math inline">\(CO_2\)</span></th>
+<th><span class="math inline">\(H_2\)</span></th>
+<th><span class="math inline">\(H_2O\)</span></th>
+<th><span class="math inline">\(N_2\)</span></th>
+<th><span class="math inline">\(H\)</span></th>
+<th><span class="math inline">\(O_2\)</span></th>
+<th><span class="math inline">\(OH\)</span></th>
+<th><span class="math inline">\(NO\)</span></th>
+<th><span class="math inline">\(Cl\)</span></th>
+<th><span class="math inline">\(HCl\)</span></th>
+<th><span class="math inline">\(SO_2\)</span></th>
+<th><span class="math inline">\(n_g\)</span></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>8.205</td>
+<td>1.915</td>
+<td>6.660</td>
+<td>11.105</td>
+<td>3.150</td>
+<td>7.65e-4</td>
+<td>1.91e-8</td>
+<td>3.48e-4</td>
+<td>2.53e-5</td>
+<td>5e-4</td>
+<td>6.299</td>
+<td>2.42</td>
+<td>39.756</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="燃烧产物的热力学性质">燃烧产物的热力学性质</h3>
+<p>在<span class="math inline">\(T_f=2870.44\ K\)</span>时，各组分定压比热容为</p>
+<table>
+<colgroup>
+<col style="width: 31%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(c_{pi}\)</span></th>
+<th><span class="math inline">\(CO\)</span></th>
+<th><span class="math inline">\(CO_2\)</span></th>
+<th><span class="math inline">\(H_2\)</span></th>
+<th><span class="math inline">\(H_2O\)</span></th>
+<th><span class="math inline">\(N_2\)</span></th>
+<th><span class="math inline">\(H\)</span></th>
+<th><span class="math inline">\(O_2\)</span></th>
+<th><span class="math inline">\(OH\)</span></th>
+<th><span class="math inline">\(NO\)</span></th>
+<th><span class="math inline">\(Cl\)</span></th>
+<th><span class="math inline">\(HCl\)</span></th>
+<th><span class="math inline">\(SO_2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(J\cdot K^{-1}\cdot mol^{-1}\)</span></td>
+<td>37.14</td>
+<td>62.72</td>
+<td>36.77</td>
+<td>53.69</td>
+<td>36.98</td>
+<td>20.79</td>
+<td>39.70</td>
+<td>36.76</td>
+<td>37.49</td>
+<td>21.08</td>
+<td>37.03</td>
+<td>59.38</td>
+</tr>
+</tbody>
+</table>
+<p>燃烧室出口处，燃烧产物的平均比热为 <span class="math display">\[
+\begin{aligned}
+c_p &amp;=\sum_{i=1}^{m}{x_ic_{pi}}=44.26\quad J\cdot K^{-1}\cdot mol^{-1} \\
+c_v &amp;=c_p-R_0=35.946\quad J\cdot K^{-1}\cdot mol^{-1} \\
+k &amp;= \frac{c_p}{c_v}=1.23 \\
+\end{aligned}
+\]</span> 平均摩尔质量为 <span class="math display">\[
+\bar{\mu}_g=\frac{1000}{n_g}=25.153\quad g/mol
+\]</span> 平均气体常数为 <span class="math display">\[
+\bar{R}_g=\frac{R_0}{\bar{\mu}_g}=330.54\quad J\cdot kg^{-1}\cdot K^{-1}
+\]</span></p>
+<h3 id="燃烧室出口处的理论特征速度">燃烧室出口处的理论特征速度</h3>
+<p><span class="math display">\[
+\begin{aligned}
+\Gamma &amp;=\sqrt{k}\left(\frac{2}{k+1}\right)^{\frac{k+1}{2(k-1)}}=0.6543 \\
+C_D &amp;=\frac{\Gamma}{\sqrt{RT_c}}=6.717\times10^{-4}\quad s/m \\
+c^* &amp;=\frac{1}{C_D}=1488.72\quad m/s\\
+\end{aligned}
+\]</span></p>
+<h1 id="喷管流动过程热力计算">喷管流动过程热力计算</h1>
+<h2 id="喷管流动过程分析">喷管流动过程分析</h2>
+<p>由于出口处压强为<span class="math inline">\(1.0132e5\ Pa\)</span>，根据空气动力学可以进行流动过程分析 <span class="math display">\[
+\begin{aligned}
+\frac{p_e}{p_c} &amp;=\pi(\lambda)=\left(1-\frac{k-1}{k+1}\lambda^2\right)^{\frac{k}{k-1}} \\
+\Rightarrow \lambda &amp;=2.2428,\quad M=3.062 \\
+T_e &amp;=T_c\tau(\lambda)=1381.19\quad K \\
+\end{aligned}
+\]</span> 可见，喷管出口处为超声速。</p>
+<h2 id="喷管出口截面处燃烧产物的平衡组分">喷管出口截面处燃烧产物的平衡组分</h2>
+<p>用上面的平衡组分计算程序，得在出口截面处，组分为</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(CO\)</span></th>
+<th><span class="math inline">\(CO_2\)</span></th>
+<th><span class="math inline">\(H_2\)</span></th>
+<th><span class="math inline">\(H_2O\)</span></th>
+<th><span class="math inline">\(N_2\)</span></th>
+<th><span class="math inline">\(H\)</span></th>
+<th><span class="math inline">\(O_2\)</span></th>
+<th><span class="math inline">\(OH\)</span></th>
+<th><span class="math inline">\(NO\)</span></th>
+<th><span class="math inline">\(Cl\)</span></th>
+<th><span class="math inline">\(HCl\)</span></th>
+<th><span class="math inline">\(SO_2\)</span></th>
+<th><span class="math inline">\(n_g\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>6.621</td>
+<td>3.497</td>
+<td>8.244</td>
+<td>9.521</td>
+<td>3.150</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>6.300</td>
+<td>2.420</td>
+<td>39.755</td>
+</tr>
+</tbody>
+</table>
+<h2 id="喷管出口截面处燃烧产物的热力学性质">喷管出口截面处燃烧产物的热力学性质</h2>
+<p>在<span class="math inline">\(T_e=1381.19\ K\)</span>时，各组分定压比热容为</p>
+<table>
+<colgroup>
+<col style="width: 31%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(c_{pi}\)</span></th>
+<th><span class="math inline">\(CO\)</span></th>
+<th><span class="math inline">\(CO_2\)</span></th>
+<th><span class="math inline">\(H_2\)</span></th>
+<th><span class="math inline">\(H_2O\)</span></th>
+<th><span class="math inline">\(N_2\)</span></th>
+<th><span class="math inline">\(H\)</span></th>
+<th><span class="math inline">\(O_2\)</span></th>
+<th><span class="math inline">\(OH\)</span></th>
+<th><span class="math inline">\(NO\)</span></th>
+<th><span class="math inline">\(Cl\)</span></th>
+<th><span class="math inline">\(HCl\)</span></th>
+<th><span class="math inline">\(SO_2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(J\cdot K^{-1}\cdot mol^{-1}\)</span></td>
+<td>34.87</td>
+<td>57.79</td>
+<td>31.78</td>
+<td>45.45</td>
+<td>34.46</td>
+<td>20.79</td>
+<td>36.24</td>
+<td>32.43</td>
+<td>35.50</td>
+<td>21.76</td>
+<td>33.58</td>
+<td>56.61</td>
+</tr>
+</tbody>
+</table>
+<p>与上面同理，可计算出此时气流的平均热力性质参数</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(c_p\)</span></th>
+<th><span class="math inline">\(39.86\ J\cdot K^{-1}\cdot mol^{-1}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(c_v\)</span></td>
+<td><span class="math inline">\(31.546\ J\cdot K^{-1}\cdot mol^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(k\)</span></td>
+<td><span class="math inline">\(1.26\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\bar{\mu}_g\)</span></td>
+<td><span class="math inline">\(25.154\ g/mol\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\bar{R}_g\)</span></td>
+<td><span class="math inline">\(330.524\ J\cdot kg^{-1}\cdot K^{-1}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\Gamma\)</span></td>
+<td><span class="math inline">\(0.660\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(C_D\)</span></td>
+<td><span class="math inline">\(6.775\times10^{-4}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(c^*\)</span></td>
+<td><span class="math inline">\(1475.97\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>比热比<span class="math inline">\(k\)</span>误差较大，其他参数与燃烧室出口处基本相同。</p>
+<p>查表计算总焓，得<span class="math inline">\(I_{m,e}=-4157.36\ kJ/kg推进剂\)</span>。</p>
+<h1 id="发动机理论性能参数计算">发动机理论性能参数计算</h1>
+<h2 id="发动机理论比冲计算">发动机理论比冲计算</h2>
+<p><span class="math display">\[
+\begin{aligned}
+u_e &amp;=\sqrt{2(I_{m,c}-I_{m,e})}=2264.58\quad m/s \\
+I_{sp} &amp;=\left[u_e+\frac{A_e}{\dot{m}}(p_e-p_a)\right]/g=226.458\quad s \\
+\end{aligned}
+\]</span></p>
+<h2 id="发动机理论推力系数计算">发动机理论推力系数计算</h2>
+<p><span class="math display">\[
+C_F=\frac{I_{sp}}{c^*}=1.534
+\]</span></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2021-05-14T06:01:05.781Z" itemprop="dateUpdated">2021-05-14 14:01:05</time>
+</span><br>
+
+
+        
+        文章转载请标明出处，仅供学习使用。
+        
+    </div>
+    
+    <footer>
+        <a href="http://zerlingx.com">
+            <img src="/img/avatar.jpg" alt="zerlingx">
+            zerlingx
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/">notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/physics/">physics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/">study</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2021/05/14/热力计算作业_杨逸韬/&title=《固体火箭发动机燃烧产物热力计算》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2021/05/14/热力计算作业_杨逸韬/&title=《固体火箭发动机燃烧产物热力计算》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2021/05/14/热力计算作业_杨逸韬/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《固体火箭发动机燃烧产物热力计算》 — zerlingx's blog&url=http://zerlingx.com/2021/05/14/热力计算作业_杨逸韬/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2021/05/14/热力计算作业_杨逸韬/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/04/27/机器学习纲要_05_卷积神经网络/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">机器学习纲要_05_卷积神经网络</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "vonyPRJwedvkCu0ksIMQYbmO-gzGzoHsz",
+            appKey: "O5p62bw33LShlsMSGD0y51wr",
+            avatar: "mm",
+            placeholder: "Your comment...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zerlingx &copy; 2019 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2021/05/14/热力计算作业_杨逸韬/&title=《固体火箭发动机燃烧产物热力计算》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2021/05/14/热力计算作业_杨逸韬/&title=《固体火箭发动机燃烧产物热力计算》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2021/05/14/热力计算作业_杨逸韬/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《固体火箭发动机燃烧产物热力计算》 — zerlingx's blog&url=http://zerlingx.com/2021/05/14/热力计算作业_杨逸韬/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2021/05/14/热力计算作业_杨逸韬/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3ay67CMAxFUf7/p4t0p6jR9nEvIs7OCFEoWQxcP/J64XX9rc/X68/ffev6WHffenjJkCFjW8a1XOtNkKvkW+vPrPcmQ4aMcxgkyFbX+s9aY/jeZMiQIaNza54O8qAsQ4YMGdkmSDnaR8qQIUMGKWJ5a6yaMn61FpchQ8aGjM5g4L9ff2m+IUOGjB9mZO2z7Od50CzvSoYMGaMZpLzkYbc/2syKYRkyZJzAID+TYTJStisZMmRMZVTTtWqbLEsNSdBHGa4MGTIGMarBLmvS8c3xYSo6RyZDhowRjP6himzcWH0fPTdkyJAxjpGFSF6aVttt1SNiMmTIOIHBrXyQ+VQRy+8jQ4aM2QxymQTErHHGg7IMGTJkVI95VQ+KrcFZDitDhoxzGDy0VUMnCamd1PC2iJUhQ8ZQBm+B8YSPh1ROvb2PDBkyRjPI6JFQydFV3u4PHwAyZMgYzeiUlNVxY7U9xx8JMmTImM3IDm/1B5a8YYd2JUOGjKGMMCpHi4djnhrKkCHjHEZ26+pR1GxEikK2DBkyRjOqbSwCa4XOYgIaduNkyJCxFeMqLn6HzjCyOpCQIUPGbEanBM1GmCSArsGtAluGDBnbMvhWqsVtliCGxzJkyJBxAKMaZKuBsp/eoXabDBkyjmdUg2b1QEb2AJAhQ4aM/mte+naSVxkyZJzAyFr8nd4eSQr5UQ8ZMmTMZjxQQIJ3+NiAXH1ghClDhow9GG/3m2qYm9m/SAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'stand by (~_~)';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'welcome back (^-^)/';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

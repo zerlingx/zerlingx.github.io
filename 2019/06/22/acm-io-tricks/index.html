@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>ACM、C++关于输入输出的小技巧 | zerlingx&#39;s blog | Stay hungry, stay foolish.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#39C5BB">
+    
+    
+    <meta name="keywords" content="C/C++,acm">
+    <meta name="description" content="输入输出的问题说大不大说小不小，关键时候知道一点小技巧能帮上大忙。  ##　cin、cout加速  在main函数的第一行加入: 1ios::sync_with_stdio(false);  关闭cin、cout与输入输出流的同步，可以使其速度和printf、scanf等几乎一样。 ##　输入 N组数据  最常用的应该是这样吧…… 123while(N--)&amp;#123;">
+<meta name="keywords" content="C&#x2F;C++,acm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ACM、C++关于输入输出的小技巧">
+<meta property="og:url" content="http://zerlingx.com/2019/06/22/acm-io-tricks/index.html">
+<meta property="og:site_name" content="zerlingx&#39;s blog">
+<meta property="og:description" content="输入输出的问题说大不大说小不小，关键时候知道一点小技巧能帮上大忙。  ##　cin、cout加速  在main函数的第一行加入: 1ios::sync_with_stdio(false);  关闭cin、cout与输入输出流的同步，可以使其速度和printf、scanf等几乎一样。 ##　输入 N组数据  最常用的应该是这样吧…… 123while(N--)&amp;#123;">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2021-05-14T01:40:46.147Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ACM、C++关于输入输出的小技巧">
+<meta name="twitter:description" content="输入输出的问题说大不大说小不小，关键时候知道一点小技巧能帮上大忙。  ##　cin、cout加速  在main函数的第一行加入: 1ios::sync_with_stdio(false);  关闭cin、cout与输入输出流的同步，可以使其速度和printf、scanf等几乎一样。 ##　输入 N组数据  最常用的应该是这样吧…… 123while(N--)&amp;#123;">
+    
+        <link rel="alternate" type="application/atom+xml" title="zerlingx&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">zerlingx</h5>
+          <a href="mailto:centralnode@zerlingx.com" title="centralnode@zerlingx.com" class="mail">centralnode@zerlingx.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-info-circle"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zerlingx" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://wiki.archlinux.org/" target="_blank">
+                <i class="icon icon-lg icon-wikipedia-w"></i>
+                ArchWiki
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">ACM、C++关于输入输出的小技巧</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">ACM、C++关于输入输出的小技巧</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-06-22T01:01:06.000Z" itemprop="datePublished" class="page-time">
+  2019-06-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ACM/">ACM</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#n组数据"><span class="post-toc-number">1.</span> <span class="post-toc-text">N组数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#处理到文件尾"><span class="post-toc-number">2.</span> <span class="post-toc-text">处理到文件尾</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符串输入"><span class="post-toc-number">3.</span> <span class="post-toc-text">字符串输入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符串输出后缀技巧"><span class="post-toc-number">4.</span> <span class="post-toc-text">字符串输出后缀技巧</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-acm-io-tricks" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">ACM、C++关于输入输出的小技巧</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-06-22 09:01:06" datetime="2019-06-22T01:01:06.000Z" itemprop="datePublished">2019-06-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ACM/">ACM</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>输入输出的问题说大不大说小不小，关键时候知道一点小技巧能帮上大忙。</p>
+</blockquote>
+<p>##　cin、cout加速</p>
+<p> 在main函数的第一行加入:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ios::sync_with_stdio(<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<p> 关闭<code>cin</code>、<code>cout</code>与输入输出流的同步，可以使其速度和<code>printf</code>、<code>scanf</code>等几乎一样。</p>
+<p>##　输入</p>
+<h3 id="n组数据">N组数据</h3>
+<p> 最常用的应该是这样吧……</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(N--)&#123;</span><br><span class="line">    ……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 原理是先<code>while()</code>函数进行判断再自减1。如当N==1，<code>while()</code>判断为真，将会执行函数体，执行前N--变为0。再下一次就不会执行了。</p>
+<h3 id="处理到文件尾">处理到文件尾</h3>
+<p> 有的题目不指定输入多少，也没有给出结束的条件，要求处理所有数据，这时用文件尾的<code>EOF</code>标记。<br>
+ 好像<code>EOF</code>等于-1来着。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="built_in">scanf</span>(_dates_))&#123;</span><br><span class="line">    ……</span><br><span class="line">&#125;</span><br><span class="line">或</span><br><span class="line"><span class="keyword">while</span>(<span class="built_in">scanf</span>(_dates_) != EOF)&#123;</span><br><span class="line">    ……</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cin</span>同理</span><br></pre></td></tr></table></figure>
+<h3 id="字符串输入">字符串输入</h3>
+<p> <del>真的猛士敢于使用getchar()。</del></p>
+<p> 经常需要整行输入，无视空格。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gets(s);</span><br><span class="line"></span><br><span class="line">fgets(s,<span class="keyword">sizeof</span>(s),<span class="built_in">stdin</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%[^\n]"</span>,s);</span><br></pre></td></tr></table></figure>
+<p> gets由于输入时不考虑缓冲区大小，可能导致栈溢出（网络安全攻防上有一个相似的经典漏洞），因此被视为不安全，有的编辑器和编译器都会警告，vs用<code>gets_s()</code>代替。一般推荐使用<code>fgets()</code>代替。</p>
+<p> <code>fgets()</code>本来用于文件读取，不过定向到<code>stdio</code>就是从键盘输入了。每一行输入只会读取前<code>sizeof(s)</code>的内容，避免了栈溢出的危险。<br>
+ 注意<code>fgets()</code><strong>会读取末尾的回车</strong>，记得<code>s[strlen(s)-1]='\0'</code>消掉输入的回车（如果你不需要的话）。</p>
+<p> 上面第三种用了一个巧妙的表达式，<code>%[^\n]</code>可以理解为只要是非<code>\n</code>就一直输入。当然也可以用其他字符表示输入结束，如<code>%[^a]</code>会输入直到遇见字符a。<br>
+ 注意，之后的内容就丢失了，请谨慎使用。</p>
+<p>##　输出</p>
+<p> 输出基本没啥大问题吧……看清楚题目要求就好。</p>
+<h3 id="字符串输出后缀技巧">字符串输出后缀技巧</h3>
+<p> 字符串要输出后面的一部分没必要重新搞一个，可以用以下方式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; s + <span class="number">2</span> &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<p> 这样就会从<code>s[2]</code>（含）开始输出。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2021-05-14T01:40:46.147Z" itemprop="dateUpdated">2021-05-14 09:40:46</time>
+</span><br>
+
+
+        
+        文章转载请标明出处，仅供学习使用。
+        
+    </div>
+    
+    <footer>
+        <a href="http://zerlingx.com">
+            <img src="/img/avatar.jpg" alt="zerlingx">
+            zerlingx
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/acm/">acm</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2019/06/22/acm-io-tricks/&title=《ACM、C++关于输入输出的小技巧》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2019/06/22/acm-io-tricks/&title=《ACM、C++关于输入输出的小技巧》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2019/06/22/acm-io-tricks/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ACM、C++关于输入输出的小技巧》 — zerlingx's blog&url=http://zerlingx.com/2019/06/22/acm-io-tricks/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2019/06/22/acm-io-tricks/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/07/03/priority-queue/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">C++ STL 优先队列priority_queue</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/06/19/things-in-installing-tensorflow/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Arch中安装Tensorflow及一些小问题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "vonyPRJwedvkCu0ksIMQYbmO-gzGzoHsz",
+            appKey: "O5p62bw33LShlsMSGD0y51wr",
+            avatar: "mm",
+            placeholder: "Your comment...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>zerlingx &copy; 2019 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://zerlingx.com/2019/06/22/acm-io-tricks/&title=《ACM、C++关于输入输出的小技巧》 — zerlingx's blog&pic=http://zerlingx.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://zerlingx.com/2019/06/22/acm-io-tricks/&title=《ACM、C++关于输入输出的小技巧》 — zerlingx's blog&source=A curios, learning student." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://zerlingx.com/2019/06/22/acm-io-tricks/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ACM、C++关于输入输出的小技巧》 — zerlingx's blog&url=http://zerlingx.com/2019/06/22/acm-io-tricks/&via=http://zerlingx.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://zerlingx.com/2019/06/22/acm-io-tricks/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACN0lEQVR42u3awY6DMAyEYd7/panUExKEznho1Tg/p6q7m83HYRTH3jb52d/P8fPxm/Nvnn96/n605mjlBx4YMGBMy9hvn/O/HH1zv6b7mvS9wYABYx1GsrQe0Hrs6nuDAQMGDCX4lM3df1ZeHwwYMGC4y9UieAROqDBgwFiHoQSoW44mJesXa3EYMGBMyKg1Bn7z+ev9DRgwYPw9Yw8ePYjzQ+SHncCAAaM1wz326eXo/ciFQtKbBDBgwFiHkV+N1Yrb2gFxGLgwYMBox4iGG2SYfmXmDp/Z2QwDBozJGXrwuQ1I9/rMLpVhwICxMEMvUJXStFb6FnuwMGDAaMRIwq6GqbUN7JVhwIDRiJEf6fTy1U1Io3iGAQNGa4YSZ+5lfS1G3dAfnnNhwIDRlJFc8SdtA7s0Vf4KBgwY7RhusapEsz5UUStfL14cDBgwWjPcqE0ak/YIhVvcwoABozWjtl13tEsPXLdghgEDxgoM9zDnhm/t96NzLgwYMFoz9CGtBKxfwOlFNQwYMNZkJOWlG8R68bw9leswYMCYkKFsS8com8gv+C4CFwYMGE0ZdrQFkx15g0GaGYEBA0Yjxm4+tcI1aRJIoQwDBozWjHw8wi163Sbos2ENAwaMeRlKyLpjEMnERzFwYcCAsQDDvSyrlbXJah9gMGDAgBEMtioFqlsYRwOsMGDAaM2otSHdsVejYQkDBozFGProqr6JWrwW7wVhwIDRmpE0BmrFqjuIpr8aGDBgtGO8AKL1dHLtge8aAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'stand by (~_~)';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'welcome back (^-^)/';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
