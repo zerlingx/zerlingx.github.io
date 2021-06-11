@@ -132,7 +132,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -158,30 +158,10 @@
 <div class="tabs-bar container">
     <nav class="tags-list">
         <a href="/categories" style="-webkit-order:-1;order:-1" class="tags-list-item waves-effect waves-button waves-light
-            ">全て</a>
+            ">All</a>
         
 
-            <a href="/categories/ACM/" style="-webkit-order:5;order:5" class="tags-list-item waves-effect waves-button waves-light">ACM</a>
-
-        
-
-            <a href="/categories/Notes/" style="-webkit-order:6;order:6" class="tags-list-item waves-effect waves-button waves-light">Notes</a>
-
-        
-
-            <a href="/categories/Test/" style="-webkit-order:7;order:7" class="tags-list-item waves-effect waves-button waves-light">Test</a>
-
-        
-
-            <a href="/categories/Music/" style="-webkit-order:8;order:8" class="tags-list-item waves-effect waves-button waves-light">Music</a>
-
-        
-
-            <a href="/categories/Linux/" style="-webkit-order:9;order:9" class="tags-list-item waves-effect waves-button waves-light">Linux</a>
-
-        
-
-            <a href="/categories/Text/" style="-webkit-order:0;order:0" class="tags-list-item waves-effect waves-button waves-light">Text</a>
+            <a href="/categories/ACM/" style="-webkit-order:0;order:0" class="tags-list-item waves-effect waves-button waves-light">ACM</a>
 
         
 
@@ -189,15 +169,35 @@
 
         
 
-            <a href="/categories/Server/" style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">Server</a>
+            <a href="/categories/Text/" style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">Text</a>
 
         
 
-            <a href="/categories/WIN/" style="-webkit-order:3;order:3" class="tags-list-item waves-effect waves-button waves-light">WIN</a>
+            <a href="/categories/Notes/" style="-webkit-order:3;order:3" class="tags-list-item waves-effect waves-button waves-light">Notes</a>
 
         
 
-            <a href="/categories/AI/" style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light">AI</a>
+            <a href="/categories/Test/" style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light">Test</a>
+
+        
+
+            <a href="/categories/Server/" style="-webkit-order:5;order:5" class="tags-list-item waves-effect waves-button waves-light">Server</a>
+
+        
+
+            <a href="/categories/Linux/" style="-webkit-order:6;order:6" class="tags-list-item waves-effect waves-button waves-light">Linux</a>
+
+        
+
+            <a href="/categories/Music/" style="-webkit-order:7;order:7" class="tags-list-item waves-effect waves-button waves-light">Music</a>
+
+        
+
+            <a href="/categories/AI/" style="-webkit-order:8;order:8" class="tags-list-item waves-effect waves-button waves-light">AI</a>
+
+        
+
+            <a href="/categories/WIN/" style="-webkit-order:9;order:9" class="tags-list-item waves-effect waves-button waves-light">WIN</a>
 
         
     </nav>
@@ -272,7 +272,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
@@ -394,23 +394,6 @@ MathJax.Hub.Queue(function() {
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = 'stand by (~_~)';
-            clearTimeout(titleTime);
-        } else {
-            document.title = 'welcome back (^-^)/';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
-</script>
 
 
 
