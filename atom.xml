@@ -168,9 +168,9 @@
     
       <category term="acm" scheme="http://zerlingx.com/tags/acm/"/>
     
-      <category term="math" scheme="http://zerlingx.com/tags/math/"/>
-    
       <category term="study" scheme="http://zerlingx.com/tags/study/"/>
+    
+      <category term="math" scheme="http://zerlingx.com/tags/math/"/>
     
       <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
     
@@ -355,9 +355,9 @@ A=
       <category term="Linux" scheme="http://zerlingx.com/categories/Linux/"/>
     
     
-      <category term="linux" scheme="http://zerlingx.com/tags/linux/"/>
-    
       <category term="music" scheme="http://zerlingx.com/tags/music/"/>
+    
+      <category term="linux" scheme="http://zerlingx.com/tags/linux/"/>
     
   </entry>
   
@@ -507,9 +507,9 @@ A=
       <category term="Music" scheme="http://zerlingx.com/categories/Music/"/>
     
     
-      <category term="music" scheme="http://zerlingx.com/tags/music/"/>
-    
       <category term="midi" scheme="http://zerlingx.com/tags/midi/"/>
+    
+      <category term="music" scheme="http://zerlingx.com/tags/music/"/>
     
   </entry>
   
@@ -636,9 +636,9 @@ A=
       <category term="Notes" scheme="http://zerlingx.com/categories/Notes/"/>
     
     
-      <category term="math" scheme="http://zerlingx.com/tags/math/"/>
-    
       <category term="study" scheme="http://zerlingx.com/tags/study/"/>
+    
+      <category term="math" scheme="http://zerlingx.com/tags/math/"/>
     
       <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
     
