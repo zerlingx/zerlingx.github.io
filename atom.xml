@@ -5,9 +5,9 @@
   <subtitle>Stay hungry, stay foolish.</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://zerlingx.com/"/>
+  <link href="https://zerlingx.com/"/>
   <updated>2021-05-14T06:01:05.781Z</updated>
-  <id>http://zerlingx.com/</id>
+  <id>https://zerlingx.com/</id>
   
   <author>
     <name>zerlingx</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>固体火箭发动机燃烧产物热力计算</title>
-    <link href="http://zerlingx.com/2021/05/14/%E7%83%AD%E5%8A%9B%E8%AE%A1%E7%AE%97%E4%BD%9C%E4%B8%9A_%E6%9D%A8%E9%80%B8%E9%9F%AC/"/>
-    <id>http://zerlingx.com/2021/05/14/热力计算作业_杨逸韬/</id>
+    <link href="https://zerlingx.com/2021/05/14/%E7%83%AD%E5%8A%9B%E8%AE%A1%E7%AE%97%E4%BD%9C%E4%B8%9A_%E6%9D%A8%E9%80%B8%E9%9F%AC/"/>
+    <id>https://zerlingx.com/2021/05/14/热力计算作业_杨逸韬/</id>
     <published>2021-05-14T01:22:00.000Z</published>
     <updated>2021-05-14T06:01:05.781Z</updated>
     
@@ -36,21 +36,21 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://zerlingx.com/categories/Notes/"/>
+      <category term="Notes" scheme="https://zerlingx.com/categories/Notes/"/>
     
     
-      <category term="study" scheme="http://zerlingx.com/tags/study/"/>
+      <category term="study" scheme="https://zerlingx.com/tags/study/"/>
     
-      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+      <category term="notes" scheme="https://zerlingx.com/tags/notes/"/>
     
-      <category term="physics" scheme="http://zerlingx.com/tags/physics/"/>
+      <category term="physics" scheme="https://zerlingx.com/tags/physics/"/>
     
   </entry>
   
   <entry>
     <title>机器学习纲要_05_卷积神经网络</title>
-    <link href="http://zerlingx.com/2021/04/27/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_05_%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    <id>http://zerlingx.com/2021/04/27/机器学习纲要_05_卷积神经网络/</id>
+    <link href="https://zerlingx.com/2021/04/27/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_05_%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    <id>https://zerlingx.com/2021/04/27/机器学习纲要_05_卷积神经网络/</id>
     <published>2021-04-26T16:00:00.000Z</published>
     <updated>2021-06-08T00:51:38.443Z</updated>
     
@@ -70,19 +70,19 @@
     
     </summary>
     
-      <category term="AI" scheme="http://zerlingx.com/categories/AI/"/>
+      <category term="AI" scheme="https://zerlingx.com/categories/AI/"/>
     
     
-      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+      <category term="notes" scheme="https://zerlingx.com/tags/notes/"/>
     
-      <category term="ai" scheme="http://zerlingx.com/tags/ai/"/>
+      <category term="ai" scheme="https://zerlingx.com/tags/ai/"/>
     
   </entry>
   
   <entry>
     <title>机器学习纲要_04_神经网络</title>
-    <link href="http://zerlingx.com/2021/04/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_04_%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    <id>http://zerlingx.com/2021/04/08/机器学习纲要_04_神经网络/</id>
+    <link href="https://zerlingx.com/2021/04/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_04_%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    <id>https://zerlingx.com/2021/04/08/机器学习纲要_04_神经网络/</id>
     <published>2021-04-07T16:00:00.000Z</published>
     <updated>2021-06-07T10:37:16.734Z</updated>
     
@@ -102,19 +102,19 @@
     
     </summary>
     
-      <category term="AI" scheme="http://zerlingx.com/categories/AI/"/>
+      <category term="AI" scheme="https://zerlingx.com/categories/AI/"/>
     
     
-      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+      <category term="notes" scheme="https://zerlingx.com/tags/notes/"/>
     
-      <category term="ai" scheme="http://zerlingx.com/tags/ai/"/>
+      <category term="ai" scheme="https://zerlingx.com/tags/ai/"/>
     
   </entry>
   
   <entry>
     <title>机器学习纲要_03_逻辑回归</title>
-    <link href="http://zerlingx.com/2021/04/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_03_%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/"/>
-    <id>http://zerlingx.com/2021/04/05/机器学习纲要_03_逻辑回归/</id>
+    <link href="https://zerlingx.com/2021/04/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_03_%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/"/>
+    <id>https://zerlingx.com/2021/04/05/机器学习纲要_03_逻辑回归/</id>
     <published>2021-04-04T16:00:00.000Z</published>
     <updated>2021-06-07T10:37:13.647Z</updated>
     
@@ -133,19 +133,19 @@
     
     </summary>
     
-      <category term="AI" scheme="http://zerlingx.com/categories/AI/"/>
+      <category term="AI" scheme="https://zerlingx.com/categories/AI/"/>
     
     
-      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+      <category term="notes" scheme="https://zerlingx.com/tags/notes/"/>
     
-      <category term="ai" scheme="http://zerlingx.com/tags/ai/"/>
+      <category term="ai" scheme="https://zerlingx.com/tags/ai/"/>
     
   </entry>
   
   <entry>
     <title>FFT快速傅里叶变换原理概要</title>
-    <link href="http://zerlingx.com/2021/03/28/FFT%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E5%8E%9F%E7%90%86%E6%A6%82%E8%A6%81/"/>
-    <id>http://zerlingx.com/2021/03/28/FFT快速傅里叶变换原理概要/</id>
+    <link href="https://zerlingx.com/2021/03/28/FFT%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E5%8E%9F%E7%90%86%E6%A6%82%E8%A6%81/"/>
+    <id>https://zerlingx.com/2021/03/28/FFT快速傅里叶变换原理概要/</id>
     <published>2021-03-28T13:30:00.000Z</published>
     <updated>2021-05-14T02:05:32.052Z</updated>
     
@@ -163,23 +163,23 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://zerlingx.com/categories/Notes/"/>
+      <category term="Notes" scheme="https://zerlingx.com/categories/Notes/"/>
     
     
-      <category term="acm" scheme="http://zerlingx.com/tags/acm/"/>
+      <category term="acm" scheme="https://zerlingx.com/tags/acm/"/>
     
-      <category term="math" scheme="http://zerlingx.com/tags/math/"/>
+      <category term="study" scheme="https://zerlingx.com/tags/study/"/>
     
-      <category term="study" scheme="http://zerlingx.com/tags/study/"/>
+      <category term="math" scheme="https://zerlingx.com/tags/math/"/>
     
-      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+      <category term="notes" scheme="https://zerlingx.com/tags/notes/"/>
     
   </entry>
   
   <entry>
     <title>机器学习纲要_02_线性代数复习与应用</title>
-    <link href="http://zerlingx.com/2021/03/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_02_%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%A4%8D%E4%B9%A0%E4%B8%8E%E5%BA%94%E7%94%A8/"/>
-    <id>http://zerlingx.com/2021/03/24/机器学习纲要_02_线性代数复习与应用/</id>
+    <link href="https://zerlingx.com/2021/03/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_02_%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%A4%8D%E4%B9%A0%E4%B8%8E%E5%BA%94%E7%94%A8/"/>
+    <id>https://zerlingx.com/2021/03/24/机器学习纲要_02_线性代数复习与应用/</id>
     <published>2021-03-23T16:00:00.000Z</published>
     <updated>2021-06-07T10:37:08.230Z</updated>
     
@@ -201,19 +201,19 @@ A=
     
     </summary>
     
-      <category term="AI" scheme="http://zerlingx.com/categories/AI/"/>
+      <category term="AI" scheme="https://zerlingx.com/categories/AI/"/>
     
     
-      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+      <category term="notes" scheme="https://zerlingx.com/tags/notes/"/>
     
-      <category term="ai" scheme="http://zerlingx.com/tags/ai/"/>
+      <category term="ai" scheme="https://zerlingx.com/tags/ai/"/>
     
   </entry>
   
   <entry>
     <title>机器学习纲要_01_机器学习的基本模型和数学描述</title>
-    <link href="http://zerlingx.com/2021/03/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_01_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/"/>
-    <id>http://zerlingx.com/2021/03/22/机器学习纲要_01_机器学习的基本模型和数学描述/</id>
+    <link href="https://zerlingx.com/2021/03/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%B2%E8%A6%81_01_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/"/>
+    <id>https://zerlingx.com/2021/03/22/机器学习纲要_01_机器学习的基本模型和数学描述/</id>
     <published>2021-03-21T16:00:00.000Z</published>
     <updated>2021-06-07T10:37:05.692Z</updated>
     
@@ -230,19 +230,19 @@ A=
     
     </summary>
     
-      <category term="AI" scheme="http://zerlingx.com/categories/AI/"/>
+      <category term="AI" scheme="https://zerlingx.com/categories/AI/"/>
     
     
-      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+      <category term="notes" scheme="https://zerlingx.com/tags/notes/"/>
     
-      <category term="ai" scheme="http://zerlingx.com/tags/ai/"/>
+      <category term="ai" scheme="https://zerlingx.com/tags/ai/"/>
     
   </entry>
   
   <entry>
     <title>压高公式——临近空间气压和密度与高度的关系</title>
-    <link href="http://zerlingx.com/2021/03/12/%E5%8E%8B%E9%AB%98%E5%85%AC%E5%BC%8F/"/>
-    <id>http://zerlingx.com/2021/03/12/压高公式/</id>
+    <link href="https://zerlingx.com/2021/03/12/%E5%8E%8B%E9%AB%98%E5%85%AC%E5%BC%8F/"/>
+    <id>https://zerlingx.com/2021/03/12/压高公式/</id>
     <published>2021-03-12T06:42:00.000Z</published>
     <updated>2021-05-14T01:40:46.146Z</updated>
     
@@ -259,21 +259,21 @@ A=
     
     </summary>
     
-      <category term="Notes" scheme="http://zerlingx.com/categories/Notes/"/>
+      <category term="Notes" scheme="https://zerlingx.com/categories/Notes/"/>
     
     
-      <category term="study" scheme="http://zerlingx.com/tags/study/"/>
+      <category term="study" scheme="https://zerlingx.com/tags/study/"/>
     
-      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+      <category term="notes" scheme="https://zerlingx.com/tags/notes/"/>
     
-      <category term="physics" scheme="http://zerlingx.com/tags/physics/"/>
+      <category term="physics" scheme="https://zerlingx.com/tags/physics/"/>
     
   </entry>
   
   <entry>
     <title>关于win10的触摸板延迟设置问题</title>
-    <link href="http://zerlingx.com/2020/11/03/win10_touchpad_delay/"/>
-    <id>http://zerlingx.com/2020/11/03/win10_touchpad_delay/</id>
+    <link href="https://zerlingx.com/2020/11/03/win10_touchpad_delay/"/>
+    <id>https://zerlingx.com/2020/11/03/win10_touchpad_delay/</id>
     <published>2020-11-03T09:26:12.000Z</published>
     <updated>2021-05-14T01:40:46.144Z</updated>
     
@@ -291,17 +291,17 @@ A=
     
     </summary>
     
-      <category term="WIN" scheme="http://zerlingx.com/categories/WIN/"/>
+      <category term="WIN" scheme="https://zerlingx.com/categories/WIN/"/>
     
     
-      <category term="win" scheme="http://zerlingx.com/tags/win/"/>
+      <category term="win" scheme="https://zerlingx.com/tags/win/"/>
     
   </entry>
   
   <entry>
     <title>onenote使用latex或unicomath格式输入数学公式的设置</title>
-    <link href="http://zerlingx.com/2019/11/06/onenote-math-input/"/>
-    <id>http://zerlingx.com/2019/11/06/onenote-math-input/</id>
+    <link href="https://zerlingx.com/2019/11/06/onenote-math-input/"/>
+    <id>https://zerlingx.com/2019/11/06/onenote-math-input/</id>
     <published>2019-11-06T11:09:31.000Z</published>
     <updated>2021-05-14T01:40:46.145Z</updated>
     
@@ -321,19 +321,19 @@ A=
     
     </summary>
     
-      <category term="Text" scheme="http://zerlingx.com/categories/Text/"/>
+      <category term="Text" scheme="https://zerlingx.com/categories/Text/"/>
     
     
-      <category term="latex" scheme="http://zerlingx.com/tags/latex/"/>
+      <category term="latex" scheme="https://zerlingx.com/tags/latex/"/>
     
-      <category term="win" scheme="http://zerlingx.com/tags/win/"/>
+      <category term="win" scheme="https://zerlingx.com/tags/win/"/>
     
   </entry>
   
   <entry>
     <title>vscode的网易云音乐插件问题处理</title>
-    <link href="http://zerlingx.com/2019/09/23/netease-ext-in-vscode/"/>
-    <id>http://zerlingx.com/2019/09/23/netease-ext-in-vscode/</id>
+    <link href="https://zerlingx.com/2019/09/23/netease-ext-in-vscode/"/>
+    <id>https://zerlingx.com/2019/09/23/netease-ext-in-vscode/</id>
     <published>2019-09-23T05:38:30.000Z</published>
     <updated>2021-05-14T01:40:46.148Z</updated>
     
@@ -352,19 +352,19 @@ A=
     
     </summary>
     
-      <category term="Linux" scheme="http://zerlingx.com/categories/Linux/"/>
+      <category term="Linux" scheme="https://zerlingx.com/categories/Linux/"/>
     
     
-      <category term="music" scheme="http://zerlingx.com/tags/music/"/>
+      <category term="music" scheme="https://zerlingx.com/tags/music/"/>
     
-      <category term="linux" scheme="http://zerlingx.com/tags/linux/"/>
+      <category term="linux" scheme="https://zerlingx.com/tags/linux/"/>
     
   </entry>
   
   <entry>
     <title>软件工程笔记</title>
-    <link href="http://zerlingx.com/2019/08/12/software-project-note/"/>
-    <id>http://zerlingx.com/2019/08/12/software-project-note/</id>
+    <link href="https://zerlingx.com/2019/08/12/software-project-note/"/>
+    <id>https://zerlingx.com/2019/08/12/software-project-note/</id>
     <published>2019-08-12T13:18:03.000Z</published>
     <updated>2021-05-14T01:40:46.147Z</updated>
     
@@ -384,19 +384,19 @@ A=
     
     </summary>
     
-      <category term="Notes" scheme="http://zerlingx.com/categories/Notes/"/>
+      <category term="Notes" scheme="https://zerlingx.com/categories/Notes/"/>
     
     
-      <category term="study" scheme="http://zerlingx.com/tags/study/"/>
+      <category term="study" scheme="https://zerlingx.com/tags/study/"/>
     
-      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+      <category term="notes" scheme="https://zerlingx.com/tags/notes/"/>
     
   </entry>
   
   <entry>
     <title>《背包九讲》笔记</title>
-    <link href="http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/"/>
-    <id>http://zerlingx.com/2019/08/04/bag-dp-nine-lesson/</id>
+    <link href="https://zerlingx.com/2019/08/04/bag-dp-nine-lesson/"/>
+    <id>https://zerlingx.com/2019/08/04/bag-dp-nine-lesson/</id>
     <published>2019-08-04T10:27:58.000Z</published>
     <updated>2021-05-14T01:40:46.146Z</updated>
     
@@ -415,19 +415,19 @@ A=
     
     </summary>
     
-      <category term="ACM" scheme="http://zerlingx.com/categories/ACM/"/>
+      <category term="ACM" scheme="https://zerlingx.com/categories/ACM/"/>
     
     
-      <category term="C/C++" scheme="http://zerlingx.com/tags/C-C/"/>
+      <category term="C/C++" scheme="https://zerlingx.com/tags/C-C/"/>
     
-      <category term="acm" scheme="http://zerlingx.com/tags/acm/"/>
+      <category term="acm" scheme="https://zerlingx.com/tags/acm/"/>
     
   </entry>
   
   <entry>
     <title>Matlab基础——矩阵</title>
-    <link href="http://zerlingx.com/2019/07/31/matlab-basic-matrix/"/>
-    <id>http://zerlingx.com/2019/07/31/matlab-basic-matrix/</id>
+    <link href="https://zerlingx.com/2019/07/31/matlab-basic-matrix/"/>
+    <id>https://zerlingx.com/2019/07/31/matlab-basic-matrix/</id>
     <published>2019-07-31T04:16:49.000Z</published>
     <updated>2021-05-14T01:40:46.148Z</updated>
     
@@ -446,17 +446,17 @@ A=
     
     </summary>
     
-      <category term="Matlab" scheme="http://zerlingx.com/categories/Matlab/"/>
+      <category term="Matlab" scheme="https://zerlingx.com/categories/Matlab/"/>
     
     
-      <category term="matlab" scheme="http://zerlingx.com/tags/matlab/"/>
+      <category term="matlab" scheme="https://zerlingx.com/tags/matlab/"/>
     
   </entry>
   
   <entry>
     <title>ACM大正整数运算模板</title>
-    <link href="http://zerlingx.com/2019/07/29/ACM-big-num/"/>
-    <id>http://zerlingx.com/2019/07/29/ACM-big-num/</id>
+    <link href="https://zerlingx.com/2019/07/29/ACM-big-num/"/>
+    <id>https://zerlingx.com/2019/07/29/ACM-big-num/</id>
     <published>2019-07-29T15:30:21.000Z</published>
     <updated>2021-05-14T01:40:46.145Z</updated>
     
@@ -473,19 +473,19 @@ A=
     
     </summary>
     
-      <category term="ACM" scheme="http://zerlingx.com/categories/ACM/"/>
+      <category term="ACM" scheme="https://zerlingx.com/categories/ACM/"/>
     
     
-      <category term="C/C++" scheme="http://zerlingx.com/tags/C-C/"/>
+      <category term="C/C++" scheme="https://zerlingx.com/tags/C-C/"/>
     
-      <category term="acm" scheme="http://zerlingx.com/tags/acm/"/>
+      <category term="acm" scheme="https://zerlingx.com/tags/acm/"/>
     
   </entry>
   
   <entry>
     <title>在linux上播放midi音乐</title>
-    <link href="http://zerlingx.com/2019/07/07/midi-on-linux/"/>
-    <id>http://zerlingx.com/2019/07/07/midi-on-linux/</id>
+    <link href="https://zerlingx.com/2019/07/07/midi-on-linux/"/>
+    <id>https://zerlingx.com/2019/07/07/midi-on-linux/</id>
     <published>2019-07-07T04:45:37.000Z</published>
     <updated>2021-05-14T01:40:46.146Z</updated>
     
@@ -504,19 +504,19 @@ A=
     
     </summary>
     
-      <category term="Music" scheme="http://zerlingx.com/categories/Music/"/>
+      <category term="Music" scheme="https://zerlingx.com/categories/Music/"/>
     
     
-      <category term="midi" scheme="http://zerlingx.com/tags/midi/"/>
+      <category term="midi" scheme="https://zerlingx.com/tags/midi/"/>
     
-      <category term="music" scheme="http://zerlingx.com/tags/music/"/>
+      <category term="music" scheme="https://zerlingx.com/tags/music/"/>
     
   </entry>
   
   <entry>
     <title>C++ STL 优先队列priority_queue</title>
-    <link href="http://zerlingx.com/2019/07/03/priority-queue/"/>
-    <id>http://zerlingx.com/2019/07/03/priority-queue/</id>
+    <link href="https://zerlingx.com/2019/07/03/priority-queue/"/>
+    <id>https://zerlingx.com/2019/07/03/priority-queue/</id>
     <published>2019-07-03T04:28:54.000Z</published>
     <updated>2021-05-14T01:40:46.146Z</updated>
     
@@ -535,21 +535,21 @@ A=
     
     </summary>
     
-      <category term="ACM" scheme="http://zerlingx.com/categories/ACM/"/>
+      <category term="ACM" scheme="https://zerlingx.com/categories/ACM/"/>
     
     
-      <category term="C/C++" scheme="http://zerlingx.com/tags/C-C/"/>
+      <category term="C/C++" scheme="https://zerlingx.com/tags/C-C/"/>
     
-      <category term="acm" scheme="http://zerlingx.com/tags/acm/"/>
+      <category term="acm" scheme="https://zerlingx.com/tags/acm/"/>
     
-      <category term="STL" scheme="http://zerlingx.com/tags/STL/"/>
+      <category term="STL" scheme="https://zerlingx.com/tags/STL/"/>
     
   </entry>
   
   <entry>
     <title>ACM、C++关于输入输出的小技巧</title>
-    <link href="http://zerlingx.com/2019/06/22/acm-io-tricks/"/>
-    <id>http://zerlingx.com/2019/06/22/acm-io-tricks/</id>
+    <link href="https://zerlingx.com/2019/06/22/acm-io-tricks/"/>
+    <id>https://zerlingx.com/2019/06/22/acm-io-tricks/</id>
     <published>2019-06-22T01:01:06.000Z</published>
     <updated>2021-05-14T01:40:46.147Z</updated>
     
@@ -570,19 +570,19 @@ A=
     
     </summary>
     
-      <category term="ACM" scheme="http://zerlingx.com/categories/ACM/"/>
+      <category term="ACM" scheme="https://zerlingx.com/categories/ACM/"/>
     
     
-      <category term="C/C++" scheme="http://zerlingx.com/tags/C-C/"/>
+      <category term="C/C++" scheme="https://zerlingx.com/tags/C-C/"/>
     
-      <category term="acm" scheme="http://zerlingx.com/tags/acm/"/>
+      <category term="acm" scheme="https://zerlingx.com/tags/acm/"/>
     
   </entry>
   
   <entry>
     <title>Arch中安装Tensorflow及一些小问题</title>
-    <link href="http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/"/>
-    <id>http://zerlingx.com/2019/06/19/things-in-installing-tensorflow/</id>
+    <link href="https://zerlingx.com/2019/06/19/things-in-installing-tensorflow/"/>
+    <id>https://zerlingx.com/2019/06/19/things-in-installing-tensorflow/</id>
     <published>2019-06-19T00:34:12.000Z</published>
     <updated>2021-05-14T01:40:46.146Z</updated>
     
@@ -602,19 +602,19 @@ A=
     
     </summary>
     
-      <category term="AI" scheme="http://zerlingx.com/categories/AI/"/>
+      <category term="AI" scheme="https://zerlingx.com/categories/AI/"/>
     
     
-      <category term="ai" scheme="http://zerlingx.com/tags/ai/"/>
+      <category term="ai" scheme="https://zerlingx.com/tags/ai/"/>
     
-      <category term="tensorflow" scheme="http://zerlingx.com/tags/tensorflow/"/>
+      <category term="tensorflow" scheme="https://zerlingx.com/tags/tensorflow/"/>
     
   </entry>
   
   <entry>
     <title>关于傅里叶级数的贝塞尔不等式与帕塞瓦尔等式</title>
-    <link href="http://zerlingx.com/2019/06/14/%E5%85%B3%E4%BA%8E%E8%B4%9D%E5%A1%9E%E5%B0%94%E4%B8%8D%E7%AD%89%E5%BC%8F%E4%B8%8E%E5%B8%95%E5%A1%9E%E7%93%A6%E5%B0%94%E7%AD%89%E5%BC%8F/"/>
-    <id>http://zerlingx.com/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/</id>
+    <link href="https://zerlingx.com/2019/06/14/%E5%85%B3%E4%BA%8E%E8%B4%9D%E5%A1%9E%E5%B0%94%E4%B8%8D%E7%AD%89%E5%BC%8F%E4%B8%8E%E5%B8%95%E5%A1%9E%E7%93%A6%E5%B0%94%E7%AD%89%E5%BC%8F/"/>
+    <id>https://zerlingx.com/2019/06/14/关于贝塞尔不等式与帕塞瓦尔等式/</id>
     <published>2019-06-14T15:49:03.000Z</published>
     <updated>2021-05-14T01:40:46.149Z</updated>
     
@@ -633,14 +633,14 @@ A=
     
     </summary>
     
-      <category term="Notes" scheme="http://zerlingx.com/categories/Notes/"/>
+      <category term="Notes" scheme="https://zerlingx.com/categories/Notes/"/>
     
     
-      <category term="math" scheme="http://zerlingx.com/tags/math/"/>
+      <category term="study" scheme="https://zerlingx.com/tags/study/"/>
     
-      <category term="study" scheme="http://zerlingx.com/tags/study/"/>
+      <category term="math" scheme="https://zerlingx.com/tags/math/"/>
     
-      <category term="notes" scheme="http://zerlingx.com/tags/notes/"/>
+      <category term="notes" scheme="https://zerlingx.com/tags/notes/"/>
     
   </entry>
   
